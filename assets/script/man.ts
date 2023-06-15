@@ -1,7 +1,11 @@
 const {ccclass, property} = cc._decorator;
-
+import GameManager from "./gamemanager";
 @ccclass
 export default class NewClass extends cc.Component {
+
+    @property(GameManager)
+    Gamemanger: GameManager = null;
+
     @property(cc.Label)
     label: cc.Label = null;
 
@@ -29,7 +33,9 @@ export default class NewClass extends cc.Component {
 
     start(){
         cc.audioEngine.playMusic(this.bgm, true);
-        
+        this.Gamemanger = cc.find('Canvas/gamemanager').getComponent('gamemanager');
+        // console.log(this.Gamemanger);
+        this.Gamemanger.palse = false;
     }
 
     onLoad() {
@@ -110,39 +116,44 @@ export default class NewClass extends cc.Component {
     }
 
     update(dt: number) {
-        //cc.log(this.node.x, this.node.y);
+        cc.log(this.node.x, this.node.y);
         // 根据按键状态更新角色位置
-        if (this.isMovingUp) {
-        this.node.y += (this.moveSpeed * dt - 0.5 );
-            if(!this.animation.getAnimationState("man_up").isPlaying)this.animation.play("man_up");
-        }
-        if (this.isMovingDown) {
-            this.node.y -= this.moveSpeed * dt - 0.5;
-            if(!this.animation.getAnimationState("man_down").isPlaying)this.animation.play("man_down");
-        }
-        if (this.isMovingLeft) {
-            this.node.x -= this.moveSpeed * dt - + 0.5;
-            if(!this.animation.getAnimationState("man_left").isPlaying)this.animation.play("man_left");
-        }
-        if (this.isMovingRight) {
-            this.node.x += this.moveSpeed * dt - 0.5;
-            if(!this.animation.getAnimationState("man_right").isPlaying)this.animation.play("man_right");
-        }
-
-        if((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false){
-            //cc.director.loadScene("battle");
-            this.isBattle = true;
-            cc.audioEngine.pauseMusic();
-            cc.audioEngine.playEffect(this.goinSound, false);
-            
-            //cc.find("Canvas/map1").hide();
-
-            //this.node.runAction(action);
-            this.scheduleOnce(function() {
-                cc.director.loadScene("battle");
-            }, 2);
+        if(this.Gamemanger.palse==false)
+        {
+            if (this.isMovingUp) {
+            this.node.y += (this.moveSpeed * dt - 0.5 );
+                if(!this.animation.getAnimationState("man_up").isPlaying)this.animation.play("man_up");
+            }
+            if (this.isMovingDown) {
+                this.node.y -= this.moveSpeed * dt - 0.5;
+                if(!this.animation.getAnimationState("man_down").isPlaying)this.animation.play("man_down");
+            }
+            if (this.isMovingLeft) {
+                this.node.x -= this.moveSpeed * dt - + 0.5;
+                if(!this.animation.getAnimationState("man_left").isPlaying)this.animation.play("man_left");
+            }
+            if (this.isMovingRight) {
+                this.node.x += this.moveSpeed * dt - 0.5;
+                if(!this.animation.getAnimationState("man_right").isPlaying)this.animation.play("man_right");
+            }
         }
         
+        if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
+            // this.isBattle = true;
+            // cc.audioEngine.pauseMusic();
+            // cc.audioEngine.playEffect(this.goinSound, false);
+        
+            // var canvasNode = cc.find("Canvas"); // 获取画布节点
+            // var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
+            // this.Gamemanger.palse = true;
+            // console.log(this.Gamemanger.palse);
+            // canvasNode.runAction(cc.sequence(
+            //     blinkAction,
+            //     cc.callFunc(function () {
+            //         cc.director.loadScene("battle");
+            //     })
+            // ));
+        }   
     }
 
     onBeginContact(contact, selfCollider, otherCollider) {
@@ -151,8 +162,22 @@ export default class NewClass extends cc.Component {
         let points = worldManifold.points;
         let normal = worldManifold.normal;
         if(otherCollider.tag == 1){
-            cc.log("Player hits the bush");
+            cc.log("Player hits the enemy");
+            this.isBattle = true;
             cc.audioEngine.pauseMusic();
+            cc.audioEngine.playEffect(this.goinSound, false);
+        
+            var canvasNode = cc.find("Canvas"); // 获取画布节点
+            var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
+            this.Gamemanger.palse = true;
+            console.log(this.Gamemanger.palse);
+            canvasNode.runAction(cc.sequence(
+                blinkAction,
+                cc.callFunc(function () {
+                    cc.director.loadScene("battle");
+                })
+            ));
+            //cc.audioEngine.pauseMusic();
             //cc.audioEngine.playEffect(this.battleBgm, true);
         }
     }

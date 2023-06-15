@@ -55,7 +55,7 @@ export default class NewClass extends cc.Component {
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.winSound, false);
             this.scheduleOnce(function() {
-                cc.director.loadScene("map1");
+                cc.director.loadScene("map2");
             }, 4);
         }
 
@@ -67,7 +67,7 @@ export default class NewClass extends cc.Component {
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.loseSound, false);
             this.scheduleOnce(function() {
-                cc.director.loadScene("map1");
+                cc.director.loadScene("map2");
             }, 4);
         }
 

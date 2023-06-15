@@ -17,17 +17,46 @@ export default class NewClass extends cc.Component {
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad() {
+        // cc.director.getPhysicsManager().enabled = true;
+    
+        // const bagNode = cc.find('Canvas/Main Camera/bag');
+        // bagNode.on(cc.Node.EventType.MOUSE_ENTER, this.onBagMouseEnter, this);
+        // bagNode.on(cc.Node.EventType.MOUSE_LEAVE, this.onBagMouseLeave, this);
+    
+        // cc.find('Canvas/Main Camera').on('click', () => {
+        //     cc.director.loadScene('bag');
+        // });
+    }
+    // onBagMouseEnter(event) {
+    //     const bagNode = event.currentTarget;
+    //     bagNode.color = cc.Color.YELLOW; // 设置鼠标悬停时的颜色，这里示例为黄色
+    // }
+    
+    // onBagMouseLeave(event) {
+    //     const bagNode = event.currentTarget;
+    //     bagNode.color = cc.Color.WHITE; // 恢复原始颜色
+    // }
+    // onDestroy() {
+    //     const bagNode = cc.find('Canvas/Main Camera/bag');
+    //     bagNode.off(cc.Node.EventType.MOUSE_ENTER, this.onBagMouseEnter, this);
+    //     bagNode.off(cc.Node.EventType.MOUSE_LEAVE, this.onBagMouseLeave, this);
+    // }
 
     start () {
 
     }
 
     update (dt) {
-        if(this.player.x <= 60 && this.player.x >= -50) 
-        this.node.x = this.player.x + 195;
-        //else this.node.x = 60;
-        if(this.player.y <= 126 && this.player.y >= -147) 
-        this.node.y = this.player.y + 130;
+        // cc.find('Canvas/Main Camera/bag').on('click', () => {
+        //     cc.director.loadScene('bag');
+        // });
+        //cc.log(this.node.x);
+        if(this.player.x <= 62 && this.player.x >= -62) 
+            this.node.x = this.player.x ;
+        //else this.node.x = 62;
+        if(this.player.y <= 140 && this.player.y >= -136) 
+        this.node.y = this.player.y ;
+        //else this.node.y = -147;
     }
 }
