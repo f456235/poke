@@ -5,14 +5,15 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-const {ccclass, property} = cc._decorator;
+import GlobalData from "./GlobalData";
 
+const {ccclass, property} = cc._decorator;
+declare const firebase : any;
 @ccclass
 export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     label: cc.Label = null;
-
     public email:string = null;
     public password:string = null;
     public register:cc.Button = null;
@@ -30,8 +31,9 @@ export default class NewClass extends cc.Component {
         const auth = firebase.auth();
         auth.createUserWithEmailAndPassword(this.email,this.password)
         .then((userCredential)=>{
+            GlobalData.uid = userCredential.user.uid
             const database = firebase.database();
-            database.ref('user').child(userCredential.user.uid).set({
+            database.ref('user').child(GlobalData.uid).set({
                 elf : 0,
             });
             cc.director.loadScene('map2');
