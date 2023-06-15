@@ -33,10 +33,11 @@ export default class NewClass extends cc.Component {
         .then((userCredential)=>{
             GlobalData.uid = userCredential.user.uid
             const database = firebase.database();
-            database.ref('user').child(GlobalData.uid).set({
-                elf : 0,
+            firebase.database().ref('user').child(GlobalData.uid).set({
+                level: GlobalData.level,
+                myArray: [],
             });
-            cc.director.loadScene('map2');
+            cc.director.loadScene('select');
         })
         .catch((err)=>{
             console.log(err.message);
