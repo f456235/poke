@@ -1,6 +1,6 @@
 "use strict";
 cc._RF.push(module, '7c2c8dN56ZMCoF5vATlE0Um', 'setting');
-// setting.ts
+// script/setting.ts
 
 "use strict";
 // Learn TypeScript:

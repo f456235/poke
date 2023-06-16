@@ -25,13 +25,13 @@
     "relativePath": "scene"
   },
   "9e6a25c3-cc91-43fe-ba1e-432001901935": {
-    "asset": 1686923182963,
-    "meta": 1686923192530,
+    "asset": 1686923850795,
+    "meta": 1686925414137,
     "relativePath": "script"
   },
   "1c027bdb-1b8e-472e-921f-3d5907894d8f": {
-    "asset": 1686923182880,
-    "meta": 1686923192531,
+    "asset": 1686924784324,
+    "meta": 1686925414139,
     "relativePath": "src"
   },
   "bcdd460c-30a5-40ff-9c30-d47e5063e0e3": {
@@ -110,8 +110,8 @@
     "relativePath": "script\\bag.ts"
   },
   "7f0a876f-3b92-4f8d-a54a-83db4e020a0b": {
-    "asset": 1686923583997,
-    "meta": 1686923584025,
+    "asset": 1686925393381,
+    "meta": 1686925393412,
     "relativePath": "scene\\map2.fire"
   },
   "c0011427-0879-4fd7-8967-f98af578b132": {
@@ -9719,11 +9719,6 @@
     "meta": 1686923490897,
     "relativePath": "model\\primitives.fbx"
   },
-  "7c2c874d-e7a6-4c0a-8179-bc04e5134526": {
-    "asset": 1686913244633,
-    "meta": 1686923844436,
-    "relativePath": "script\\setting.ts"
-  },
   "0fe665c1-6060-4283-97ed-126e785a1f4c": {
     "asset": 1686923951379,
     "meta": 1686923952254,
@@ -9748,5 +9743,10 @@
     "asset": 1686925220554,
     "meta": 1686925223192,
     "relativePath": "script\\GlobalData.ts"
+  },
+  "7c2c874d-e7a6-4c0a-8179-bc04e5134526": {
+    "asset": 1686925389085,
+    "meta": 1686925390974,
+    "relativePath": "script\\setting.ts"
   }
 }
