@@ -34,8 +34,17 @@ export default class NewClass extends cc.Component {
         this.back.node.on('click',this.backToMap,this);
     }
 
-    SaveGame(){
-
+    SaveGame() {
+        const uid = GlobalData.uid;
+        const database = firebase.database();
+        const userRef = database.ref().child('user').child(uid);
+        userRef.child('myArray').set(GlobalData.pokewoman)
+            .then(() => {
+                console.log('myArray saved successfully');
+            })
+            .catch((error) => {
+                console.error('Error saving myArray:', error);
+            });
     }
     quitGame(){
         GlobalData.uid = "";

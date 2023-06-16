@@ -48,6 +48,16 @@ var NewClass = /** @class */ (function (_super) {
         this.back.node.on('click', this.backToMap, this);
     };
     NewClass.prototype.SaveGame = function () {
+        var uid = GlobalData_1.default.uid;
+        var database = firebase.database();
+        var userRef = database.ref().child('user').child(uid);
+        userRef.child('myArray').set(GlobalData_1.default.pokewoman)
+            .then(function () {
+            console.log('myArray saved successfully');
+        })
+            .catch(function (error) {
+            console.error('Error saving myArray:', error);
+        });
     };
     NewClass.prototype.quitGame = function () {
         GlobalData_1.default.uid = "";
