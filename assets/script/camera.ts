@@ -1,3 +1,5 @@
+import GlobalData from "./GlobalData";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -19,7 +21,7 @@ export default class NewClass extends cc.Component {
 
     onLoad() {
         // cc.director.getPhysicsManager().enabled = true;
-    
+        this.node.setPosition(GlobalData.cameraPosX,GlobalData.cameraPosY);
         // const bagNode = cc.find('Canvas/Main Camera/bag');
         // bagNode.on(cc.Node.EventType.MOUSE_ENTER, this.onBagMouseEnter, this);
         // bagNode.on(cc.Node.EventType.MOUSE_LEAVE, this.onBagMouseLeave, this);
@@ -58,5 +60,7 @@ export default class NewClass extends cc.Component {
         if(this.player.y <= 140 && this.player.y >= -136) 
         this.node.y = this.player.y ;
         //else this.node.y = -147;
+       GlobalData.cameraPosX = this.node.position.x;
+       GlobalData.cameraPosY = this.node.position.y;
     }
 }

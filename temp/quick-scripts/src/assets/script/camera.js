@@ -23,6 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var GlobalData_1 = require("./GlobalData");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
@@ -37,6 +38,7 @@ var NewClass = /** @class */ (function (_super) {
     // LIFE-CYCLE CALLBACKS:
     NewClass.prototype.onLoad = function () {
         // cc.director.getPhysicsManager().enabled = true;
+        this.node.setPosition(GlobalData_1.default.cameraPosX, GlobalData_1.default.cameraPosY);
         // const bagNode = cc.find('Canvas/Main Camera/bag');
         // bagNode.on(cc.Node.EventType.MOUSE_ENTER, this.onBagMouseEnter, this);
         // bagNode.on(cc.Node.EventType.MOUSE_LEAVE, this.onBagMouseLeave, this);
@@ -70,6 +72,8 @@ var NewClass = /** @class */ (function (_super) {
         if (this.player.y <= 140 && this.player.y >= -136)
             this.node.y = this.player.y;
         //else this.node.y = -147;
+        GlobalData_1.default.cameraPosX = this.node.position.x;
+        GlobalData_1.default.cameraPosY = this.node.position.y;
     };
     __decorate([
         property(cc.Label)

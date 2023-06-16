@@ -25,6 +25,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var gamemanager_1 = require("./gamemanager");
+var GlobalData_1 = require("./GlobalData");
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
     function NewClass() {
@@ -57,6 +58,7 @@ var NewClass = /** @class */ (function (_super) {
         this.animation = this.getComponent(cc.Animation);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+        this.node.setPosition(GlobalData_1.default.PlayerPosX, GlobalData_1.default.PlayerPosY);
     };
     NewClass.prototype.onDestroy = function () {
         // 移除键盘事件监听
@@ -158,6 +160,8 @@ var NewClass = /** @class */ (function (_super) {
             //     })
             // ));
         }
+        GlobalData_1.default.PlayerPosX = this.node.getPosition().x;
+        GlobalData_1.default.PlayerPosY = this.node.getPosition().y;
     };
     NewClass.prototype.onBeginContact = function (contact, selfCollider, otherCollider) {
         cc.log("Player hits the bush");

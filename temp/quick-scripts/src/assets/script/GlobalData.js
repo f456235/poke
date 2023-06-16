@@ -16,6 +16,13 @@ var GlobalData = /** @class */ (function () {
     GlobalData.uid = "";
     GlobalData.pokewoman = [];
     GlobalData.level = 1;
+    GlobalData.PlayerPosX = 29;
+    GlobalData.PlayerPosY = -62;
+    GlobalData.cameraPosX = 138;
+    GlobalData.cameraPosY = 71;
+    GlobalData.volume = 0.5;
+    GlobalData.mute = this.volume == 0 ? false : true;
+    GlobalData.map = 'map2';
     return GlobalData;
 }());
 exports.default = GlobalData;

@@ -1,5 +1,6 @@
 const {ccclass, property} = cc._decorator;
 import GameManager from "./gamemanager";
+import GlobalData from "./GlobalData";
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -46,6 +47,7 @@ export default class NewClass extends cc.Component {
         this.animation = this.getComponent(cc.Animation);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+        this.node.setPosition(GlobalData.PlayerPosX,GlobalData.PlayerPosY);
         
     }
 
@@ -154,6 +156,8 @@ export default class NewClass extends cc.Component {
             //     })
             // ));
         }   
+        GlobalData.PlayerPosX = this.node.getPosition().x;
+        GlobalData.PlayerPosY = this.node.getPosition().y;  
     }
 
     onBeginContact(contact, selfCollider, otherCollider) {
