@@ -8,7 +8,7 @@ export default class NewClass extends cc.Component {
     onLoad() {
         
         cc.director.getPhysicsManager().enabled = true;
-        cc.find('Canvas/brown/back').on('click', () => {
+        cc.find('Canvas/block/brown/back').on('click', () => {
                 cc.director.loadScene('map2');
         });
     }

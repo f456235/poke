@@ -31,7 +31,7 @@ var NewClass = /** @class */ (function (_super) {
     }
     NewClass.prototype.onLoad = function () {
         cc.director.getPhysicsManager().enabled = true;
-        cc.find('Canvas/brown/back').on('click', function () {
+        cc.find('Canvas/block/brown/back').on('click', function () {
             cc.director.loadScene('map2');
         });
     };

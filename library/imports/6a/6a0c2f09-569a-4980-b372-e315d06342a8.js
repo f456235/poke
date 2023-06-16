@@ -119,7 +119,7 @@ var NewClass = /** @class */ (function (_super) {
         }
     };
     NewClass.prototype.update = function (dt) {
-        cc.log(this.node.x, this.node.y);
+        //cc.log(this.node.x, this.node.y);
         // 根据按键状态更新角色位置
         if (this.Gamemanger.palse == false) {
             if (this.isMovingUp) {

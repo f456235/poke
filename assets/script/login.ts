@@ -33,15 +33,29 @@ export default class NewClass extends cc.Component {
 
     handleLogin(){
         const auth = firebase.auth();
-        auth.signInWithEmailAndPassword(this.email,this.password).
-        then((userCredential)=>{
-            GlobalData.uid = userCredential.user.uid;
+        auth.signInWithEmailAndPassword(this.email, this.password)
+        .then((userCredential) => {
+        GlobalData.uid = userCredential.user.uid;
+        
+        const database = firebase.database();
+        const userRef = database.ref('user').child(GlobalData.uid);
+        
+        userRef.once('value', (snapshot) => {
+            const userData = snapshot.val();
+            if (userData && userData.myArray) {
+                GlobalData.pokewoman = userData.myArray;
+                console.log(GlobalData.pokewoman);
+            } else {
+                console.log("myArray not found in user data");
+            }
+            
+            console.log(GlobalData.uid);
             cc.director.loadScene('map2');
-        })
-        .catch((error)=>{
-            console.log(error.message);
-            cc.error(error.message);
-        })
+        });
+    })
+    .catch((error) => {
+        console.log(error);
+    });
     }
 
     toRegisterPage(){

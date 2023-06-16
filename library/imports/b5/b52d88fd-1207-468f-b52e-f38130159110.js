@@ -34,29 +34,49 @@ var NewClass = /** @class */ (function (_super) {
         _this.sprite = [];
         _this.index = 0;
         /* get a return array from other script */
-        _this.bag = [3, 4, 1, 2, 5, 0];
+        // bag: number[] = [3, 4, 1, 2, 5, 0];
+        _this.bag = GlobalData_1.default.pokewoman;
         // LIFE-CYCLE CALLBACKS:
         _this.num = 0;
+        _this.nm = null;
+        _this.atk_num = null;
+        _this.hp_num = null;
         return _this;
-        // update (dt) {}
     }
     NewClass.prototype.onLoad = function () {
         var _this = this;
+        this.nm = cc.find("Canvas/block/name").getComponent(cc.Label);
+        this.atk_num = cc.find("Canvas/block/atk_num").getComponent(cc.Label);
+        this.hp_num = cc.find("Canvas/block/hp_num").getComponent(cc.Label);
+        cc.director.getPhysicsManager().enabled = true;
         var uid = GlobalData_1.default.uid;
-        console.log("uid:", uid);
+        // console.log("uid:",uid);
         firebase.database().ref(uid + 'pokewoman').on('value', function (snapshot) {
             _this.num = snapshot.val();
-            console.log(_this.num);
+            // console.log(this.num);
         });
     };
     NewClass.prototype.start = function () {
+        var _this = this;
+        // this.atk_num.string = "200";
+        this.node.getChildByName('Sprite6').active = false;
+        this.node.getChildByName('name').active = false;
+        this.node.getChildByName('atk').active = false;
+        this.node.getChildByName('atk_num').active = false;
+        this.node.getChildByName('hp').active = false;
+        this.node.getChildByName('hp_num').active = false;
         // iterate through bag
         // i : bag.index , child.index
-        for (var i = 0; i < this.bag.length; i++) {
+        console.log(this.bag);
+        for (var i = 0; i < 6; i++) {
             this.node.getChildByName('Sprite' + i).getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[i]];
             // scale 0.1
             this.node.getChildByName('Sprite' + i).scale = 0.05;
             // onload click event
+            if (this.bag[i] == null) {
+                // console.log("bag[",i,"] is null");
+                this.node.getChildByName('Sprite' + i).active = false;
+            }
         }
         // Check the value of myArray[0] in Firebase
         // Update spriteFrame based on myArray[0] value
@@ -86,6 +106,80 @@ var NewClass = /** @class */ (function (_super) {
                 this.node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
             });
         }*/
+        cc.find('Canvas/block/Sprite0').on('click', function () {
+            _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[0]];
+            _this.node.getChildByName('Sprite6').active = true;
+            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.update_s6(_this.bag[0]);
+            // this.nm.string = "岩東勇";
+            // this.atk_num.string = "100";
+        });
+        cc.find('Canvas/block/Sprite1').on('click', function () {
+            _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[1]];
+            _this.node.getChildByName('Sprite6').active = true;
+            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.update_s6(_this.bag[1]);
+            // this.nm.string = "炎東勇";
+            // this.atk_num.string = "100";
+        });
+        cc.find('Canvas/block/Sprite2').on('click', function () {
+            _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[2]];
+            _this.node.getChildByName('Sprite6').active = true;
+            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.update_s6(_this.bag[2]);
+            // this.nm.string = "嚴冬勇";
+            // this.atk_num.string = "100";
+        });
+        cc.find('Canvas/block/Sprite3').on('click', function () {
+            _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[3]];
+            _this.node.getChildByName('Sprite6').active = true;
+            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.update_s6(_this.bag[3]);
+        });
+        cc.find('Canvas/block/Sprite4').on('click', function () {
+            _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[4]];
+            _this.node.getChildByName('Sprite6').active = true;
+            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.update_s6(_this.bag[4]);
+        });
+        cc.find('Canvas/block/Sprite5').on('click', function () {
+            _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[5]];
+            _this.node.getChildByName('Sprite6').active = true;
+            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.update_s6(_this.bag[5]);
+        });
+    };
+    NewClass.prototype.update_s6 = function (a) {
+        this.node.getChildByName('name').active = true;
+        this.node.getChildByName('atk').active = true;
+        this.node.getChildByName('atk_num').active = true;
+        this.node.getChildByName('hp').active = true;
+        this.node.getChildByName('hp_num').active = true;
+        console.log("hi:", a);
+        if (a == 0) {
+            this.nm.string = "岩東勇";
+            this.atk_num.string = "20";
+            this.hp_num.string = "100";
+        }
+        else if (a == 1) {
+            this.nm.string = "炎東勇";
+            this.atk_num.string = "100";
+            this.hp_num.string = "20";
+        }
+        else if (a == 2) {
+            this.nm.string = "嚴冬勇";
+            this.atk_num.string = "50";
+            this.hp_num.string = "50";
+        }
+        else if (a == 3) {
+            this.nm.string = "魔關羽";
+            this.atk_num.string = "300";
+            this.hp_num.string = "10";
+        }
+        // console.log(this.nm.string);
+    };
+    NewClass.prototype.update = function (dt) {
+        // console.log(this.nm.string);
     };
     __decorate([
         property(cc.Label)
@@ -102,6 +196,15 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property
     ], NewClass.prototype, "num", void 0);
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "nm", void 0);
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "atk_num", void 0);
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "hp_num", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);

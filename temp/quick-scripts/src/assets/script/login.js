@@ -52,14 +52,26 @@ var NewClass = /** @class */ (function (_super) {
     };
     NewClass.prototype.handleLogin = function () {
         var auth = firebase.auth();
-        auth.signInWithEmailAndPassword(this.email, this.password).
-            then(function (userCredential) {
+        auth.signInWithEmailAndPassword(this.email, this.password)
+            .then(function (userCredential) {
             GlobalData_1.default.uid = userCredential.user.uid;
-            cc.director.loadScene('map2');
+            var database = firebase.database();
+            var userRef = database.ref('user').child(GlobalData_1.default.uid);
+            userRef.once('value', function (snapshot) {
+                var userData = snapshot.val();
+                if (userData && userData.myArray) {
+                    GlobalData_1.default.pokewoman = userData.myArray;
+                    console.log(GlobalData_1.default.pokewoman);
+                }
+                else {
+                    console.log("myArray not found in user data");
+                }
+                console.log(GlobalData_1.default.uid);
+                cc.director.loadScene('map2');
+            });
         })
             .catch(function (error) {
-            console.log(error.message);
-            cc.error(error.message);
+            console.log(error);
         });
     };
     NewClass.prototype.toRegisterPage = function () {
