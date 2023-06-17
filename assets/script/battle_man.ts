@@ -89,6 +89,13 @@ export default class NewClass extends cc.Component {
         this.initSkill2();
         this.initSkill3();
         this.initSkill4();
+
+        let enemyParticleEffect2 = cc.find("Canvas/enemy/onLoad").getComponent(cc.ParticleSystem);
+        if(this.enemynum == 4){
+            console.log("this.enemynum == 4");
+            enemyParticleEffect2.playOnLoad = true;
+            enemyParticleEffect2.resetSystem();
+        }
     }
 
     update(dt){
@@ -102,6 +109,7 @@ export default class NewClass extends cc.Component {
             //     myArray: [this.enemynum],
             // });
             GlobalData.pokewoman.push(this.enemynum);
+            console.log("GlobalData.pokewoman:", GlobalData.pokewoman);
 
 
             this.enemyLife = 0;
@@ -267,12 +275,34 @@ export default class NewClass extends cc.Component {
 
         this.node.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(520, 0)), cc.moveBy(1, cc.v2(-520, 0)),enemyLifeDeduct, turnSwitch2))
     }
-
     enemyTurnAction(){
+        let enemyAnimation = cc.find("Canvas/enemy").getComponent(cc.Animation);
+        let enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
+        
+        let shakeCamera = cc.callFunc(function(target) {
+            const mainCamera = cc.Camera.main;
+            this.originalPosition = mainCamera.node.position.clone();
+            const shakeSequence = cc.sequence(
+                cc.moveTo(0.05, cc.v2(this.originalPosition.x , this.originalPosition.y + 8)),
+                cc.moveTo(0.05, cc.v2(this.originalPosition.x, this.originalPosition.y - 8)),
+                cc.moveTo(0.05, this.originalPosition)
+            );
+    
+            // Run the shake sequence on the camera
+            cc.find("Canvas/Main Camera").getComponent(cc.Camera).node.runAction(shakeSequence);
+            //this.camera.node.runAction(shakeSequence);
+        });
+
+        if(this.enemynum == 4){
+            enemyAnimation.play("dong_move");
+        }else if(this.enemynum == 5){
+        }else if(this.enemynum == 6){
+        }
         let myLifeDeduct = cc.callFunc(function(target) {
             //console.log("enemyNum in mylife deduct:", this.enemynum);
-            if(this.enemynum == 4) this.myLife -= 40;
-            else if(this.enemynum == 5) this.myLife -= 100;
+            if(this.enemynum == 4) this.myLife -= 10;
+            else if(this.enemynum == 5) this.myLife -= 20;
+            else if(this.enemynum == 6) this.myLife -= 40;
         }, this);
 
         let turnSwitch1 = cc.callFunc(function(target) {
@@ -285,9 +315,30 @@ export default class NewClass extends cc.Component {
             this.enemyTurn = false;
         }, this);
 
+        let particleAction = cc.callFunc(function(target) {
+            enemyParticleEffect.resetSystem();
+        }, this);
+
+        // let particleAction = cc.callFunc(function(target) {
+        //     enemyParticleEffect.stopSystem();
+        // }, this);
+
+        
+        let moveAction = cc.callFunc(function(target) {
+            if(this.enemynum == 4)
+                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera));
+            else if(this.enemynum == 5)
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0))));
+            else if(this.enemynum == 6)
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0))));
+        }, this);
+
+        
+
 
         let enemy = cc.find("Canvas/enemy");
-        enemy.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0)),myLifeDeduct, turnSwitch2))
+        enemy.runAction(cc.sequence(turnSwitch1, moveAction, myLifeDeduct, turnSwitch2))
     }
+    
 
 }

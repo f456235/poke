@@ -175,6 +175,7 @@ var Man = /** @class */ (function (_super) {
             var canvasNode = cc.find("Canvas"); // 获取画布节点
             var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
             this.Gamemanger.palse = true;
+            cc.audioEngine.pauseMusic();
             console.log(this.Gamemanger.palse);
             canvasNode.runAction(cc.sequence(blinkAction, cc.callFunc(function () {
                 cc.director.loadScene("battle", function () {

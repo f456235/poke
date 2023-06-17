@@ -160,7 +160,7 @@ export default class Man extends cc.Component {
         let worldManifold = contact.getWorldManifold();
         let points = worldManifold.points;
         let normal = worldManifold.normal;
-        if(otherCollider.tag == 4 || otherCollider.tag == 5){
+        if(otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6){
             this.enemyNum = otherCollider.tag;
             //console.log("enemyNum in man");
             //console.log(this.enemyNum);
@@ -172,10 +172,12 @@ export default class Man extends cc.Component {
             var canvasNode = cc.find("Canvas"); // 获取画布节点
             var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
             this.Gamemanger.palse = true;
+            cc.audioEngine.pauseMusic();
             console.log(this.Gamemanger.palse);
             canvasNode.runAction(cc.sequence(
                 blinkAction,
                 cc.callFunc(function () {
+                       
                     cc.director.loadScene("battle", () =>{
                        const nextScene = cc.director.getScene();
                        nextScene["enemyNum"] = otherCollider.tag;

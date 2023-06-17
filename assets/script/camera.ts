@@ -54,10 +54,10 @@ export default class NewClass extends cc.Component {
         //     cc.director.loadScene('bag');
         // });
         //cc.log(this.node.x);
-        if(this.player.x <= 62 && this.player.x >= -62) 
+        if(this.player.x <= 55 && this.player.x >= -55) 
             this.node.x = this.player.x ;
         //else this.node.x = 62;
-        if(this.player.y <= 140 && this.player.y >= -136) 
+        if(this.player.y <= 136 && this.player.y >= -136) 
         this.node.y = this.player.y ;
         //else this.node.y = -147;
        GlobalData.cameraPosX = this.node.position.x;

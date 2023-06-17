@@ -87,6 +87,12 @@ var NewClass = /** @class */ (function (_super) {
         this.initSkill2();
         this.initSkill3();
         this.initSkill4();
+        var enemyParticleEffect2 = cc.find("Canvas/enemy/onLoad").getComponent(cc.ParticleSystem);
+        if (this.enemynum == 4) {
+            console.log("this.enemynum == 4");
+            enemyParticleEffect2.playOnLoad = true;
+            enemyParticleEffect2.resetSystem();
+        }
     };
     NewClass.prototype.update = function (dt) {
         this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData_1.default.myelf]];
@@ -98,6 +104,7 @@ var NewClass = /** @class */ (function (_super) {
             //     myArray: [this.enemynum],
             // });
             GlobalData_1.default.pokewoman.push(this.enemynum);
+            console.log("GlobalData.pokewoman:", GlobalData_1.default.pokewoman);
             this.enemyLife = 0;
             this.isWin = true;
             cc.audioEngine.pauseMusic();
@@ -227,12 +234,31 @@ var NewClass = /** @class */ (function (_super) {
         this.node.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(520, 0)), cc.moveBy(1, cc.v2(-520, 0)), enemyLifeDeduct, turnSwitch2));
     };
     NewClass.prototype.enemyTurnAction = function () {
+        var enemyAnimation = cc.find("Canvas/enemy").getComponent(cc.Animation);
+        var enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
+        var shakeCamera = cc.callFunc(function (target) {
+            var mainCamera = cc.Camera.main;
+            this.originalPosition = mainCamera.node.position.clone();
+            var shakeSequence = cc.sequence(cc.moveTo(0.05, cc.v2(this.originalPosition.x, this.originalPosition.y + 8)), cc.moveTo(0.05, cc.v2(this.originalPosition.x, this.originalPosition.y - 8)), cc.moveTo(0.05, this.originalPosition));
+            // Run the shake sequence on the camera
+            cc.find("Canvas/Main Camera").getComponent(cc.Camera).node.runAction(shakeSequence);
+            //this.camera.node.runAction(shakeSequence);
+        });
+        if (this.enemynum == 4) {
+            enemyAnimation.play("dong_move");
+        }
+        else if (this.enemynum == 5) {
+        }
+        else if (this.enemynum == 6) {
+        }
         var myLifeDeduct = cc.callFunc(function (target) {
             //console.log("enemyNum in mylife deduct:", this.enemynum);
             if (this.enemynum == 4)
-                this.myLife -= 40;
+                this.myLife -= 10;
             else if (this.enemynum == 5)
-                this.myLife -= 100;
+                this.myLife -= 20;
+            else if (this.enemynum == 6)
+                this.myLife -= 40;
         }, this);
         var turnSwitch1 = cc.callFunc(function (target) {
             this.myTurn = false;
@@ -242,8 +268,22 @@ var NewClass = /** @class */ (function (_super) {
             this.myTurn = true;
             this.enemyTurn = false;
         }, this);
+        var particleAction = cc.callFunc(function (target) {
+            enemyParticleEffect.resetSystem();
+        }, this);
+        // let particleAction = cc.callFunc(function(target) {
+        //     enemyParticleEffect.stopSystem();
+        // }, this);
+        var moveAction = cc.callFunc(function (target) {
+            if (this.enemynum == 4)
+                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera));
+            else if (this.enemynum == 5)
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0))));
+            else if (this.enemynum == 6)
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0))));
+        }, this);
         var enemy = cc.find("Canvas/enemy");
-        enemy.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0)), myLifeDeduct, turnSwitch2));
+        enemy.runAction(cc.sequence(turnSwitch1, moveAction, myLifeDeduct, turnSwitch2));
     };
     __decorate([
         property(cc.Label)
