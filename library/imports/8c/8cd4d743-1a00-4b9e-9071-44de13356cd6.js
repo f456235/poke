@@ -34,11 +34,9 @@ var NewClass = /** @class */ (function (_super) {
         _this.label = null;
         _this.lie = null;
         _this.text = 'hello';
-        // @property({type:cc.AudioClip})
-        // bgm: cc.AudioClip = null;
         _this.goinSound = null;
-        _this.moveSpeed = 1.5; // 移动速度，可以根据需要调整
-        _this.animation = null; // 动画组件
+        _this.moveSpeed = 1.5;
+        _this.animation = null;
         _this.isBattle = false;
         _this.isMovingUp = false;
         _this.isMovingDown = false;
@@ -51,22 +49,13 @@ var NewClass = /** @class */ (function (_super) {
     NewClass.prototype.start = function () {
         var nodetodestory = cc.director.getScene()["nodeToDestroy"];
         console.log("nodeToDestroy in man:", nodetodestory);
-        //if(this.node.getChildByName(nodetodestory) !== null){
-        //    this.node.destroy();
-        //}
         cc.director.getScene().walk(function (node) {
-            // Perform operations on each node
-            // Access node properties, call methods, etc.
             if (GlobalData_1.default.nodeToDestroy.includes(node.name)) {
                 node.destroy();
             }
         }, function () {
-            // This callback is invoked after visiting each node in the scene hierarchy
-            //console.log("Iteration complete");
         });
-        // cc.audioEngine.playMusic(this.bgm, true);
         this.Gamemanger = cc.find('Canvas/gamemanager').getComponent('gamemanager');
-        // console.log(this.Gamemanger);
         this.Gamemanger.palse = false;
     };
     NewClass.prototype.onLoad = function () {
@@ -77,7 +66,7 @@ var NewClass = /** @class */ (function (_super) {
         this.animation = this.getComponent(cc.Animation);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
-        this.node.setPosition(GlobalData_1.default.PlayerPosX, GlobalData_1.default.PlayerPosY);
+        this.node.setPosition(GlobalData_1.default.Player2PosX, GlobalData_1.default.Player2PosY);
     };
     NewClass.prototype.onDestroy = function () {
         // 移除键盘事件监听
@@ -99,23 +88,15 @@ var NewClass = /** @class */ (function (_super) {
         switch (event.keyCode) {
             case cc.macro.KEY.w:
                 this.isMovingUp = true;
-                // this.playAnimation("man_up");
-                // this.animation.play("man_up");
                 break;
             case cc.macro.KEY.s:
                 this.isMovingDown = true;
-                // this.playAnimation("man_down");
-                // this.animation.play("man_down");
                 break;
             case cc.macro.KEY.a:
                 this.isMovingLeft = true;
-                // this.playAnimation("man_left");
-                // this.animation.play("man_left");
                 break;
             case cc.macro.KEY.d:
                 this.isMovingRight = true;
-                // this.playAnimation("man_right");
-                // this.animation.play("man_right");
                 break;
             case cc.macro.KEY.space:
                 console.log(this.node);
@@ -144,8 +125,6 @@ var NewClass = /** @class */ (function (_super) {
         }
     };
     NewClass.prototype.update = function (dt) {
-        //cc.log(this.node.x, this.node.y);
-        // 根据按键状态更新角色位置
         if (this.Gamemanger.palse == false) {
             if (this.isMovingUp) {
                 this.node.y += (this.moveSpeed * dt);
@@ -169,49 +148,31 @@ var NewClass = /** @class */ (function (_super) {
             }
         }
         if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
-            // this.isBattle = true;
-            // cc.audioEngine.pauseMusic();
-            // cc.audioEngine.playEffect(this.goinSound, false);
-            // var canvasNode = cc.find("Canvas"); // 获取画布节点
-            // var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
-            // this.Gamemanger.palse = true;
-            // console.log(this.Gamemanger.palse);
-            // canvasNode.runAction(cc.sequence(
-            //     blinkAction,
-            //     cc.callFunc(function () {
-            //         cc.director.loadScene("battle");
-            //     })
-            // ));
         }
-        GlobalData_1.default.PlayerPosX = this.node.getPosition().x;
-        GlobalData_1.default.PlayerPosY = this.node.getPosition().y;
+        GlobalData_1.default.Player2PosX = this.node.getPosition().x;
+        GlobalData_1.default.Player2PosY = this.node.getPosition().y;
     };
     NewClass.prototype.onBeginContact = function (contact, selfCollider, otherCollider) {
-        //cc.log("Player hits the bush");
+        console.log("shit1");
         var worldManifold = contact.getWorldManifold();
         var points = worldManifold.points;
         var normal = worldManifold.normal;
         if (otherCollider.tag == 4 || otherCollider.tag == 5) {
+            console.log("shit");
             this.enemyNum = otherCollider.tag;
-            //console.log("enemyNum in man");
-            //console.log(this.enemyNum);
-            //cc.log("Player hits the enemy");
             this.isBattle = true;
-            // cc.audioEngine.pauseMusic();
+            cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.goinSound, false);
-            var canvasNode = cc.find("Canvas"); // 获取画布节点
-            var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
+            var canvasNode = cc.find("Canvas");
+            var blinkAction = cc.blink(2, 5);
             this.Gamemanger.palse = true;
-            console.log(this.Gamemanger.palse);
+            console.log("fuck your life ", this.Gamemanger.palse);
             canvasNode.runAction(cc.sequence(blinkAction, cc.callFunc(function () {
                 cc.director.loadScene("battle", function () {
                     var nextScene = cc.director.getScene();
                     nextScene["enemyNum"] = otherCollider.tag;
-                    //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
                 });
             })));
-            //cc.audioEngine.pauseMusic();
-            //cc.audioEngine.playEffect(this.battleBgm, true);
         }
     };
     __decorate([

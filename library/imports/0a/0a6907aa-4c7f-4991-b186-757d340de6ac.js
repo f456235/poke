@@ -82,11 +82,11 @@ var NewClass = /** @class */ (function (_super) {
     NewClass.prototype.update = function (dt) {
         this.updateUI(dt);
         if (this.enemyLife <= 0 && !this.isWin) {
-            var uid = GlobalData_1.default.uid;
-            var database = firebase.database();
-            firebase.database().ref('user').child(GlobalData_1.default.uid).update({
-                myArray: [this.enemynum],
-            });
+            // var uid = GlobalData.uid;
+            // const database = firebase.database();
+            // firebase.database().ref('user').child(GlobalData.uid).update({
+            //     myArray: [this.enemynum],
+            // });
             GlobalData_1.default.pokewoman.push(this.enemynum);
             this.enemyLife = 0;
             this.isWin = true;

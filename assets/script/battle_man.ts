@@ -84,11 +84,11 @@ export default class NewClass extends cc.Component {
         
         this.updateUI(dt);
         if(this.enemyLife <= 0 && !this.isWin){
-            var uid = GlobalData.uid;
-            const database = firebase.database();
-            firebase.database().ref('user').child(GlobalData.uid).update({
-                myArray: [this.enemynum],
-            });
+            // var uid = GlobalData.uid;
+            // const database = firebase.database();
+            // firebase.database().ref('user').child(GlobalData.uid).update({
+            //     myArray: [this.enemynum],
+            // });
             GlobalData.pokewoman.push(this.enemynum);
 
 
