@@ -1,86 +1,101 @@
-2023-06-17T11:31:23.637Z - success: protocol editor-framework registered
-2023-06-17T11:31:23.638Z - success: protocol app registered
-2023-06-17T11:31:23.638Z - success: protocol theme registered
-2023-06-17T11:31:23.638Z - success: protocol packages registered
-2023-06-17T11:31:23.654Z - normal: Load ~/.CocosCreator/settings.json
-2023-06-17T11:31:23.670Z - success: protocol uuid registerred
-2023-06-17T11:31:23.670Z - success: protocol db registerred
-2023-06-17T11:31:23.670Z - success: protocol thumbnail registerred
-2023-06-17T11:31:23.747Z - normal: Initializing Asset Database
-2023-06-17T11:31:23.756Z - normal: checking language setting...
-2023-06-17T11:31:23.757Z - normal: Language: zh
-2023-06-17T11:31:23.758Z - success: protocol unpack registerred
-2023-06-17T11:31:23.759Z - success: protocol disable-commonjs registerred
-2023-06-17T11:31:24.538Z - normal: connected!
-2023-06-17T11:31:24.711Z - normal: Check project C:\Users\tyues\OneDrive\桌面\walking_down_the_street\pokewoman
-2023-06-17T11:31:24.711Z - normal: Initializing project C:\Users\tyues\OneDrive\桌面\walking_down_the_street\pokewoman
-2023-06-17T11:31:25.224Z - success: adapters loaded
-2023-06-17T11:31:25.238Z - success: asset-db-debugger loaded
-2023-06-17T11:31:25.323Z - success: fb-audience-network loaded
-2023-06-17T11:31:25.378Z - success: fb-live-stream loaded
-2023-06-17T11:31:25.396Z - success: google-play-instant loaded
-2023-06-17T11:31:25.400Z - success: jsb-adapter loaded
-2023-06-17T11:31:25.414Z - success: package-manager loaded
-2023-06-17T11:31:25.418Z - success: runtime-adapters loaded
-2023-06-17T11:31:25.435Z - success: runtime-dev-tools loaded
-2023-06-17T11:31:25.446Z - success: ui-kit-preview-extra loaded
-2023-06-17T11:31:25.456Z - success: ui-kit-preview loaded
-2023-06-17T11:31:26.392Z - success: alipay-minigame loaded
-2023-06-17T11:31:26.398Z - success: assets loaded
-2023-06-17T11:31:26.400Z - success: baidugame-opendata loaded
-2023-06-17T11:31:26.402Z - success: baidugame loaded
-2023-06-17T11:31:26.408Z - success: builder loaded
-2023-06-17T11:31:26.411Z - success: bytedance-opendata loaded
-2023-06-17T11:31:26.413Z - success: bytedance loaded
-2023-06-17T11:31:26.416Z - success: channel-upload-tools loaded
-2023-06-17T11:31:26.535Z - success: cloud-function loaded
-2023-06-17T11:31:26.723Z - success: cocos-services loaded
-2023-06-17T11:31:26.726Z - success: console loaded
-2023-06-17T11:31:26.729Z - success: curve-editor loaded
-2023-06-17T11:31:26.738Z - success: fb-instant-games loaded
-2023-06-17T11:31:26.740Z - success: game-window loaded
-2023-06-17T11:31:26.741Z - success: google-instant-games loaded
-2023-06-17T11:31:26.744Z - success: hierarchy loaded
-2023-06-17T11:31:26.748Z - success: huawei-agc loaded
-2023-06-17T11:31:26.751Z - success: huawei-runtime loaded
-2023-06-17T11:31:26.753Z - success: inspector loaded
-2023-06-17T11:31:26.766Z - success: cpk-publish loaded
-2023-06-17T11:31:26.767Z - success: keystore loaded
-2023-06-17T11:31:26.783Z - success: link-sure-runtime loaded
-2023-06-17T11:31:26.797Z - success: node-library loaded
-2023-06-17T11:31:26.798Z - success: open-recent-items loaded
-2023-06-17T11:31:26.800Z - success: oppo-runtime loaded
-2023-06-17T11:31:26.802Z - success: package-asset loaded
-2023-06-17T11:31:26.803Z - success: preferences loaded
-2023-06-17T11:31:26.804Z - success: project-importer loaded
-2023-06-17T11:31:26.806Z - success: project-settings loaded
-2023-06-17T11:31:26.818Z - success: qtt-runtime loaded
-2023-06-17T11:31:26.820Z - success: scene loaded
-2023-06-17T11:31:26.821Z - success: simulator-debugger loaded
-2023-06-17T11:31:26.822Z - success: sprite-editor loaded
-2023-06-17T11:31:26.883Z - success: store loaded
-2023-06-17T11:31:26.887Z - success: taobao-creativeapp loaded
-2023-06-17T11:31:26.890Z - success: timeline loaded
-2023-06-17T11:31:26.896Z - success: vivo-runtime loaded
-2023-06-17T11:31:26.898Z - success: wechatgame-opendata loaded
-2023-06-17T11:31:26.902Z - success: wechatgame loaded
-2023-06-17T11:31:26.907Z - success: xiaomi-runtime loaded
-2023-06-17T11:31:27.076Z - success: im-plugin loaded
-2023-06-17T11:31:27.077Z - warn: The current '7456' preview port is already occupied, the port is automatically incremented
-2023-06-17T11:31:27.078Z - success: preview server running at http://localhost:7457
-2023-06-17T11:31:27.714Z - normal: Initializing Cocos2d
-2023-06-17T11:31:29.843Z - normal: Initializing engine extends
-2023-06-17T11:31:31.988Z - info: Cocos Service load base data!
-2023-06-17T11:31:43.941Z - failed: [db-task][init] Failed to import asset C:\Users\tyues\OneDrive\桌面\walking_down_the_street\pokewoman\assets\map_tile\Grasslands Fantasy Dreamland\Palette\FD_Grasslands.prefab, message: SyntaxError: C:\Users\tyues\OneDrive\桌面\walking_down_the_street\pokewoman\assets\map_tile\Grasslands Fantasy Dreamland\Palette\FD_Grasslands.prefab: Unexpected token % in JSON at position 0
+2023-06-17T16:32:43.340Z - success: protocol editor-framework registered
+2023-06-17T16:32:43.340Z - success: protocol app registered
+2023-06-17T16:32:43.341Z - success: protocol theme registered
+2023-06-17T16:32:43.341Z - success: protocol packages registered
+2023-06-17T16:32:43.354Z - normal: Load ~/.CocosCreator/settings.json
+2023-06-17T16:32:43.375Z - success: protocol uuid registerred
+2023-06-17T16:32:43.375Z - success: protocol db registerred
+2023-06-17T16:32:43.375Z - success: protocol thumbnail registerred
+2023-06-17T16:32:43.445Z - normal: Initializing Asset Database
+2023-06-17T16:32:43.449Z - normal: checking language setting...
+2023-06-17T16:32:43.449Z - normal: Language: zh
+2023-06-17T16:32:43.451Z - success: protocol unpack registerred
+2023-06-17T16:32:43.451Z - success: protocol disable-commonjs registerred
+2023-06-17T16:32:43.872Z - normal: connected!
+2023-06-17T16:32:44.084Z - normal: Check project C:\Users\tyues\OneDrive\桌面\cc\pokewoman
+2023-06-17T16:32:44.085Z - normal: Initializing project C:\Users\tyues\OneDrive\桌面\cc\pokewoman
+2023-06-17T16:32:44.275Z - success: adapters loaded
+2023-06-17T16:32:44.277Z - success: asset-db-debugger loaded
+2023-06-17T16:32:44.347Z - success: fb-audience-network loaded
+2023-06-17T16:32:44.376Z - success: fb-live-stream loaded
+2023-06-17T16:32:44.380Z - success: google-play-instant loaded
+2023-06-17T16:32:44.381Z - success: jsb-adapter loaded
+2023-06-17T16:32:44.383Z - success: package-manager loaded
+2023-06-17T16:32:44.383Z - success: runtime-adapters loaded
+2023-06-17T16:32:44.385Z - success: runtime-dev-tools loaded
+2023-06-17T16:32:44.387Z - success: ui-kit-preview-extra loaded
+2023-06-17T16:32:44.388Z - success: ui-kit-preview loaded
+2023-06-17T16:32:45.082Z - success: alipay-minigame loaded
+2023-06-17T16:32:45.089Z - success: assets loaded
+2023-06-17T16:32:45.092Z - success: baidugame-opendata loaded
+2023-06-17T16:32:45.094Z - success: baidugame loaded
+2023-06-17T16:32:45.096Z - success: builder loaded
+2023-06-17T16:32:45.099Z - success: bytedance-opendata loaded
+2023-06-17T16:32:45.101Z - success: bytedance loaded
+2023-06-17T16:32:45.105Z - success: channel-upload-tools loaded
+2023-06-17T16:32:45.236Z - success: cloud-function loaded
+2023-06-17T16:32:45.421Z - success: cocos-services loaded
+2023-06-17T16:32:45.424Z - success: console loaded
+2023-06-17T16:32:45.427Z - success: curve-editor loaded
+2023-06-17T16:32:45.437Z - success: fb-instant-games loaded
+2023-06-17T16:32:45.440Z - success: game-window loaded
+2023-06-17T16:32:45.442Z - success: google-instant-games loaded
+2023-06-17T16:32:45.446Z - success: hierarchy loaded
+2023-06-17T16:32:45.450Z - success: huawei-agc loaded
+2023-06-17T16:32:45.454Z - success: huawei-runtime loaded
+2023-06-17T16:32:45.456Z - success: inspector loaded
+2023-06-17T16:32:45.475Z - success: cpk-publish loaded
+2023-06-17T16:32:45.477Z - success: keystore loaded
+2023-06-17T16:32:45.497Z - success: link-sure-runtime loaded
+2023-06-17T16:32:45.505Z - success: node-library loaded
+2023-06-17T16:32:45.506Z - success: open-recent-items loaded
+2023-06-17T16:32:45.512Z - success: oppo-runtime loaded
+2023-06-17T16:32:45.515Z - success: package-asset loaded
+2023-06-17T16:32:45.516Z - success: preferences loaded
+2023-06-17T16:32:45.518Z - success: project-importer loaded
+2023-06-17T16:32:45.520Z - success: project-settings loaded
+2023-06-17T16:32:45.540Z - success: qtt-runtime loaded
+2023-06-17T16:32:45.544Z - success: scene loaded
+2023-06-17T16:32:45.545Z - success: simulator-debugger loaded
+2023-06-17T16:32:45.547Z - success: sprite-editor loaded
+2023-06-17T16:32:45.615Z - success: store loaded
+2023-06-17T16:32:45.619Z - success: taobao-creativeapp loaded
+2023-06-17T16:32:45.623Z - success: timeline loaded
+2023-06-17T16:32:45.630Z - success: vivo-runtime loaded
+2023-06-17T16:32:45.634Z - success: wechatgame-opendata loaded
+2023-06-17T16:32:45.640Z - success: wechatgame loaded
+2023-06-17T16:32:45.645Z - success: xiaomi-runtime loaded
+2023-06-17T16:32:45.708Z - success: im-plugin loaded
+2023-06-17T16:32:45.708Z - warn: The current '7456' preview port is already occupied, the port is automatically incremented
+2023-06-17T16:32:45.709Z - warn: The current '7457' preview port is already occupied, the port is automatically incremented
+2023-06-17T16:32:45.710Z - success: preview server running at http://localhost:7458
+2023-06-17T16:32:46.281Z - normal: Initializing Cocos2d
+2023-06-17T16:32:46.565Z - normal: Initializing engine extends
+2023-06-17T16:32:48.241Z - info: Cocos Service load base data!
+2023-06-17T16:32:53.456Z - failed: [db-task][init] Failed to import asset C:\Users\tyues\OneDrive\桌面\cc\pokewoman\assets\map_tile\Grasslands Fantasy Dreamland\Palette\FD_Grasslands.prefab, message: SyntaxError: C:\Users\tyues\OneDrive\桌面\cc\pokewoman\assets\map_tile\Grasslands Fantasy Dreamland\Palette\FD_Grasslands.prefab: Unexpected token % in JSON at position 0
     at JSON.parse (<anonymous>)
     at C:\ProgramData\cocos\editors\Creator\2.4.8\resources\app.asar\node_modules\fire-fs\node_modules\jsonfile\index.js:36:18
     at C:\ProgramData\cocos\editors\Creator\2.4.8\resources\app.asar\node_modules\graceful-fs\graceful-fs.js:123:16
     at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:63:3)
-2023-06-17T11:31:51.672Z - normal: Loading packages
-2023-06-17T11:31:51.675Z - normal: Watching packages
-2023-06-17T11:31:52.261Z - normal: Run Application
-2023-06-17T11:31:55.419Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
-2023-06-17T11:31:55.740Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
-2023-06-17T11:31:55.881Z - success: cloud-function unloaded
-2023-06-17T11:39:53.629Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
-2023-06-17T11:39:54.324Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:32:55.189Z - normal: Loading packages
+2023-06-17T16:32:55.192Z - normal: Watching packages
+2023-06-17T16:32:55.935Z - normal: Run Application
+2023-06-17T16:32:59.117Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:32:59.493Z - success: cloud-function unloaded
+2023-06-17T16:32:59.612Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:35:39.136Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:35:39.557Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:36:28.534Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:37:23.513Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:37:24.062Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:39:12.757Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:39:13.308Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:39:17.483Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:41:22.913Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:41:23.309Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:41:39.235Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:41:39.609Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:41:59.569Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:42:00.037Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T16:42:09.769Z - warn: The type of "man2.moveSpeed" must be cc.Float or cc.Integer, not Number.
+2023-06-17T16:42:10.112Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10

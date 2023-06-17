@@ -82,6 +82,7 @@ var NewClass = /** @class */ (function (_super) {
         else if (this.enemynum == 5) {
             if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy2;
+                cc.find("Canvas/enemy").color = cc.Color.RED;
             }
         }
         cc.audioEngine.playMusic(this.battleBgm, true);
@@ -247,6 +248,7 @@ var NewClass = /** @class */ (function (_super) {
     NewClass.prototype.enemyTurnAction = function () {
         var enemyAnimation = cc.find("Canvas/enemy").getComponent(cc.Animation);
         var enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
+        var enemyParticleEffect3 = cc.find("Canvas/enemy/punch").getComponent(cc.ParticleSystem);
         var shakeCamera = cc.callFunc(function (target) {
             var mainCamera = cc.Camera.main;
             this.originalPosition = mainCamera.node.position.clone();
@@ -255,10 +257,18 @@ var NewClass = /** @class */ (function (_super) {
             cc.find("Canvas/Main Camera").getComponent(cc.Camera).node.runAction(shakeSequence);
             //this.camera.node.runAction(shakeSequence);
         });
+        var shakeCamera2 = cc.callFunc(function (target) {
+            var mainCamera = cc.Camera.main;
+            this.originalPosition = mainCamera.node.position.clone();
+            //let shakeSequence;
+            var shakeSequence = cc.sequence(cc.moveTo(0.05, cc.v2(this.originalPosition.x + 15, this.originalPosition.y)), cc.moveTo(0.05, cc.v2(this.originalPosition.x - 15, this.originalPosition.y)), cc.moveTo(0.05, this.originalPosition));
+            cc.find("Canvas/Main Camera").getComponent(cc.Camera).node.runAction(shakeSequence);
+        });
         if (this.enemynum == 4) {
             enemyAnimation.play("dong_move");
         }
         else if (this.enemynum == 5) {
+            enemyAnimation.play("red_dong_move");
         }
         else if (this.enemynum == 6) {
         }
@@ -280,21 +290,24 @@ var NewClass = /** @class */ (function (_super) {
             this.enemyTurn = false;
         }, this);
         var particleAction = cc.callFunc(function (target) {
-            enemyParticleEffect.resetSystem();
+            if (this.enemynum == 4)
+                enemyParticleEffect.resetSystem();
+            else if (this.enemynum == 5)
+                enemyParticleEffect3.resetSystem();
         }, this);
         // let particleAction = cc.callFunc(function(target) {
         //     enemyParticleEffect.stopSystem();
         // }, this);
         var moveAction = cc.callFunc(function (target) {
             if (this.enemynum == 4)
-                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera));
+                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera, myLifeDeduct));
             else if (this.enemynum == 5)
-                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0))));
+                enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)), myLifeDeduct));
             else if (this.enemynum == 6)
-                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-520, 0)), cc.moveBy(1, cc.v2(520, 0))));
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)), myLifeDeduct));
         }, this);
         var enemy = cc.find("Canvas/enemy");
-        enemy.runAction(cc.sequence(turnSwitch1, moveAction, myLifeDeduct, turnSwitch2));
+        enemy.runAction(cc.sequence(turnSwitch1, moveAction, turnSwitch2));
     };
     __decorate([
         property(cc.Label)

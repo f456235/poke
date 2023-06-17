@@ -7060,9 +7060,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 251,
-      "g": 251,
-      "b": 251,
+      "r": 242,
+      "g": 10,
+      "b": 10,
       "a": 255
     },
     "_contentSize": {
@@ -7079,8 +7079,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        213.485,
-        409.011,
+        579.177,
+        287.745,
         0,
         0,
         0,
@@ -7141,8 +7141,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        9.358,
-        4.944,
+        -0.825,
+        -3.416,
         0,
         0,
         0,
@@ -7189,7 +7189,7 @@
       "__uuid__": "472df5d3-35e7-4184-9e6c-7f41bee65ee3"
     },
     "_texture": null,
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 200,
@@ -7199,36 +7199,36 @@
     "lifeVar": 0.5,
     "_startColor": {
       "__type__": "cc.Color",
-      "r": 202,
-      "g": 200,
-      "b": 86,
+      "r": 255,
+      "g": 39,
+      "b": 82,
       "a": 163
     },
     "_startColorVar": {
       "__type__": "cc.Color",
-      "r": 229,
-      "g": 255,
-      "b": 173,
+      "r": 250,
+      "g": 27,
+      "b": 98,
       "a": 198
     },
     "_endColor": {
       "__type__": "cc.Color",
-      "r": 173,
-      "g": 161,
-      "b": 19,
+      "r": 240,
+      "g": 18,
+      "b": 62,
       "a": 214
     },
     "_endColorVar": {
       "__type__": "cc.Color",
-      "r": 107,
-      "g": 249,
-      "b": 249,
+      "r": 235,
+      "g": 10,
+      "b": 37,
       "a": 188
     },
     "angle": 360,
     "angleVar": 360,
     "startSize": 1,
-    "startSizeVar": 20,
+    "startSizeVar": 50,
     "endSize": 3,
     "endSizeVar": 0,
     "startSpin": -47.369998931884766,
@@ -7242,8 +7242,8 @@
     },
     "posVar": {
       "__type__": "cc.Vec2",
-      "x": 7,
-      "y": 7
+      "x": 1,
+      "y": 1
     },
     "_positionType": 1,
     "positionType": 1,
@@ -7377,6 +7377,9 @@
     "_clips": [
       {
         "__uuid__": "ac776f28-1668-4f6e-8aab-81b0f90969ab"
+      },
+      {
+        "__uuid__": "f49ff315-afee-4eb2-a314-feca2aa6f69c"
       }
     ],
     "playOnLoad": false,

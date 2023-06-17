@@ -30,10 +30,13 @@ export default class Enemy extends cc.Component {
 
     update(dt) {
         //cc.log("dong_move");
-        if(!this.anim.getAnimationState("dong_move").isPlaying){
-            this.playAnimation("dong_move");
+            if(this.node.name == "4"){
+                if(!this.anim.getAnimationState("dong_move").isPlaying) this.playAnimation("dong_move")
+            }
+            else if(this.node.name == "5")
+            if(!this.anim.getAnimationState("red_dong_move").isPlaying) this.playAnimation("red_dong_move");
             //cc.log("dong_move");
-        }
+        
            // this.playAnimation("dong_move");  
         this.node.x = this.node.x + this.enemySpeed * dt;
           
