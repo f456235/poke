@@ -77,7 +77,7 @@ var NewClass = /** @class */ (function (_super) {
                     console.log("myArray not found in user data");
                 }
                 console.log(GlobalData_1.default.uid);
-                cc.director.loadScene('map2');
+                cc.director.loadScene('main');
             });
         })
             .catch(function (error) {

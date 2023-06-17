@@ -26,11 +26,13 @@ require('./assets/script/libaoma');
 require('./assets/script/login');
 require('./assets/script/man');
 require('./assets/script/man2');
+require('./assets/script/no');
 require('./assets/script/register');
 require('./assets/script/select_dong');
 require('./assets/script/setting');
 require('./assets/script/universe');
 require('./assets/script/universe_select');
+require('./assets/script/yuan');
 
                     }
                     if (nodeEnv) {

@@ -61,7 +61,7 @@ export default class NewClass extends cc.Component {
             }
             
             console.log(GlobalData.uid);
-            cc.director.loadScene('map2');
+            cc.director.loadScene('main');
         });
     })
     .catch((error) => {
