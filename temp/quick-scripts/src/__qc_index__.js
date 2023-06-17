@@ -12,6 +12,7 @@ require('./assets/script/handleSetting');
 require('./assets/script/libaoma');
 require('./assets/script/login');
 require('./assets/script/man');
+require('./assets/script/man2');
 require('./assets/script/register');
 require('./assets/script/select_dong');
 require('./assets/script/setting');

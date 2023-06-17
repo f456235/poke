@@ -132,19 +132,19 @@ export default class Man extends cc.Component {
         if(this.Gamemanger.palse==false)
         {
             if (this.isMovingUp) {
-            this.node.y += (this.moveSpeed * dt - 0.5 );
+            this.node.y += (this.moveSpeed * dt);
                 if(!this.animation.getAnimationState("man_up").isPlaying)this.animation.play("man_up");
             }
             if (this.isMovingDown) {
-                this.node.y -= this.moveSpeed * dt - 0.5;
+                this.node.y -= this.moveSpeed * dt;
                 if(!this.animation.getAnimationState("man_down").isPlaying)this.animation.play("man_down");
             }
             if (this.isMovingLeft) {
-                this.node.x -= this.moveSpeed * dt - + 0.5;
+                this.node.x -= this.moveSpeed * dt;
                 if(!this.animation.getAnimationState("man_left").isPlaying)this.animation.play("man_left");
             }
             if (this.isMovingRight) {
-                this.node.x += this.moveSpeed * dt - 0.5;
+                this.node.x += this.moveSpeed * dt;
                 if(!this.animation.getAnimationState("man_right").isPlaying)this.animation.play("man_right");
             }
         }
@@ -166,7 +166,7 @@ export default class Man extends cc.Component {
             //console.log(this.enemyNum);
             //cc.log("Player hits the enemy");
             this.isBattle = true;
-            cc.audioEngine.pauseMusic();
+            // cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.goinSound, false);
         
             var canvasNode = cc.find("Canvas"); // 获取画布节点
