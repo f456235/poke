@@ -18,4 +18,6 @@ export default class GlobalData {
     static mute : boolean = this.volume == 0 ? false : true;
     static map : string = 'map2';
     static nodeToDestroy : string[] = [];
+    static myelf : number = 0;
+    static mylife : number = 0;
 }

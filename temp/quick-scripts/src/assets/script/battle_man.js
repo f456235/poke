@@ -39,6 +39,9 @@ var NewClass = /** @class */ (function (_super) {
         _this.enemy1 = null;
         _this.enemy2 = null;
         _this.man = null;
+        _this.sprite = [];
+        _this.bag = GlobalData_1.default.pokewoman;
+        _this.mylife = GlobalData_1.default.mylife;
         _this.myLife = 100;
         _this.enemyLife = 100;
         _this.isWin = false;
@@ -56,9 +59,15 @@ var NewClass = /** @class */ (function (_super) {
         //     console.log("Number passed from previous scene:", this.enemynum);
         //     //this.enemynum = enemyNum;
         // }
+        cc.find('Canvas/skills/bag2').on('click', function () {
+            // cc.director.loadScene('bag_battle');
+            cc.find('Canvas/skills').active = false;
+            cc.find('Canvas/bags2').active = true;
+        });
     };
     NewClass.prototype.start = function () {
         this.enemynum = cc.director.getScene()["enemyNum"];
+        // this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
         //console.log("enemyNum:", this.enemynum);
         if (this.enemynum !== undefined) {
             //console.log("Number passed from previous scene:", this.enemynum);
@@ -80,6 +89,7 @@ var NewClass = /** @class */ (function (_super) {
         this.initSkill4();
     };
     NewClass.prototype.update = function (dt) {
+        this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData_1.default.myelf]];
         this.updateUI(dt);
         if (this.enemyLife <= 0 && !this.isWin) {
             // var uid = GlobalData.uid;
@@ -126,10 +136,10 @@ var NewClass = /** @class */ (function (_super) {
         if (!this.enemyTurn && this.myTurn && this.myLife > 0) {
             //cc.find("Canvas/skill1").getComponent(cc.Button).interactable = this.myTurn;
         }
-        cc.find("Canvas/skill1").getComponent(cc.Button).interactable = this.myTurn;
-        cc.find("Canvas/skill2").getComponent(cc.Button).interactable = this.myTurn;
-        cc.find("Canvas/skill3").getComponent(cc.Button).interactable = this.myTurn;
-        cc.find("Canvas/skill4").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill1").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill2").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill3").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill4").getComponent(cc.Button).interactable = this.myTurn;
         //}
     };
     NewClass.prototype.updateUI = function (dt) {
@@ -141,28 +151,28 @@ var NewClass = /** @class */ (function (_super) {
         clickEventHandler.target = this.node;
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill1";
-        cc.find("Canvas/skill1").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill1").getComponent(cc.Button).clickEvents.push(clickEventHandler);
     };
     NewClass.prototype.initSkill2 = function () {
         var clickEventHandler = new cc.Component.EventHandler();
         clickEventHandler.target = this.node;
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill2";
-        cc.find("Canvas/skill2").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill2").getComponent(cc.Button).clickEvents.push(clickEventHandler);
     };
     NewClass.prototype.initSkill3 = function () {
         var clickEventHandler = new cc.Component.EventHandler();
         clickEventHandler.target = this.node;
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill3";
-        cc.find("Canvas/skill3").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill3").getComponent(cc.Button).clickEvents.push(clickEventHandler);
     };
     NewClass.prototype.initSkill4 = function () {
         var clickEventHandler = new cc.Component.EventHandler();
         clickEventHandler.target = this.node;
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill4";
-        cc.find("Canvas/skill4").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill4").getComponent(cc.Button).clickEvents.push(clickEventHandler);
     };
     NewClass.prototype.skill1 = function () {
         //cc.log("skill1");
@@ -262,6 +272,9 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property(man_1.default)
     ], NewClass.prototype, "man", void 0);
+    __decorate([
+        property([cc.SpriteFrame])
+    ], NewClass.prototype, "sprite", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);

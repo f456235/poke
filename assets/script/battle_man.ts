@@ -34,6 +34,13 @@ export default class NewClass extends cc.Component {
     @property(Man)
     man: Man = null;
 
+    @property([cc.SpriteFrame])
+    sprite: cc.SpriteFrame[] = [];
+
+    bag: number[] =GlobalData.pokewoman;
+
+    mylife: number =GlobalData.mylife;
+
     private myLife: number = 100;
     private enemyLife: number = 100;
     private isWin: boolean = false;
@@ -51,11 +58,16 @@ export default class NewClass extends cc.Component {
         //     console.log("Number passed from previous scene:", this.enemynum);
         //     //this.enemynum = enemyNum;
         // }
+        cc.find('Canvas/skills/bag2').on('click', () => {
+            // cc.director.loadScene('bag_battle');
+            cc.find('Canvas/skills').active = false;
+            cc.find('Canvas/bags2').active = true;
+    });
     }
 
     start () {
         this.enemynum = cc.director.getScene()["enemyNum"];
-        
+        // this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
         //console.log("enemyNum:", this.enemynum);
 
         if(this.enemynum !== undefined){
@@ -81,7 +93,7 @@ export default class NewClass extends cc.Component {
 
     update(dt){
         
-        
+        this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
         this.updateUI(dt);
         if(this.enemyLife <= 0 && !this.isWin){
             // var uid = GlobalData.uid;
@@ -136,10 +148,10 @@ export default class NewClass extends cc.Component {
 
             //cc.find("Canvas/skill1").getComponent(cc.Button).interactable = this.myTurn;
         }
-        cc.find("Canvas/skill1").getComponent(cc.Button).interactable = this.myTurn;
-        cc.find("Canvas/skill2").getComponent(cc.Button).interactable = this.myTurn;
-        cc.find("Canvas/skill3").getComponent(cc.Button).interactable = this.myTurn;
-        cc.find("Canvas/skill4").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill1").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill2").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill3").getComponent(cc.Button).interactable = this.myTurn;
+        cc.find("Canvas/skills/skill4").getComponent(cc.Button).interactable = this.myTurn;
     //}
     }
 
@@ -154,7 +166,7 @@ export default class NewClass extends cc.Component {
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill1";
 
-        cc.find("Canvas/skill1").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill1").getComponent(cc.Button).clickEvents.push(clickEventHandler);
 
         
     }
@@ -165,7 +177,7 @@ export default class NewClass extends cc.Component {
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill2";
 
-        cc.find("Canvas/skill2").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill2").getComponent(cc.Button).clickEvents.push(clickEventHandler);
     }
 
     initSkill3(){
@@ -174,7 +186,7 @@ export default class NewClass extends cc.Component {
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill3";
 
-        cc.find("Canvas/skill3").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill3").getComponent(cc.Button).clickEvents.push(clickEventHandler);
     }
 
     initSkill4(){
@@ -183,7 +195,7 @@ export default class NewClass extends cc.Component {
         clickEventHandler.component = "battle_man";
         clickEventHandler.handler = "skill4";
 
-        cc.find("Canvas/skill4").getComponent(cc.Button).clickEvents.push(clickEventHandler);
+        cc.find("Canvas/skills/skill4").getComponent(cc.Button).clickEvents.push(clickEventHandler);
 
         
     }
