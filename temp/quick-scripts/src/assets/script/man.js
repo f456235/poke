@@ -26,9 +26,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var gamemanager_1 = require("./gamemanager");
 var GlobalData_1 = require("./GlobalData");
-var NewClass = /** @class */ (function (_super) {
-    __extends(NewClass, _super);
-    function NewClass() {
+var Man = /** @class */ (function (_super) {
+    __extends(Man, _super);
+    function Man() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.Gamemanger = null;
         _this.label = null;
@@ -42,15 +42,32 @@ var NewClass = /** @class */ (function (_super) {
         _this.isMovingDown = false;
         _this.isMovingLeft = false;
         _this.isMovingRight = false;
+        _this.destroynum = 0;
+        _this.enemyNum = 0;
         return _this;
     }
-    NewClass.prototype.start = function () {
+    Man.prototype.start = function () {
+        var nodetodestory = cc.director.getScene()["nodeToDestroy"];
+        console.log("nodeToDestroy in man:", nodetodestory);
+        //if(this.node.getChildByName(nodetodestory) !== null){
+        //    this.node.destroy();
+        //}
+        cc.director.getScene().walk(function (node) {
+            // Perform operations on each node
+            // Access node properties, call methods, etc.
+            if (GlobalData_1.default.nodeToDestroy.includes(node.name)) {
+                node.destroy();
+            }
+        }, function () {
+            // This callback is invoked after visiting each node in the scene hierarchy
+            //console.log("Iteration complete");
+        });
         cc.audioEngine.playMusic(this.bgm, true);
         this.Gamemanger = cc.find('Canvas/gamemanager').getComponent('gamemanager');
         // console.log(this.Gamemanger);
         this.Gamemanger.palse = false;
     };
-    NewClass.prototype.onLoad = function () {
+    Man.prototype.onLoad = function () {
         // 注册键盘事件
         cc.director.getPhysicsManager().enabled = true;
         var manager = cc.director.getCollisionManager();
@@ -60,47 +77,39 @@ var NewClass = /** @class */ (function (_super) {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
         this.node.setPosition(GlobalData_1.default.PlayerPosX, GlobalData_1.default.PlayerPosY);
     };
-    NewClass.prototype.onDestroy = function () {
+    Man.prototype.onDestroy = function () {
         // 移除键盘事件监听
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
     };
-    NewClass.prototype.playAnimation = function (animationName) {
+    Man.prototype.playAnimation = function (animationName) {
         if (this.animation && this.animation.getAnimationState(animationName).isPlaying) {
             return;
         }
         this.animation.play(animationName);
     };
-    NewClass.prototype.stopAnimation = function (animationName) {
+    Man.prototype.stopAnimation = function (animationName) {
         if (this.animation && this.animation.getAnimationState(animationName).isPlaying) {
             this.animation.stop(animationName);
         }
     };
-    NewClass.prototype.onKeyDown = function (event) {
+    Man.prototype.onKeyDown = function (event) {
         switch (event.keyCode) {
             case cc.macro.KEY.up:
                 this.isMovingUp = true;
-                // this.playAnimation("man_up");
-                //this.animation.play("man_up");
                 break;
             case cc.macro.KEY.down:
                 this.isMovingDown = true;
-                // this.playAnimation("man_down");
-                //this.animation.play("man_down");
                 break;
             case cc.macro.KEY.left:
                 this.isMovingLeft = true;
-                // this.playAnimation("man_left");
-                //this.animation.play("man_left");
                 break;
             case cc.macro.KEY.right:
                 this.isMovingRight = true;
-                // this.playAnimation("man_right");
-                //this.animation.play("man_right");
                 break;
         }
     };
-    NewClass.prototype.onKeyUp = function (event) {
+    Man.prototype.onKeyUp = function (event) {
         switch (event.keyCode) {
             case cc.macro.KEY.up:
                 this.isMovingUp = false;
@@ -120,7 +129,7 @@ var NewClass = /** @class */ (function (_super) {
                 break;
         }
     };
-    NewClass.prototype.update = function (dt) {
+    Man.prototype.update = function (dt) {
         //cc.log(this.node.x, this.node.y);
         // 根据按键状态更新角色位置
         if (this.Gamemanger.palse == false) {
@@ -146,30 +155,20 @@ var NewClass = /** @class */ (function (_super) {
             }
         }
         if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
-            // this.isBattle = true;
-            // cc.audioEngine.pauseMusic();
-            // cc.audioEngine.playEffect(this.goinSound, false);
-            // var canvasNode = cc.find("Canvas"); // 获取画布节点
-            // var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
-            // this.Gamemanger.palse = true;
-            // console.log(this.Gamemanger.palse);
-            // canvasNode.runAction(cc.sequence(
-            //     blinkAction,
-            //     cc.callFunc(function () {
-            //         cc.director.loadScene("battle");
-            //     })
-            // ));
         }
         GlobalData_1.default.PlayerPosX = this.node.getPosition().x;
         GlobalData_1.default.PlayerPosY = this.node.getPosition().y;
     };
-    NewClass.prototype.onBeginContact = function (contact, selfCollider, otherCollider) {
-        cc.log("Player hits the bush");
+    Man.prototype.onBeginContact = function (contact, selfCollider, otherCollider) {
+        //cc.log("Player hits the bush");
         var worldManifold = contact.getWorldManifold();
         var points = worldManifold.points;
         var normal = worldManifold.normal;
-        if (otherCollider.tag == 1) {
-            cc.log("Player hits the enemy");
+        if (otherCollider.tag == 4 || otherCollider.tag == 5) {
+            this.enemyNum = otherCollider.tag;
+            //console.log("enemyNum in man");
+            //console.log(this.enemyNum);
+            //cc.log("Player hits the enemy");
             this.isBattle = true;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.goinSound, false);
@@ -178,7 +177,11 @@ var NewClass = /** @class */ (function (_super) {
             this.Gamemanger.palse = true;
             console.log(this.Gamemanger.palse);
             canvasNode.runAction(cc.sequence(blinkAction, cc.callFunc(function () {
-                cc.director.loadScene("battle");
+                cc.director.loadScene("battle", function () {
+                    var nextScene = cc.director.getScene();
+                    nextScene["enemyNum"] = otherCollider.tag;
+                    //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
+                });
             })));
             //cc.audioEngine.pauseMusic();
             //cc.audioEngine.playEffect(this.battleBgm, true);
@@ -186,27 +189,27 @@ var NewClass = /** @class */ (function (_super) {
     };
     __decorate([
         property(gamemanager_1.default)
-    ], NewClass.prototype, "Gamemanger", void 0);
+    ], Man.prototype, "Gamemanger", void 0);
     __decorate([
         property(cc.Label)
-    ], NewClass.prototype, "label", void 0);
+    ], Man.prototype, "label", void 0);
     __decorate([
         property
-    ], NewClass.prototype, "text", void 0);
+    ], Man.prototype, "text", void 0);
     __decorate([
         property({ type: cc.AudioClip })
-    ], NewClass.prototype, "bgm", void 0);
+    ], Man.prototype, "bgm", void 0);
     __decorate([
         property({ type: cc.AudioClip })
-    ], NewClass.prototype, "goinSound", void 0);
+    ], Man.prototype, "goinSound", void 0);
     __decorate([
         property(cc.Integer)
-    ], NewClass.prototype, "moveSpeed", void 0);
-    NewClass = __decorate([
+    ], Man.prototype, "moveSpeed", void 0);
+    Man = __decorate([
         ccclass
-    ], NewClass);
-    return NewClass;
+    ], Man);
+    return Man;
 }(cc.Component));
-exports.default = NewClass;
+exports.default = Man;
 
 cc._RF.pop();

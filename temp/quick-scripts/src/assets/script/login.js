@@ -51,6 +51,7 @@ var NewClass = /** @class */ (function (_super) {
         this.toRegister.node.on('click', this.toRegisterPage, this);
     };
     NewClass.prototype.handleLogin = function () {
+        GlobalData_1.default.nodeToDestroy = [];
         var auth = firebase.auth();
         auth.signInWithEmailAndPassword(this.email, this.password)
             .then(function (userCredential) {

@@ -15,4 +15,5 @@ export default class GlobalData {
     static volume : number = 0.5;
     static mute : boolean = this.volume == 0 ? false : true;
     static map : string = 'map2';
+    static nodeToDestroy : string[] = [];
 }

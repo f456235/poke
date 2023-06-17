@@ -23,6 +23,7 @@ var GlobalData = /** @class */ (function () {
     GlobalData.volume = 0.5;
     GlobalData.mute = this.volume == 0 ? false : true;
     GlobalData.map = 'map2';
+    GlobalData.nodeToDestroy = [];
     return GlobalData;
 }());
 exports.default = GlobalData;

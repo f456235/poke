@@ -1,10 +1,6 @@
-// Learn TypeScript:
-//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
-
+import Man from "./man";
+import GlobalData from "./GlobalData";
+declare const firebase: any;
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -28,18 +24,54 @@ export default class NewClass extends cc.Component {
     @property({type:cc.Node})
     mainCamera: cc.Node = null;
 
+    @property({type:cc.SpriteFrame})
+    enemy1: cc.SpriteFrame = null;
+
+    @property({type:cc.SpriteFrame})
+    enemy2: cc.SpriteFrame = null;
+
+
+    @property(Man)
+    man: Man = null;
+
     private myLife: number = 100;
     private enemyLife: number = 100;
     private isWin: boolean = false;
     private myTurn: boolean = true;
     private enemyTurn: boolean = false;
     private isLose: boolean = false;
+    private enemynum = 0;
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad () {
+        // this.enemynum = cc.director.getScene()["enemyNum"];
+        // console.log("enemyNum:", this.enemynum);
+        // if(this.enemynum !== undefined){
+        //     console.log("Number passed from previous scene:", this.enemynum);
+        //     //this.enemynum = enemyNum;
+        // }
+    }
 
     start () {
+        this.enemynum = cc.director.getScene()["enemyNum"];
+        
+        //console.log("enemyNum:", this.enemynum);
+
+        if(this.enemynum !== undefined){
+            //console.log("Number passed from previous scene:", this.enemynum);
+        }
+
+        if(this.enemynum == 4){
+            if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
+                cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy1;
+            }
+            
+        }else if(this.enemynum == 5){
+            if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
+                cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy2;
+            }
+        }
         cc.audioEngine.playMusic(this.battleBgm, true);
         this.initSkill1();
         this.initSkill2();
@@ -48,14 +80,33 @@ export default class NewClass extends cc.Component {
     }
 
     update(dt){
+        
+        
         this.updateUI(dt);
         if(this.enemyLife <= 0 && !this.isWin){
+            var uid = GlobalData.uid;
+            const database = firebase.database();
+            firebase.database().ref('user').child(GlobalData.uid).update({
+                myArray: [this.enemynum],
+            });
+            GlobalData.pokewoman.push(this.enemynum);
+
+
             this.enemyLife = 0;
             this.isWin = true;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.winSound, false);
+            
             this.scheduleOnce(function() {
-                cc.director.loadScene("map2");
+                cc.director.loadScene("map2", ()=>{
+                    // const nextScene = cc.director.getScene();
+                    let enemyNumString = cc.js.formatStr("%d", this.enemynum);
+                    GlobalData.nodeToDestroy.push(enemyNumString);
+                    // nextScene["nodeToDestroy"] = enemyNumString;
+                    // //console.log("nextScene[nodeToDestroy]", enemyNumString);
+                    // console.log("nextScene[nodeToDestroy]", nextScene["nodeToDestroy"]);
+                }
+                );
             }, 4);
         }
 
@@ -138,7 +189,7 @@ export default class NewClass extends cc.Component {
     }
 
     skill1(){
-        cc.log("skill1");
+        //cc.log("skill1");
         let enemyLifeDeduct = cc.callFunc(function(target) {
             this.enemyLife -= 50;
         }, this);
@@ -155,7 +206,7 @@ export default class NewClass extends cc.Component {
     }
 
     skill2(){
-        cc.log("skill2");
+        //cc.log("skill2");
         let enemyLifeDeduct = cc.callFunc(function(target) {
             this.enemyLife -= 20;
         }, this);
@@ -172,7 +223,7 @@ export default class NewClass extends cc.Component {
     }
 
     skill3(){
-        cc.log("skill3");
+        //cc.log("skill3");
         let enemyLifeDeduct = cc.callFunc(function(target) {
             this.enemyLife -= 20;
         }, this);
@@ -189,7 +240,7 @@ export default class NewClass extends cc.Component {
     }
 
     skill4(){
-        cc.log("skill4");
+        //cc.log("skill4");
         let enemyLifeDeduct = cc.callFunc(function(target) {
             this.enemyLife -= 100;
         }, this);
@@ -207,7 +258,9 @@ export default class NewClass extends cc.Component {
 
     enemyTurnAction(){
         let myLifeDeduct = cc.callFunc(function(target) {
-            this.myLife -= 40;
+            //console.log("enemyNum in mylife deduct:", this.enemynum);
+            if(this.enemynum == 4) this.myLife -= 40;
+            else if(this.enemynum == 5) this.myLife -= 100;
         }, this);
 
         let turnSwitch1 = cc.callFunc(function(target) {

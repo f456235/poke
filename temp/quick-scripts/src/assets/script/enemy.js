@@ -35,39 +35,40 @@ var Enemy = /** @class */ (function (_super) {
         return _this;
     }
     Enemy.prototype.start = function () {
-        // if(this.node.name == "Turtle") {
-        //     this.node.scaleX = this.node.scaleX;
-        //     this.node.scaleY = this.node.scaleY;
-        // }
-        // else {
-        //      this.schedule(function() { 
-        //          this.node.scaleX *= -1;
-        //      }, 0.1);
-        //  }
+    };
+    Enemy.prototype.playAnimation = function (animationName) {
+        if (this.anim && this.anim.getAnimationState(animationName).isPlaying) {
+            return;
+        }
+        this.anim.play(animationName);
+    };
+    Enemy.prototype.stopAnimation = function (animationName) {
+        if (this.anim && this.anim.getAnimationState(animationName).isPlaying) {
+            this.anim.stop(animationName);
+        }
     };
     Enemy.prototype.update = function (dt) {
-        //if(!this.anim.getAnimationState("enemy-walk").isPlaying)
-        //  this.anim.play("enemy-walk");  
+        //cc.log("dong_move");
+        if (!this.anim.getAnimationState("dong_move").isPlaying) {
+            this.playAnimation("dong_move");
+            //cc.log("dong_move");
+        }
+        // this.playAnimation("dong_move");  
         this.node.x = this.node.x + this.enemySpeed * dt;
     };
     Enemy.prototype.onBeginContact = function (contact, self, other) {
         if (other.tag != 2) {
-            //cc.log("enemy contact blocks")
-            //if(!(contact.getWorldManifold().normal.x != -1) && !(contact.getWorldManifold().normal.y != -0)) { //right bound
             this.enemySpeed *= -1;
             this.node.scaleX *= -1;
         }
         else {
             this.enemySpeed *= 0;
+            this.stopAnimation("dong_move");
             if (other.scaleX == this.node.scaleX)
                 this.node.scaleX *= -1;
             else
                 this.node.scaleX *= 1;
         }
-        //else if(!(contact.getWorldManifold().normal.x != 1) && !(contact.getWorldManifold().normal.y != -0)) { //left bound
-        //this.enemySpeed *= -1;
-        //this.node.scaleX *= -1;
-        //}
     };
     Enemy.prototype.onLoad = function () {
         cc.director.getPhysicsManager().enabled = true;

@@ -32,6 +32,7 @@ export default class NewClass extends cc.Component {
     }
 
     handleLogin(){
+        GlobalData.nodeToDestroy = [];
         const auth = firebase.auth();
         auth.signInWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {

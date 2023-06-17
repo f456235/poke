@@ -1,0 +1,152 @@
+2023-06-16T14:53:12.157Z - success: protocol editor-framework registered
+2023-06-16T14:53:12.158Z - success: protocol app registered
+2023-06-16T14:53:12.158Z - success: protocol theme registered
+2023-06-16T14:53:12.158Z - success: protocol packages registered
+2023-06-16T14:53:12.172Z - normal: Load ~/.CocosCreator/settings.json
+2023-06-16T14:53:12.190Z - success: protocol uuid registerred
+2023-06-16T14:53:12.190Z - success: protocol db registerred
+2023-06-16T14:53:12.190Z - success: protocol thumbnail registerred
+2023-06-16T14:53:12.258Z - normal: Initializing Asset Database
+2023-06-16T14:53:12.267Z - normal: checking language setting...
+2023-06-16T14:53:12.267Z - normal: Language: zh
+2023-06-16T14:53:12.269Z - success: protocol unpack registerred
+2023-06-16T14:53:12.269Z - success: protocol disable-commonjs registerred
+2023-06-16T14:53:12.969Z - normal: connected!
+2023-06-16T14:53:13.206Z - normal: Check project C:\Users\tyues\OneDrive\桌面\0616\pokewoman
+2023-06-16T14:53:13.208Z - normal: Initializing project C:\Users\tyues\OneDrive\桌面\0616\pokewoman
+2023-06-16T14:53:13.412Z - success: adapters loaded
+2023-06-16T14:53:13.413Z - success: asset-db-debugger loaded
+2023-06-16T14:53:13.467Z - success: fb-audience-network loaded
+2023-06-16T14:53:13.494Z - success: fb-live-stream loaded
+2023-06-16T14:53:13.497Z - success: google-play-instant loaded
+2023-06-16T14:53:13.497Z - success: jsb-adapter loaded
+2023-06-16T14:53:13.499Z - success: package-manager loaded
+2023-06-16T14:53:13.499Z - success: runtime-adapters loaded
+2023-06-16T14:53:13.501Z - success: runtime-dev-tools loaded
+2023-06-16T14:53:13.502Z - success: ui-kit-preview-extra loaded
+2023-06-16T14:53:13.503Z - success: ui-kit-preview loaded
+2023-06-16T14:53:14.119Z - success: alipay-minigame loaded
+2023-06-16T14:53:14.125Z - success: assets loaded
+2023-06-16T14:53:14.128Z - success: baidugame-opendata loaded
+2023-06-16T14:53:14.130Z - success: baidugame loaded
+2023-06-16T14:53:14.137Z - success: builder loaded
+2023-06-16T14:53:14.139Z - success: bytedance-opendata loaded
+2023-06-16T14:53:14.142Z - success: bytedance loaded
+2023-06-16T14:53:14.145Z - success: channel-upload-tools loaded
+2023-06-16T14:53:14.265Z - success: cloud-function loaded
+2023-06-16T14:53:14.431Z - success: cocos-services loaded
+2023-06-16T14:53:14.434Z - success: console loaded
+2023-06-16T14:53:14.436Z - success: curve-editor loaded
+2023-06-16T14:53:14.445Z - success: fb-instant-games loaded
+2023-06-16T14:53:14.447Z - success: game-window loaded
+2023-06-16T14:53:14.448Z - success: google-instant-games loaded
+2023-06-16T14:53:14.451Z - success: hierarchy loaded
+2023-06-16T14:53:14.454Z - success: huawei-agc loaded
+2023-06-16T14:53:14.457Z - success: huawei-runtime loaded
+2023-06-16T14:53:14.459Z - success: inspector loaded
+2023-06-16T14:53:14.472Z - success: cpk-publish loaded
+2023-06-16T14:53:14.473Z - success: keystore loaded
+2023-06-16T14:53:14.489Z - success: link-sure-runtime loaded
+2023-06-16T14:53:14.498Z - success: node-library loaded
+2023-06-16T14:53:14.501Z - success: open-recent-items loaded
+2023-06-16T14:53:14.504Z - success: oppo-runtime loaded
+2023-06-16T14:53:14.506Z - success: package-asset loaded
+2023-06-16T14:53:14.507Z - success: preferences loaded
+2023-06-16T14:53:14.509Z - success: project-importer loaded
+2023-06-16T14:53:14.510Z - success: project-settings loaded
+2023-06-16T14:53:14.525Z - success: qtt-runtime loaded
+2023-06-16T14:53:14.528Z - success: scene loaded
+2023-06-16T14:53:14.529Z - success: simulator-debugger loaded
+2023-06-16T14:53:14.530Z - success: sprite-editor loaded
+2023-06-16T14:53:14.585Z - success: store loaded
+2023-06-16T14:53:14.589Z - success: taobao-creativeapp loaded
+2023-06-16T14:53:14.592Z - success: timeline loaded
+2023-06-16T14:53:14.598Z - success: vivo-runtime loaded
+2023-06-16T14:53:14.600Z - success: wechatgame-opendata loaded
+2023-06-16T14:53:14.604Z - success: wechatgame loaded
+2023-06-16T14:53:14.608Z - success: xiaomi-runtime loaded
+2023-06-16T14:53:14.754Z - success: im-plugin loaded
+2023-06-16T14:53:14.755Z - warn: The current '7456' preview port is already occupied, the port is automatically incremented
+2023-06-16T14:53:14.756Z - warn: The current '7457' preview port is already occupied, the port is automatically incremented
+2023-06-16T14:53:14.756Z - success: preview server running at http://localhost:7458
+2023-06-16T14:53:15.398Z - normal: Initializing Cocos2d
+2023-06-16T14:53:15.741Z - normal: Initializing engine extends
+2023-06-16T14:53:17.285Z - info: Cocos Service load base data!
+2023-06-16T14:53:27.002Z - failed: [db-task][init] Failed to import asset C:\Users\tyues\OneDrive\桌面\0616\pokewoman\assets\map_tile\Grasslands Fantasy Dreamland\Palette\FD_Grasslands.prefab, message: SyntaxError: C:\Users\tyues\OneDrive\桌面\0616\pokewoman\assets\map_tile\Grasslands Fantasy Dreamland\Palette\FD_Grasslands.prefab: Unexpected token % in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at C:\ProgramData\cocos\editors\Creator\2.4.8\resources\app.asar\node_modules\fire-fs\node_modules\jsonfile\index.js:36:18
+    at C:\ProgramData\cocos\editors\Creator\2.4.8\resources\app.asar\node_modules\graceful-fs\graceful-fs.js:123:16
+    at FSReqCallback.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:63:3)
+2023-06-16T14:53:33.220Z - normal: Loading packages
+2023-06-16T14:53:33.222Z - normal: Watching packages
+2023-06-16T14:53:33.714Z - normal: Run Application
+2023-06-16T14:53:36.786Z - success: cloud-function unloaded
+2023-06-16T14:53:51.247Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T14:53:56.791Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T14:53:58.080Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T14:53:58.551Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T14:54:04.312Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T14:55:20.981Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:10:48.163Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:14:01.900Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:14:12.047Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:17:36.428Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:24:48.137Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:25:10.350Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:28:16.806Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:28:35.907Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:33:47.797Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:33:49.878Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:33:51.110Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:34:05.355Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:34:44.710Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:35:04.744Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:50:00.419Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:51:56.188Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:52:30.056Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:52:47.373Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:52:53.291Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:54:10.883Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:54:43.394Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:55:49.382Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:56:32.090Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:57:00.969Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T15:57:02.838Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T16:00:25.588Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T16:03:18.067Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T16:04:06.469Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T16:05:18.923Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-16T16:22:07.100Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:71870
+2023-06-17T03:31:53.500Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:71976
+2023-06-17T03:49:37.783Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T03:49:38.175Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T03:54:18.364Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T03:57:58.498Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T03:58:05.790Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T03:58:09.070Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T03:58:38.056Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T03:58:48.060Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:16:56.102Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:16:57.723Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:24:04.870Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:34:46.895Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:36:30.761Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:37:21.514Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:38:11.520Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:40:10.034Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:40:49.776Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:41:26.685Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:42:51.523Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:44:35.212Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:45:55.503Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:47:37.582Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:50:25.863Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:51:35.044Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:52:16.128Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:52:41.333Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:52:47.909Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:54:22.070Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:55:19.756Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:55:28.769Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T04:57:18.543Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10
+2023-06-17T05:00:33.636Z - normal: cocos2d: TMXFormat: Unsupported TMX version: 1.10

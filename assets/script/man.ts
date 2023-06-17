@@ -2,7 +2,7 @@ const {ccclass, property} = cc._decorator;
 import GameManager from "./gamemanager";
 import GlobalData from "./GlobalData";
 @ccclass
-export default class NewClass extends cc.Component {
+export default class Man extends cc.Component {
 
     @property(GameManager)
     Gamemanger: GameManager = null;
@@ -30,9 +30,26 @@ export default class NewClass extends cc.Component {
     private isMovingDown: boolean = false;
     private isMovingLeft: boolean = false;
     private isMovingRight: boolean = false;
+    private destroynum = 0;
+    public enemyNum = 0;
 
 
     start(){
+        let nodetodestory = cc.director.getScene()["nodeToDestroy"];
+        console.log("nodeToDestroy in man:", nodetodestory);
+        //if(this.node.getChildByName(nodetodestory) !== null){
+        //    this.node.destroy();
+        //}
+        cc.director.getScene().walk((node: cc.Node) => {
+            // Perform operations on each node
+            // Access node properties, call methods, etc.
+            if(GlobalData.nodeToDestroy.includes(node.name)){
+                node.destroy();
+            }
+        }, () => {
+            // This callback is invoked after visiting each node in the scene hierarchy
+            //console.log("Iteration complete");
+        });
         cc.audioEngine.playMusic(this.bgm, true);
         this.Gamemanger = cc.find('Canvas/gamemanager').getComponent('gamemanager');
         // console.log(this.Gamemanger);
@@ -75,23 +92,15 @@ export default class NewClass extends cc.Component {
         switch(event.keyCode) {
             case cc.macro.KEY.up:
                 this.isMovingUp = true;
-                // this.playAnimation("man_up");
-                //this.animation.play("man_up");
                 break;
             case cc.macro.KEY.down:
                 this.isMovingDown = true;
-                // this.playAnimation("man_down");
-                //this.animation.play("man_down");
                 break;
             case cc.macro.KEY.left:
                 this.isMovingLeft = true;
-                // this.playAnimation("man_left");
-                //this.animation.play("man_left");
                 break;
             case cc.macro.KEY.right:
                 this.isMovingRight = true;
-                // this.playAnimation("man_right");
-                //this.animation.play("man_right");
                 break;
         }
     }
@@ -141,32 +150,21 @@ export default class NewClass extends cc.Component {
         }
         
         if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
-            // this.isBattle = true;
-            // cc.audioEngine.pauseMusic();
-            // cc.audioEngine.playEffect(this.goinSound, false);
-        
-            // var canvasNode = cc.find("Canvas"); // 获取画布节点
-            // var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
-            // this.Gamemanger.palse = true;
-            // console.log(this.Gamemanger.palse);
-            // canvasNode.runAction(cc.sequence(
-            //     blinkAction,
-            //     cc.callFunc(function () {
-            //         cc.director.loadScene("battle");
-            //     })
-            // ));
         }   
         GlobalData.PlayerPosX = this.node.getPosition().x;
         GlobalData.PlayerPosY = this.node.getPosition().y;  
     }
 
     onBeginContact(contact, selfCollider, otherCollider) {
-        cc.log("Player hits the bush");
+        //cc.log("Player hits the bush");
         let worldManifold = contact.getWorldManifold();
         let points = worldManifold.points;
         let normal = worldManifold.normal;
-        if(otherCollider.tag == 1){
-            cc.log("Player hits the enemy");
+        if(otherCollider.tag == 4 || otherCollider.tag == 5){
+            this.enemyNum = otherCollider.tag;
+            //console.log("enemyNum in man");
+            //console.log(this.enemyNum);
+            //cc.log("Player hits the enemy");
             this.isBattle = true;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.goinSound, false);
@@ -178,7 +176,11 @@ export default class NewClass extends cc.Component {
             canvasNode.runAction(cc.sequence(
                 blinkAction,
                 cc.callFunc(function () {
-                    cc.director.loadScene("battle");
+                    cc.director.loadScene("battle", () =>{
+                       const nextScene = cc.director.getScene();
+                       nextScene["enemyNum"] = otherCollider.tag;
+                       //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
+                    });
                 })
             ));
             //cc.audioEngine.pauseMusic();

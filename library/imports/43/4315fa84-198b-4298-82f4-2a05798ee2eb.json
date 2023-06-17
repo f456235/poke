@@ -2519,9 +2519,7 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_spriteFrame": {
-      "__uuid__": "bc8c69f4-13d8-402e-a86e-f923fec137ec"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -2809,6 +2807,13 @@
       "__uuid__": "33006081-7b58-4931-80ef-9dc49f6c0f86"
     },
     "mainCamera": null,
+    "enemy1": {
+      "__uuid__": "91d6e170-6767-4576-9e8a-6c81776fef2d"
+    },
+    "enemy2": {
+      "__uuid__": "04799042-1a3c-4067-9ea2-2403e5408013"
+    },
+    "man": null,
     "_id": "66IxyQLANHx6akIXEJc/Fr"
   }
 ]
