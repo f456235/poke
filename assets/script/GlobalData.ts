@@ -20,4 +20,6 @@ export default class GlobalData {
     static nodeToDestroy : string[] = [];
     static myelf : number = 0;
     static mylife : number = 0;
+    static exp : number = 0;
+    static level_exp: number[] = [50,120,190,290,390,500,610,670,800,1000];
 }

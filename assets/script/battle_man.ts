@@ -116,7 +116,7 @@ export default class NewClass extends cc.Component {
             this.isWin = true;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.winSound, false);
-            
+            GlobalData.exp += 100;
             this.scheduleOnce(function() {
                 cc.director.loadScene("map2", ()=>{
                     // const nextScene = cc.director.getScene();
@@ -161,6 +161,8 @@ export default class NewClass extends cc.Component {
         cc.find("Canvas/skills/skill3").getComponent(cc.Button).interactable = this.myTurn;
         cc.find("Canvas/skills/skill4").getComponent(cc.Button).interactable = this.myTurn;
     //}
+        cc.audioEngine.setMusicVolume(GlobalData.volume);
+        cc.audioEngine.setEffectsVolume(GlobalData.volume);
     }
 
     updateUI(dt){

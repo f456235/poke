@@ -39,6 +39,8 @@ var NewClass = /** @class */ (function (_super) {
         _this.save = null;
         _this.quit = null;
         _this.back = null;
+        _this.level = null;
+        _this.exp = null;
         return _this;
     }
     // LIFE-CYCLE CALLBACKS:
@@ -46,6 +48,9 @@ var NewClass = /** @class */ (function (_super) {
         this.save.node.on('click', this.SaveGame, this);
         this.quit.node.on('click', this.quitGame, this);
         this.back.node.on('click', this.backToMap, this);
+        this.volume_slider.progress = GlobalData_1.default.volume;
+        this.level.string = 'Level : Lv.' + GlobalData_1.default.level;
+        this.exp.progress = GlobalData_1.default.exp / GlobalData_1.default.level_exp[GlobalData_1.default.level - 1];
     };
     NewClass.prototype.SaveGame = function () {
         var uid = GlobalData_1.default.uid;
@@ -57,6 +62,20 @@ var NewClass = /** @class */ (function (_super) {
         })
             .catch(function (error) {
             console.error('Error saving myArray:', error);
+        });
+        userRef.child('level').set(GlobalData_1.default.level)
+            .then(function () {
+            console.log('level saved successfully');
+        })
+            .catch(function (error) {
+            console.log('error saving level', error);
+        });
+        userRef.child('exp').set(GlobalData_1.default.exp)
+            .then(function () {
+            console.log('exp saved successfully');
+        })
+            .catch(function (error) {
+            console.log('error saving exp', error);
         });
     };
     NewClass.prototype.quitGame = function () {
@@ -90,6 +109,12 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property(cc.Button)
     ], NewClass.prototype, "back", void 0);
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "level", void 0);
+    __decorate([
+        property(cc.ProgressBar)
+    ], NewClass.prototype, "exp", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);

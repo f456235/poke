@@ -109,6 +109,7 @@ var NewClass = /** @class */ (function (_super) {
             this.isWin = true;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.winSound, false);
+            GlobalData_1.default.exp += 100;
             this.scheduleOnce(function () {
                 var _this = this;
                 cc.director.loadScene("map2", function () {
@@ -148,6 +149,8 @@ var NewClass = /** @class */ (function (_super) {
         cc.find("Canvas/skills/skill3").getComponent(cc.Button).interactable = this.myTurn;
         cc.find("Canvas/skills/skill4").getComponent(cc.Button).interactable = this.myTurn;
         //}
+        cc.audioEngine.setMusicVolume(GlobalData_1.default.volume);
+        cc.audioEngine.setEffectsVolume(GlobalData_1.default.volume);
     };
     NewClass.prototype.updateUI = function (dt) {
         cc.find("Canvas/myLife").getComponent(cc.Label).string = (Array(7).join("0") + this.myLife.toString()).slice(-3);

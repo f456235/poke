@@ -24,7 +24,11 @@ export default class NewClass extends cc.Component {
     @property(cc.Button)
     back: cc.Button = null;
 
-
+    @property(cc.Label)
+    level: cc.Label = null;
+    
+    @property(cc.ProgressBar)
+    exp : cc.ProgressBar = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -32,6 +36,9 @@ export default class NewClass extends cc.Component {
         this.save.node.on('click',this.SaveGame,this);
         this.quit.node.on('click',this.quitGame,this);
         this.back.node.on('click',this.backToMap,this);
+        this.volume_slider.progress = GlobalData.volume;
+        this.level.string = 'Level : Lv.'+ GlobalData.level;
+        this.exp.progress = GlobalData.exp/GlobalData.level_exp[GlobalData.level-1];
     }
 
     SaveGame() {
@@ -44,6 +51,20 @@ export default class NewClass extends cc.Component {
             })
             .catch((error) => {
                 console.error('Error saving myArray:', error);
+            });
+        userRef.child('level').set(GlobalData.level)
+            .then(() =>{
+                console.log('level saved successfully');
+            })
+            .catch((error)=>{
+                console.log('error saving level',error);
+            });
+        userRef.child('exp').set(GlobalData.exp)
+            .then(() =>{
+                console.log('exp saved successfully');
+            })
+            .catch((error)=>{
+                console.log('error saving exp',error);
             });
     }
     quitGame(){

@@ -153,6 +153,8 @@ export default class Man extends cc.Component {
         }   
         GlobalData.PlayerPosX = this.node.getPosition().x;
         GlobalData.PlayerPosY = this.node.getPosition().y;  
+        cc.audioEngine.setMusicVolume(GlobalData.volume);
+        cc.audioEngine.setEffectsVolume(GlobalData.volume);
     }
 
     onBeginContact(contact, selfCollider, otherCollider) {

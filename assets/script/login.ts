@@ -43,10 +43,20 @@ export default class NewClass extends cc.Component {
         
         userRef.once('value', (snapshot) => {
             const userData = snapshot.val();
+            console.log(userData);
             if (userData && userData.myArray) {
                 GlobalData.pokewoman = userData.myArray;
                 console.log(GlobalData.pokewoman);
-            } else {
+            }
+            if(userData && userData.level){
+                GlobalData.level = userData.level;
+                console.log(userData.level)
+            }
+            if(userData && userData.exp){
+                GlobalData.exp = userData.exp;
+                console.log(userData.exp);
+            }
+            else {
                 console.log("myArray not found in user data");
             }
             

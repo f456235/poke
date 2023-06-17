@@ -28,6 +28,8 @@ var GlobalData = /** @class */ (function () {
     GlobalData.nodeToDestroy = [];
     GlobalData.myelf = 0;
     GlobalData.mylife = 0;
+    GlobalData.exp = 0;
+    GlobalData.level_exp = [50, 120, 190, 290, 390, 500, 610, 670, 800, 1000];
     return GlobalData;
 }());
 exports.default = GlobalData;

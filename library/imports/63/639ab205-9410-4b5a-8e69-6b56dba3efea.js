@@ -60,9 +60,18 @@ var NewClass = /** @class */ (function (_super) {
             var userRef = database.ref('user').child(GlobalData_1.default.uid);
             userRef.once('value', function (snapshot) {
                 var userData = snapshot.val();
+                console.log(userData);
                 if (userData && userData.myArray) {
                     GlobalData_1.default.pokewoman = userData.myArray;
                     console.log(GlobalData_1.default.pokewoman);
+                }
+                if (userData && userData.level) {
+                    GlobalData_1.default.level = userData.level;
+                    console.log(userData.level);
+                }
+                if (userData && userData.exp) {
+                    GlobalData_1.default.exp = userData.exp;
+                    console.log(userData.exp);
                 }
                 else {
                     console.log("myArray not found in user data");

@@ -158,13 +158,15 @@ var Man = /** @class */ (function (_super) {
         }
         GlobalData_1.default.PlayerPosX = this.node.getPosition().x;
         GlobalData_1.default.PlayerPosY = this.node.getPosition().y;
+        cc.audioEngine.setMusicVolume(GlobalData_1.default.volume);
+        cc.audioEngine.setEffectsVolume(GlobalData_1.default.volume);
     };
     Man.prototype.onBeginContact = function (contact, selfCollider, otherCollider) {
         //cc.log("Player hits the bush");
         var worldManifold = contact.getWorldManifold();
         var points = worldManifold.points;
         var normal = worldManifold.normal;
-        if (otherCollider.tag == 4 || otherCollider.tag == 5) {
+        if (otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6) {
             this.enemyNum = otherCollider.tag;
             //console.log("enemyNum in man");
             //console.log(this.enemyNum);

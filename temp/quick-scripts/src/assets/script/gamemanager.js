@@ -24,6 +24,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var GlobalData_1 = require("../script/GlobalData");
 var GameManager = /** @class */ (function (_super) {
     __extends(GameManager, _super);
     function GameManager() {
@@ -32,6 +33,17 @@ var GameManager = /** @class */ (function (_super) {
         return _this;
     }
     GameManager.prototype.onLoad = function () {
+    };
+    GameManager.prototype.update = function () {
+        if (GlobalData_1.default.exp >= GlobalData_1.default.level_exp[GlobalData_1.default.level - 1]) {
+            GlobalData_1.default.exp -= GlobalData_1.default.level_exp[GlobalData_1.default.level - 1];
+            GlobalData_1.default.level += 1;
+            cc.find('Canvas/Main Camera/level up').active = true;
+            cc.find('Canvas/Main Camera/level up').getComponent(cc.Animation).play();
+            this.scheduleOnce(function () {
+                cc.find('Canvas/Main Camera/level up').active = false;
+            }, 1.2);
+        }
     };
     GameManager = __decorate([
         ccclass

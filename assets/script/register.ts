@@ -36,6 +36,7 @@ export default class NewClass extends cc.Component {
             firebase.database().ref('user').child(GlobalData.uid).set({
                 level: GlobalData.level,
                 myArray: [],
+                exp: GlobalData.exp
             });
             cc.director.loadScene('select');
         })
