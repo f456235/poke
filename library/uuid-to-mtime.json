@@ -9880,8 +9880,8 @@
     "relativePath": "src\\else\\bag_event2.jpg"
   },
   "4315fa84-198b-4298-82f4-2a05798ee2eb": {
-    "asset": 1687005286354,
-    "meta": 1687005311803,
+    "asset": 1687016965735,
+    "meta": 1687016965767,
     "relativePath": "scene\\battle.fire"
   },
   "0cc4743a-ab5f-47d7-9470-53bb921d0563": {
@@ -10045,8 +10045,8 @@
     "relativePath": "script\\login.ts"
   },
   "0a6907aa-4c7f-4991-b186-757d340de6ac": {
-    "asset": 1687016284572,
-    "meta": 1687016287338,
+    "asset": 1687016676421,
+    "meta": 1687016962604,
     "relativePath": "script\\battle_man.ts"
   }
 }
