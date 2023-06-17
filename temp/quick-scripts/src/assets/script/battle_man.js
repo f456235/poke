@@ -38,6 +38,8 @@ var NewClass = /** @class */ (function (_super) {
         _this.mainCamera = null;
         _this.enemy1 = null;
         _this.enemy2 = null;
+        _this.myHP = null;
+        _this.enemyHP = null;
         _this.man = null;
         _this.sprite = [];
         _this.bag = GlobalData_1.default.pokewoman;
@@ -107,6 +109,7 @@ var NewClass = /** @class */ (function (_super) {
             console.log("GlobalData.pokewoman:", GlobalData_1.default.pokewoman);
             this.enemyLife = 0;
             this.isWin = true;
+            this.enemyHP.progress = 0;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.winSound, false);
             GlobalData_1.default.exp += 100;
@@ -127,6 +130,7 @@ var NewClass = /** @class */ (function (_super) {
             this.isLose = true;
             this.myTurn = false;
             this.enemyTurn = false;
+            this.myHP.progress = 0;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.loseSound, false);
             this.scheduleOnce(function () {
@@ -153,8 +157,12 @@ var NewClass = /** @class */ (function (_super) {
         cc.audioEngine.setEffectsVolume(GlobalData_1.default.volume);
     };
     NewClass.prototype.updateUI = function (dt) {
-        cc.find("Canvas/myLife").getComponent(cc.Label).string = (Array(7).join("0") + this.myLife.toString()).slice(-3);
-        cc.find("Canvas/enemyLife").getComponent(cc.Label).string = (Array(7).join("0") + this.enemyLife.toString()).slice(-3);
+        this.myHP.progress = this.myLife / 100;
+        this.enemyHP.progress = this.enemyLife / 100;
+        var myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
+        var enemyLifeLabel = cc.find("Canvas/enemyLife").getComponent(cc.Label);
+        myLifeLabel.string = ((Array(7).join("0") + this.myLife.toString()).slice(-3)) + ('/100');
+        enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) + ('/100');
     };
     NewClass.prototype.initSkill1 = function () {
         var clickEventHandler = new cc.Component.EventHandler();
@@ -312,6 +320,12 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property({ type: cc.SpriteFrame })
     ], NewClass.prototype, "enemy2", void 0);
+    __decorate([
+        property(cc.ProgressBar)
+    ], NewClass.prototype, "myHP", void 0);
+    __decorate([
+        property(cc.ProgressBar)
+    ], NewClass.prototype, "enemyHP", void 0);
     __decorate([
         property(man_1.default)
     ], NewClass.prototype, "man", void 0);

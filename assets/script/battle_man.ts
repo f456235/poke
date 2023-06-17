@@ -30,6 +30,11 @@ export default class NewClass extends cc.Component {
     @property({type:cc.SpriteFrame})
     enemy2: cc.SpriteFrame = null;
 
+    @property(cc.ProgressBar)
+    myHP: cc.ProgressBar = null;
+
+    @property(cc.ProgressBar)
+    enemyHP: cc.ProgressBar = null;
 
     @property(Man)
     man: Man = null;
@@ -114,6 +119,7 @@ export default class NewClass extends cc.Component {
 
             this.enemyLife = 0;
             this.isWin = true;
+            this.enemyHP.progress = 0;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.winSound, false);
             GlobalData.exp += 100;
@@ -135,6 +141,7 @@ export default class NewClass extends cc.Component {
             this.isLose = true;
             this.myTurn = false;
             this.enemyTurn = false;
+            this.myHP.progress = 0;
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.loseSound, false);
             this.scheduleOnce(function() {
@@ -166,8 +173,13 @@ export default class NewClass extends cc.Component {
     }
 
     updateUI(dt){
-        cc.find("Canvas/myLife").getComponent(cc.Label).string = (Array(7).join("0") + this.myLife.toString()).slice(-3);
-        cc.find("Canvas/enemyLife").getComponent(cc.Label).string = (Array(7).join("0") + this.enemyLife.toString()).slice(-3);
+        this.myHP.progress = this.myLife / 100;
+        this.enemyHP.progress = this.enemyLife / 100;
+        const myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
+        const enemyLifeLabel = cc.find("Canvas/enemyLife").getComponent(cc.Label);
+      
+        myLifeLabel.string = ((Array(7).join("0") + this.myLife.toString()).slice(-3)) + ('/100');
+        enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) + ('/100');
     }
 
     initSkill1(){
