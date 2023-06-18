@@ -35,9 +35,11 @@ var NewClass = /** @class */ (function (_super) {
         _this.battleBgm = null;
         _this.winSound = null;
         _this.loseSound = null;
+        _this.red_dong_punch = null;
         _this.mainCamera = null;
         _this.enemy1 = null;
         _this.enemy2 = null;
+        _this.enemy3 = null;
         _this.enemy7 = null;
         _this.myHP = null;
         _this.enemyHP = null;
@@ -52,29 +54,32 @@ var NewClass = /** @class */ (function (_super) {
         _this.enemyTurn = false;
         _this.isLose = false;
         _this.enemynum = 0;
+        _this.renew = true;
+        _this.last_myself = -1;
+        _this.skill1Button = null;
+        _this.skill2Button = null;
+        _this.skill3Button = null;
+        _this.skill4Button = null;
         return _this;
     }
     // LIFE-CYCLE CALLBACKS:
     NewClass.prototype.onLoad = function () {
-        // this.enemynum = cc.director.getScene()["enemyNum"];
-        // console.log("enemyNum:", this.enemynum);
-        // if(this.enemynum !== undefined){
-        //     console.log("Number passed from previous scene:", this.enemynum);
-        //     //this.enemynum = enemyNum;
-        // }
         cc.find('Canvas/skills/bag2').on('click', function () {
-            // cc.director.loadScene('bag_battle');
             cc.find('Canvas/skills').active = false;
             cc.find('Canvas/bags2').active = true;
         });
+        this.skill1Button = cc.find("Canvas/skills/skill1").getComponent(cc.Button);
+        this.skill2Button = cc.find("Canvas/skills/skill2").getComponent(cc.Button);
+        this.skill3Button = cc.find("Canvas/skills/skill3").getComponent(cc.Button);
+        this.skill4Button = cc.find("Canvas/skills/skill4").getComponent(cc.Button);
+        this.skill1Button.node.on('click', this.skill1, this);
+        this.skill2Button.node.on('click', this.skill2, this);
+        this.skill3Button.node.on('click', this.skill3, this);
+        this.skill4Button.node.on('click', this.skill4, this);
     };
     NewClass.prototype.start = function () {
+        this.last_myself = GlobalData_1.default.myelf;
         this.enemynum = cc.director.getScene()["enemyNum"];
-        // this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
-        //console.log("enemyNum:", this.enemynum);
-        if (this.enemynum !== undefined) {
-            //console.log("Number passed from previous scene:", this.enemynum);
-        }
         if (this.enemynum == 4) {
             if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy1;
@@ -86,6 +91,15 @@ var NewClass = /** @class */ (function (_super) {
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
         }
+        else if (this.enemynum == 6) {
+            if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
+                cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy3;
+                // cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame.setFlipX(true);
+                cc.find("Canvas/enemy").scaleX *= -1;
+                cc.find("Canvas/enemy").width = 300;
+                cc.find("Canvas/enemy").y = 0;
+            }
+        }
         else if (this.enemynum == 7) {
             if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy7;
@@ -93,10 +107,6 @@ var NewClass = /** @class */ (function (_super) {
             }
         }
         cc.audioEngine.playMusic(this.battleBgm, true);
-        this.initSkill1();
-        this.initSkill2();
-        this.initSkill3();
-        this.initSkill4();
         var enemyParticleEffect2 = cc.find("Canvas/enemy/onLoad").getComponent(cc.ParticleSystem);
         if (this.enemynum == 4) {
             console.log("this.enemynum == 4");
@@ -105,17 +115,25 @@ var NewClass = /** @class */ (function (_super) {
         }
     };
     NewClass.prototype.update = function (dt) {
-        // console.log(this.enemynum);
+        if (this.renew) {
+            this.renew = false;
+            if (GlobalData_1.default.myelf == 0) {
+                cc.find("Canvas/skills/skill1/Background/Label").getComponent(cc.Label).string = "魔法攻擊";
+                cc.find("Canvas/skills/skill4/Background/Label").getComponent(cc.Label).string = "懶蛋攻擊";
+            }
+            else {
+                cc.find("Canvas/skills/skill1/Background/Label").getComponent(cc.Label).string = "衝撞";
+            }
+        }
+        if (GlobalData_1.default.myelf != this.last_myself) {
+            console.log("GlobalData.myelf:", GlobalData_1.default.myelf);
+            this.last_myself = GlobalData_1.default.myelf;
+            this.renew = true;
+        }
         this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData_1.default.myelf]];
         this.updateUI(dt);
         if (this.enemyLife <= 0 && !this.isWin) {
-            // var uid = GlobalData.uid;
-            // const database = firebase.database();
-            // firebase.database().ref('user').child(GlobalData.uid).update({
-            //     myArray: [this.enemynum],
-            // });
             GlobalData_1.default.pokewoman.push(this.enemynum);
-            console.log("GlobalData.pokewoman:", GlobalData_1.default.pokewoman);
             this.enemyLife = 0;
             this.isWin = true;
             this.enemyHP.progress = 0;
@@ -125,12 +143,8 @@ var NewClass = /** @class */ (function (_super) {
             this.scheduleOnce(function () {
                 var _this = this;
                 cc.director.loadScene("map2", function () {
-                    // const nextScene = cc.director.getScene();
                     var enemyNumString = cc.js.formatStr("%d", _this.enemynum);
                     GlobalData_1.default.nodeToDestroy.push(enemyNumString);
-                    // nextScene["nodeToDestroy"] = enemyNumString;
-                    // //console.log("nextScene[nodeToDestroy]", enemyNumString);
-                    // console.log("nextScene[nodeToDestroy]", nextScene["nodeToDestroy"]);
                 });
             }, 4);
         }
@@ -150,9 +164,6 @@ var NewClass = /** @class */ (function (_super) {
             this.enemyTurn = false;
             this.myTurn = true;
             this.enemyTurnAction();
-            //this.scheduleOnce(function() {
-            //cc.find("Canvas/skill1").getComponent(cc.Button).interactable = this.myTurn;
-            // }, 2);
         }
         if (!this.enemyTurn && this.myTurn && this.myLife > 0) {
             //cc.find("Canvas/skill1").getComponent(cc.Button).interactable = this.myTurn;
@@ -166,6 +177,7 @@ var NewClass = /** @class */ (function (_super) {
         cc.audioEngine.setEffectsVolume(GlobalData_1.default.volume);
     };
     NewClass.prototype.updateUI = function (dt) {
+        // console.log(this.enemynum);
         this.myHP.progress = this.myLife / 100;
         this.enemyHP.progress = this.enemyLife / 100;
         var myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
@@ -173,38 +185,12 @@ var NewClass = /** @class */ (function (_super) {
         myLifeLabel.string = ((Array(7).join("0") + this.myLife.toString()).slice(-3)) + ('/100');
         enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) + ('/100');
     };
-    NewClass.prototype.initSkill1 = function () {
-        var clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node;
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill1";
-        cc.find("Canvas/skills/skill1").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-    };
-    NewClass.prototype.initSkill2 = function () {
-        var clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node;
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill2";
-        cc.find("Canvas/skills/skill2").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-    };
-    NewClass.prototype.initSkill3 = function () {
-        var clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node;
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill3";
-        cc.find("Canvas/skills/skill3").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-    };
-    NewClass.prototype.initSkill4 = function () {
-        var clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node;
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill4";
-        cc.find("Canvas/skills/skill4").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-    };
     NewClass.prototype.skill1 = function () {
-        //cc.log("skill1");
         var enemyLifeDeduct = cc.callFunc(function (target) {
-            this.enemyLife -= 50;
+            if (GlobalData_1.default.myelf == 0)
+                this.enemyLife -= 80;
+            else
+                this.enemyLife -= 20;
         }, this);
         var turnSwitch1 = cc.callFunc(function (target) {
             this.myTurn = false;
@@ -254,10 +240,10 @@ var NewClass = /** @class */ (function (_super) {
         this.node.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(520, 0)), cc.moveBy(1, cc.v2(-520, 0)), enemyLifeDeduct, turnSwitch2));
     };
     NewClass.prototype.enemyTurnAction = function () {
-        // console.log(this.enemynum);
         var enemyAnimation = cc.find("Canvas/enemy").getComponent(cc.Animation);
         var enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
         var enemyParticleEffect3 = cc.find("Canvas/enemy/punch").getComponent(cc.ParticleSystem);
+        var enemyParticleEffect4 = cc.find("Canvas/enemy/boom").getComponent(cc.ParticleSystem);
         var shakeCamera = cc.callFunc(function (target) {
             var mainCamera = cc.Camera.main;
             this.originalPosition = mainCamera.node.position.clone();
@@ -280,20 +266,21 @@ var NewClass = /** @class */ (function (_super) {
             enemyAnimation.play("red_dong_move");
         }
         else if (this.enemynum == 6) {
+            enemyAnimation.play("boom");
         }
         else if (this.enemynum == 7) {
             enemyAnimation.play("fish3");
         }
         var myLifeDeduct = cc.callFunc(function (target) {
-            //console.log("enemyNum in mylife deduct:", this.enemynum);
+            console.log("enemyNum in mylife deduct:", this.enemynum);
             if (this.enemynum == 4)
                 this.myLife -= 10;
             else if (this.enemynum == 5)
                 this.myLife -= 20;
             else if (this.enemynum == 6)
-                this.myLife -= 40;
+                this.myLife -= 45;
             else if (this.enemynum == 7)
-                this.myLife -= 40;
+                this.myLife -= 10;
         }, this);
         var turnSwitch1 = cc.callFunc(function (target) {
             this.myTurn = false;
@@ -308,22 +295,36 @@ var NewClass = /** @class */ (function (_super) {
                 enemyParticleEffect.resetSystem();
             else if (this.enemynum == 5)
                 enemyParticleEffect3.resetSystem();
+            else if (this.enemynum == 6) {
+                enemyParticleEffect4.resetSystem();
+                cc.find("Canvas/enemy/boom").runAction(cc.moveBy(0.2, cc.v2(-525, 0)));
+                cc.find("Canvas/enemy/boom").x = 17.366;
+            }
         }, this);
-        // let particleAction = cc.callFunc(function(target) {
-        //     enemyParticleEffect.stopSystem();
-        // }, this);
+        var sound = cc.callFunc(function (target) {
+            if (this.enemynum == 4) { } //enemyParticleEffect.resetSystem();
+            else if (this.enemynum == 5) {
+                cc.audioEngine.playEffect(this.red_dong_punch, false);
+                console.log("sound");
+            }
+            else if (this.enemynum == 6) {
+                cc.audioEngine.playEffect(this.red_dong_punch, false);
+                console.log("sound");
+            }
+        }, this);
         var moveAction = cc.callFunc(function (target) {
             if (this.enemynum == 4)
-                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera, myLifeDeduct));
+                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera, myLifeDeduct, turnSwitch2));
             else if (this.enemynum == 5)
-                enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)), myLifeDeduct));
+                enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), sound, shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)), myLifeDeduct, turnSwitch2));
             else if (this.enemynum == 6)
-                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)), myLifeDeduct));
-            else if (this.enemynum == 7)
-                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)), myLifeDeduct));
+                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 20)), sound, shakeCamera2, particleAction, cc.moveBy(0.1, cc.v2(0, -20)), myLifeDeduct, turnSwitch2));
+            else if (this.enemynum == 7) {
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)), myLifeDeduct, turnSwitch2));
+            }
         }, this);
         var enemy = cc.find("Canvas/enemy");
-        enemy.runAction(cc.sequence(turnSwitch1, moveAction, turnSwitch2));
+        enemy.runAction(cc.sequence(turnSwitch1, moveAction));
     };
     __decorate([
         property(cc.Label)
@@ -341,6 +342,9 @@ var NewClass = /** @class */ (function (_super) {
         property({ type: cc.AudioClip })
     ], NewClass.prototype, "loseSound", void 0);
     __decorate([
+        property({ type: cc.AudioClip })
+    ], NewClass.prototype, "red_dong_punch", void 0);
+    __decorate([
         property({ type: cc.Node })
     ], NewClass.prototype, "mainCamera", void 0);
     __decorate([
@@ -349,6 +353,9 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property({ type: cc.SpriteFrame })
     ], NewClass.prototype, "enemy2", void 0);
+    __decorate([
+        property({ type: cc.SpriteFrame })
+    ], NewClass.prototype, "enemy3", void 0);
     __decorate([
         property({ type: cc.SpriteFrame })
     ], NewClass.prototype, "enemy7", void 0);

@@ -790,6 +790,7 @@
       "__id__": 16
     },
     "_enabled": true,
+    "Gamemanger": null,
     "label": null,
     "text": "hello",
     "bgm": {
@@ -811,7 +812,7 @@
     "_enabled": true,
     "_type": 2,
     "_allowSleep": true,
-    "_gravityScale": 1,
+    "_gravityScale": 0,
     "_linearDamping": 0,
     "_angularDamping": 0,
     "_linearVelocity": {
@@ -835,7 +836,7 @@
     },
     "_enabled": true,
     "tag": 0,
-    "_density": 1,
+    "_density": 0,
     "_sensor": false,
     "_friction": 0.2,
     "_restitution": 0,
@@ -956,7 +957,7 @@
     "_enabled": true,
     "_type": 0,
     "_allowSleep": true,
-    "_gravityScale": 1,
+    "_gravityScale": 0,
     "_linearDamping": 0,
     "_angularDamping": 0,
     "_linearVelocity": {
@@ -980,7 +981,7 @@
     },
     "_enabled": true,
     "tag": 1,
-    "_density": 1,
+    "_density": 0,
     "_sensor": false,
     "_friction": 0.2,
     "_restitution": 0,
