@@ -32,7 +32,7 @@ var NewClass = /** @class */ (function (_super) {
     NewClass.prototype.onLoad = function () {
         cc.director.getPhysicsManager().enabled = true;
         cc.find('Canvas/p1').on('click', function () {
-            cc.director.loadScene('map2');
+            cc.director.loadScene('map3');
         });
         cc.find('Canvas/p2').on('click', function () {
             cc.director.loadScene('map2');

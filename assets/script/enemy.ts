@@ -35,6 +35,11 @@ export default class Enemy extends cc.Component {
             }
             else if(this.node.name == "5")
             if(!this.anim.getAnimationState("red_dong_move").isPlaying) this.playAnimation("red_dong_move");
+            if(this.node.name == "4"){
+                if(!this.anim.getAnimationState("dong_move").isPlaying) this.playAnimation("dong_move")
+            }
+            else if(this.node.name == "7")
+            if(!this.anim.getAnimationState("fish").isPlaying) this.playAnimation("fish");
             //cc.log("dong_move");
         
            // this.playAnimation("dong_move");  
@@ -48,9 +53,17 @@ export default class Enemy extends cc.Component {
                 this.enemySpeed *= -1;
                 this.node.scaleX *= -1;
                 
-            }else{
+            }
+            else{
                 this.enemySpeed *= 0;
-                this.stopAnimation("dong_move");
+                if(self.tag==7)
+                {
+                    this.stopAnimation("fish");
+                }
+                else
+                {
+                    this.stopAnimation("dong_move");
+                }
                 if(other.scaleX == this.node.scaleX)
                     this.node.scaleX *= -1;
                 else this.node.scaleX *= 1;

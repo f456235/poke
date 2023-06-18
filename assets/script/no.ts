@@ -39,7 +39,7 @@ export default class No extends cc.Component {
     }
 
     update(dt: number) {
-        console.log("this.animation:", this.animation);
+        // console.log("this.animation:", this.animation);
         if (this.animation && !this.animation.getAnimationState("no").isPlaying) {
             this.animation.play("no");
         }

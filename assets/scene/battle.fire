@@ -2864,6 +2864,9 @@
     "enemy2": {
       "__uuid__": "9d051904-3e85-4d87-9fac-13cb05360afa"
     },
+    "enemy7": {
+      "__uuid__": "eea96be3-1964-4ad6-8b61-523e4498de37"
+    },
     "myHP": {
       "__id__": 57
     },
@@ -2889,7 +2892,9 @@
       },
       null,
       null,
-      null,
+      {
+        "__uuid__": "adced209-6b48-4975-a3ab-e843805ca53f"
+      },
       null,
       null
     ],
@@ -5719,7 +5724,9 @@
       },
       null,
       null,
-      null,
+      {
+        "__uuid__": "adced209-6b48-4975-a3ab-e843805ca53f"
+      },
       null,
       null
     ],

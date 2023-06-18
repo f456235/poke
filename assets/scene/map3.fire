@@ -6007,7 +6007,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "4",
+    "_name": "7",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -6047,7 +6047,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 24,
-      "height": 24
+      "height": 20
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6168,7 +6168,7 @@
       "__uuid__": "472df5d3-35e7-4184-9e6c-7f41bee65ee3"
     },
     "_texture": null,
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": true,
     "autoRemoveOnFinish": false,
     "totalParticles": 200,
@@ -6264,7 +6264,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "91d6e170-6767-4576-9e8a-6c81776fef2d"
+      "__uuid__": "adced209-6b48-4975-a3ab-e843805ca53f"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -6313,7 +6313,7 @@
       "__id__": 143
     },
     "_enabled": true,
-    "tag": 4,
+    "tag": 7,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -6351,11 +6351,11 @@
     },
     "_enabled": true,
     "_defaultClip": {
-      "__uuid__": "ac776f28-1668-4f6e-8aab-81b0f90969ab"
+      "__uuid__": "844dc897-0cc6-4080-ac27-8920b4941b48"
     },
     "_clips": [
       {
-        "__uuid__": "ac776f28-1668-4f6e-8aab-81b0f90969ab"
+        "__uuid__": "844dc897-0cc6-4080-ac27-8920b4941b48"
       }
     ],
     "playOnLoad": false,

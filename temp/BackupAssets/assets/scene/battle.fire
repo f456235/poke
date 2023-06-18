@@ -2862,7 +2862,10 @@
       "__uuid__": "91d6e170-6767-4576-9e8a-6c81776fef2d"
     },
     "enemy2": {
-      "__uuid__": "04799042-1a3c-4067-9ea2-2403e5408013"
+      "__uuid__": "9d051904-3e85-4d87-9fac-13cb05360afa"
+    },
+    "enemy7": {
+      "__uuid__": "eea96be3-1964-4ad6-8b61-523e4498de37"
     },
     "myHP": {
       "__id__": 57
@@ -2889,7 +2892,9 @@
       },
       null,
       null,
-      null,
+      {
+        "__uuid__": "adced209-6b48-4975-a3ab-e843805ca53f"
+      },
       null,
       null
     ],
@@ -3756,7 +3761,7 @@
       "__uuid__": "91d6e170-6767-4576-9e8a-6c81776fef2d"
     },
     "_texture": null,
-    "_stopped": true,
+    "_stopped": false,
     "playOnLoad": false,
     "autoRemoveOnFinish": false,
     "totalParticles": 50,
@@ -3873,8 +3878,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        100,
-        22,
+        103.293,
+        79.629,
         0,
         0,
         0,
@@ -5719,7 +5724,9 @@
       },
       null,
       null,
-      null,
+      {
+        "__uuid__": "adced209-6b48-4975-a3ab-e843805ca53f"
+      },
       null,
       null
     ],

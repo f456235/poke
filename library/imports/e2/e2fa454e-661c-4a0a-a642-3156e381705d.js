@@ -49,7 +49,7 @@ var No = /** @class */ (function (_super) {
         this.animation = this.getComponent(cc.Animation);
     };
     No.prototype.update = function (dt) {
-        console.log("this.animation:", this.animation);
+        // console.log("this.animation:", this.animation);
         if (this.animation && !this.animation.getAnimationState("no").isPlaying) {
             this.animation.play("no");
         }

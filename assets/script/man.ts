@@ -162,7 +162,7 @@ export default class Man extends cc.Component {
         let worldManifold = contact.getWorldManifold();
         let points = worldManifold.points;
         let normal = worldManifold.normal;
-        if(otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6){
+        if(otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6|| otherCollider.tag == 7){
             this.enemyNum = otherCollider.tag;
             //console.log("enemyNum in man");
             //console.log(this.enemyNum);

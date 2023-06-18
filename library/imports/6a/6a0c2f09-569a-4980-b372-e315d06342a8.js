@@ -166,7 +166,7 @@ var Man = /** @class */ (function (_super) {
         var worldManifold = contact.getWorldManifold();
         var points = worldManifold.points;
         var normal = worldManifold.normal;
-        if (otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6) {
+        if (otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6 || otherCollider.tag == 7) {
             this.enemyNum = otherCollider.tag;
             //console.log("enemyNum in man");
             //console.log(this.enemyNum);

@@ -30,6 +30,9 @@ export default class NewClass extends cc.Component {
     @property({type:cc.SpriteFrame})
     enemy2: cc.SpriteFrame = null;
 
+    @property({type:cc.SpriteFrame})
+    enemy7: cc.SpriteFrame = null;
+
     @property(cc.ProgressBar)
     myHP: cc.ProgressBar = null;
 
@@ -90,6 +93,12 @@ export default class NewClass extends cc.Component {
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
         }
+        else if(this.enemynum == 7){
+            if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
+                cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy7;
+                cc.find("Canvas/enemy").color = cc.Color.RED;
+            }
+        }
         cc.audioEngine.playMusic(this.battleBgm, true);
         this.initSkill1();
         this.initSkill2();
@@ -105,7 +114,7 @@ export default class NewClass extends cc.Component {
     }
 
     update(dt){
-        
+        // console.log(this.enemynum);
         this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
         this.updateUI(dt);
         if(this.enemyLife <= 0 && !this.isWin){
@@ -291,6 +300,7 @@ export default class NewClass extends cc.Component {
         this.node.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(520, 0)), cc.moveBy(1, cc.v2(-520, 0)),enemyLifeDeduct, turnSwitch2))
     }
     enemyTurnAction(){
+        // console.log(this.enemynum);
         let enemyAnimation = cc.find("Canvas/enemy").getComponent(cc.Animation);
         let enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
         let enemyParticleEffect3 = cc.find("Canvas/enemy/punch").getComponent(cc.ParticleSystem);
@@ -328,11 +338,15 @@ export default class NewClass extends cc.Component {
             enemyAnimation.play("red_dong_move");
         }else if(this.enemynum == 6){
         }
+        else if(this.enemynum == 7){
+            enemyAnimation.play("fish3");
+        }
         let myLifeDeduct = cc.callFunc(function(target) {
             //console.log("enemyNum in mylife deduct:", this.enemynum);
             if(this.enemynum == 4) this.myLife -= 10;
             else if(this.enemynum == 5) this.myLife -= 20;
             else if(this.enemynum == 6) this.myLife -= 40;
+            else if(this.enemynum == 7) this.myLife -= 40;
         }, this);
 
         let turnSwitch1 = cc.callFunc(function(target) {
@@ -361,6 +375,8 @@ export default class NewClass extends cc.Component {
             else if(this.enemynum == 5)
                 enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)),myLifeDeduct));
             else if(this.enemynum == 6)
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)),myLifeDeduct));
+            else if(this.enemynum == 7)
                 enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)),myLifeDeduct));
         }, this);
 

@@ -192,6 +192,11 @@ var NewClass = /** @class */ (function (_super) {
             this.atk_num.string = "300";
             this.hp_num.string = "10";
         }
+        else if (a == 6) {
+            this.nm.string = "fishKing";
+            this.atk_num.string = "10";
+            this.hp_num.string = "10";
+        }
         // console.log(this.nm.string);
     };
     NewClass.prototype.update = function (dt) {

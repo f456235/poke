@@ -80,8 +80,8 @@
     "relativePath": "animations\\man_up.anim"
   },
   "962212ba-26a8-4839-bdcf-77a3db68cc7f": {
-    "asset": 1687022123367,
-    "meta": 1687022210074,
+    "asset": 1687084234232,
+    "meta": 1687084234259,
     "relativePath": "scene\\bag.fire"
   },
   "eda0d04a-0b00-4d3c-920d-87b1cfb2e1d1": {
@@ -113,11 +113,6 @@
     "asset": 1687022123382,
     "meta": 1687022210244,
     "relativePath": "script\\bag_back.ts"
-  },
-  "b52d88fd-1207-468f-b52e-f38130159110": {
-    "asset": 1687022123382,
-    "meta": 1687022210466,
-    "relativePath": "script\\block_sprite.ts"
   },
   "83e999eb-55de-41e6-a961-793a2c916677": {
     "asset": 1687022122460,
@@ -158,11 +153,6 @@
     "asset": 1687022123398,
     "meta": 1687022210841,
     "relativePath": "script\\universe.ts"
-  },
-  "cae209eb-9025-48c4-bd46-6c0eb4ae3ba3": {
-    "asset": 1687022123398,
-    "meta": 1687022210854,
-    "relativePath": "script\\universe_select.ts"
   },
   "be94f678-c59d-415e-82b2-c1e974a2fd5b": {
     "asset": 1687022676668,
@@ -9354,11 +9344,6 @@
     "meta": 1687022211323,
     "relativePath": "src\\else\\btn.png"
   },
-  "7c477390-263b-46a8-a740-d653fa58bd79": {
-    "asset": 1687022123382,
-    "meta": 1687022210313,
-    "relativePath": "script\\battle_bag.ts"
-  },
   "c18138b7-bb10-4c6c-9602-34dd350c9480": {
     "asset": 1687022123445,
     "meta": 1687022211244,
@@ -9370,8 +9355,8 @@
     "relativePath": "src\\else\\bag_event2.jpg"
   },
   "4315fa84-198b-4298-82f4-2a05798ee2eb": {
-    "asset": 1687022123367,
-    "meta": 1687022210099,
+    "asset": 1687084973655,
+    "meta": 1687084973677,
     "relativePath": "scene\\battle.fire"
   },
   "0cc4743a-ab5f-47d7-9470-53bb921d0563": {
@@ -9508,11 +9493,6 @@
     "asset": 1687022122429,
     "meta": 1687022209823,
     "relativePath": "animations\\level up.anim"
-  },
-  "6a0c2f09-569a-4980-b372-e315d06342a8": {
-    "asset": 1687022123398,
-    "meta": 1687022210696,
-    "relativePath": "script\\man.ts"
   },
   "0fe665c1-6060-4283-97ed-126e785a1f4c": {
     "asset": 1687022123398,
@@ -9653,16 +9633,6 @@
     "asset": 1687022123523,
     "meta": 1687022211856,
     "relativePath": "src\\red_dong_move\\red_dong_move7.png"
-  },
-  "fee8b393-97c3-4e76-bdfb-d2c4c68076e2": {
-    "asset": 1687022123382,
-    "meta": 1687022210514,
-    "relativePath": "script\\enemy.ts"
-  },
-  "0a6907aa-4c7f-4991-b186-757d340de6ac": {
-    "asset": 1687022123382,
-    "meta": 1687022210424,
-    "relativePath": "script\\battle_man.ts"
   },
   "1e45cb93-fb97-4a66-b9a6-9666d127da47": {
     "asset": 1687022666701,
@@ -9873,11 +9843,6 @@
     "asset": 1687014362012,
     "meta": 1687022677897,
     "relativePath": "src\\yuan\\9.png"
-  },
-  "e2fa454e-661c-4a0a-a642-3156e381705d": {
-    "asset": 1687005694617,
-    "meta": 1687022815606,
-    "relativePath": "script\\no.ts"
   },
   "c3982303-491c-4d27-84f0-eda223b1f78d": {
     "asset": 1687015001894,
@@ -10400,8 +10365,8 @@
     "relativePath": "script\\select_dong.ts"
   },
   "336f7557-992c-46d1-92ca-b5cf03c96f60": {
-    "asset": 1687082273256,
-    "meta": 1687082273273,
+    "asset": 1687085933725,
+    "meta": 1687085933743,
     "relativePath": "scene\\map3.fire"
   },
   "c821f457-1020-4695-b7e2-884d42d55206": {
@@ -14838,5 +14803,65 @@
     "asset": 1687077631750,
     "meta": 1687078882967,
     "relativePath": "map_tile\\2D TopDown Desert Tileset - Fantasy Dreamland\\Desert Fantasy Dreamland\\未命名.tiled-session"
+  },
+  "51537590-8805-493b-a545-a724d4e666a1": {
+    "asset": 1687083422687,
+    "meta": 1687083422698,
+    "relativePath": "src\\fish"
+  },
+  "5afee992-bfb4-4e84-91a4-66936ea68519": {
+    "asset": 1687083407439,
+    "meta": 1687083422764,
+    "relativePath": "src\\fish\\fish2.png"
+  },
+  "f3eb7d3d-a5f9-47d8-99b9-2d66f09b988d": {
+    "asset": 1687083396106,
+    "meta": 1687083422766,
+    "relativePath": "src\\fish\\fish1.png"
+  },
+  "a9c5e944-e12c-4d79-8877-c96d34aa99e1": {
+    "asset": 1687083418271,
+    "meta": 1687083422768,
+    "relativePath": "src\\fish\\fish3.png"
+  },
+  "844dc897-0cc6-4080-ac27-8920b4941b48": {
+    "asset": 1687083701857,
+    "meta": 1687083701869,
+    "relativePath": "animations\\fish.anim"
+  },
+  "7c477390-263b-46a8-a740-d653fa58bd79": {
+    "asset": 1687083781202,
+    "meta": 1687084025484,
+    "relativePath": "script\\battle_bag.ts"
+  },
+  "b52d88fd-1207-468f-b52e-f38130159110": {
+    "asset": 1687084116773,
+    "meta": 1687084144140,
+    "relativePath": "script\\block_sprite.ts"
+  },
+  "6a0c2f09-569a-4980-b372-e315d06342a8": {
+    "asset": 1687085120129,
+    "meta": 1687085121993,
+    "relativePath": "script\\man.ts"
+  },
+  "fee8b393-97c3-4e76-bdfb-d2c4c68076e2": {
+    "asset": 1687085451325,
+    "meta": 1687085452609,
+    "relativePath": "script\\enemy.ts"
+  },
+  "cae209eb-9025-48c4-bd46-6c0eb4ae3ba3": {
+    "asset": 1687085537242,
+    "meta": 1687085538610,
+    "relativePath": "script\\universe_select.ts"
+  },
+  "e2fa454e-661c-4a0a-a642-3156e381705d": {
+    "asset": 1687085660101,
+    "meta": 1687085661412,
+    "relativePath": "script\\no.ts"
+  },
+  "0a6907aa-4c7f-4991-b186-757d340de6ac": {
+    "asset": 1687085930850,
+    "meta": 1687085932126,
+    "relativePath": "script\\battle_man.ts"
   }
 }

@@ -171,6 +171,12 @@ export default class NewClass extends cc.Component {
             this.atk_num.string = "300";
             this.hp_num.string = "10";
         }
+        else if(a==7)
+        {
+            this.nm.string = "fishKing";
+            this.atk_num.string = "10";
+            this.hp_num.string = "10";
+        }
         // console.log(this.nm.string);
     }
     update (dt) {

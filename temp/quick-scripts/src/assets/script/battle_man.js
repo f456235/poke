@@ -38,6 +38,7 @@ var NewClass = /** @class */ (function (_super) {
         _this.mainCamera = null;
         _this.enemy1 = null;
         _this.enemy2 = null;
+        _this.enemy7 = null;
         _this.myHP = null;
         _this.enemyHP = null;
         _this.man = null;
@@ -85,6 +86,12 @@ var NewClass = /** @class */ (function (_super) {
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
         }
+        else if (this.enemynum == 7) {
+            if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
+                cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy7;
+                cc.find("Canvas/enemy").color = cc.Color.RED;
+            }
+        }
         cc.audioEngine.playMusic(this.battleBgm, true);
         this.initSkill1();
         this.initSkill2();
@@ -98,6 +105,7 @@ var NewClass = /** @class */ (function (_super) {
         }
     };
     NewClass.prototype.update = function (dt) {
+        // console.log(this.enemynum);
         this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData_1.default.myelf]];
         this.updateUI(dt);
         if (this.enemyLife <= 0 && !this.isWin) {
@@ -246,6 +254,7 @@ var NewClass = /** @class */ (function (_super) {
         this.node.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(520, 0)), cc.moveBy(1, cc.v2(-520, 0)), enemyLifeDeduct, turnSwitch2));
     };
     NewClass.prototype.enemyTurnAction = function () {
+        // console.log(this.enemynum);
         var enemyAnimation = cc.find("Canvas/enemy").getComponent(cc.Animation);
         var enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
         var enemyParticleEffect3 = cc.find("Canvas/enemy/punch").getComponent(cc.ParticleSystem);
@@ -272,6 +281,9 @@ var NewClass = /** @class */ (function (_super) {
         }
         else if (this.enemynum == 6) {
         }
+        else if (this.enemynum == 7) {
+            enemyAnimation.play("fish3");
+        }
         var myLifeDeduct = cc.callFunc(function (target) {
             //console.log("enemyNum in mylife deduct:", this.enemynum);
             if (this.enemynum == 4)
@@ -279,6 +291,8 @@ var NewClass = /** @class */ (function (_super) {
             else if (this.enemynum == 5)
                 this.myLife -= 20;
             else if (this.enemynum == 6)
+                this.myLife -= 40;
+            else if (this.enemynum == 7)
                 this.myLife -= 40;
         }, this);
         var turnSwitch1 = cc.callFunc(function (target) {
@@ -304,6 +318,8 @@ var NewClass = /** @class */ (function (_super) {
             else if (this.enemynum == 5)
                 enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)), myLifeDeduct));
             else if (this.enemynum == 6)
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)), myLifeDeduct));
+            else if (this.enemynum == 7)
                 enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)), myLifeDeduct));
         }, this);
         var enemy = cc.find("Canvas/enemy");
@@ -333,6 +349,9 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property({ type: cc.SpriteFrame })
     ], NewClass.prototype, "enemy2", void 0);
+    __decorate([
+        property({ type: cc.SpriteFrame })
+    ], NewClass.prototype, "enemy7", void 0);
     __decorate([
         property(cc.ProgressBar)
     ], NewClass.prototype, "myHP", void 0);
