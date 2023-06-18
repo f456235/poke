@@ -80,8 +80,8 @@
     "relativePath": "animations\\man_up.anim"
   },
   "962212ba-26a8-4839-bdcf-77a3db68cc7f": {
-    "asset": 1687101533557,
-    "meta": 1687101533575,
+    "asset": 1687102689689,
+    "meta": 1687102689714,
     "relativePath": "scene\\bag.fire"
   },
   "eda0d04a-0b00-4d3c-920d-87b1cfb2e1d1": {
@@ -15234,11 +15234,6 @@
     "meta": 1687099767035,
     "relativePath": "script\\login.ts"
   },
-  "82690b11-7908-42f7-9e3d-24873353d51d": {
-    "asset": 1687100429016,
-    "meta": 1687100431672,
-    "relativePath": "script\\GlobalData.ts"
-  },
   "0fe665c1-6060-4283-97ed-126e785a1f4c": {
     "asset": 1687100643999,
     "meta": 1687100659069,
@@ -15249,9 +15244,14 @@
     "meta": 1687100659089,
     "relativePath": "script\\register.ts"
   },
+  "82690b11-7908-42f7-9e3d-24873353d51d": {
+    "asset": 1687102469173,
+    "meta": 1687102532401,
+    "relativePath": "script\\GlobalData.ts"
+  },
   "b52d88fd-1207-468f-b52e-f38130159110": {
-    "asset": 1687101631341,
-    "meta": 1687101633781,
+    "asset": 1687102541696,
+    "meta": 1687102543026,
     "relativePath": "script\\block_sprite.ts"
   }
 }

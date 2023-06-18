@@ -28,6 +28,7 @@ export default class GlobalData {
     static pokewomanAttack: number[] = [10,15,20,23,22,18,12,29,30,24,15,31,25,31,9,8]
     static pokewomanBaseHP: number[] = [80,70,60,69,78,97,62,88,73,74,81,72,60,90,50,40]
     static pokewomanHPscale: number[] = [9,10,11,9,10,8,13,9,14,10,10,11,13,14,9]
+    static pokewomanName: string[] = ["岩東勇","炎東勇","嚴冬勇","魔關羽","dong boss","Jigglypuff","Meowth","鯉魚王","Snorlax","Mew","Mewtwo","Dragonite","Gengar","Gyarados","Pidgey","Rattata"]
     static hp: number = 100;
     static initializeHPArrays(): void {
         //this.hp = 100 + 10 * this.level;

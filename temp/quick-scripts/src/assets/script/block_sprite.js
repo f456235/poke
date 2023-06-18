@@ -158,43 +158,10 @@ var NewClass = /** @class */ (function (_super) {
         this.node.getChildByName('hp_num').active = true;
         this.healthBar.node.active = true;
         console.log("hi:", a);
-        if (a == 0) {
-            this.nm.string = "岩東勇";
-            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
-            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
-        }
-        else if (a == 1) {
-            this.nm.string = "炎東勇";
-            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
-            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
-        }
-        else if (a == 2) {
-            this.nm.string = "嚴冬勇";
-            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
-            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
-        }
-        else if (a == 3) {
-            this.nm.string = "魔關羽";
-            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
-            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
-        }
-        else if (a == 7) {
-            this.nm.string = "fishKing";
-            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
-            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
-        }
-        else {
-            this.nm.string = "Killer Queen";
-            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
-            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
-        }
-        // console.log(this.nm.string);
+        this.nm.string = GlobalData_1.default.pokewomanName[GlobalData_1.default.pokewoman[a]];
+        this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
+        this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
+        this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
     };
     NewClass.prototype.update = function (dt) {
         // console.log(this.nm.string);

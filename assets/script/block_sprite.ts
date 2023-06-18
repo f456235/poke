@@ -151,47 +151,11 @@ export default class NewClass extends cc.Component {
         this.node.getChildByName('hp_num').active = true;
         this.healthBar.node.active = true;
         console.log("hi:",a);
-        if(a==0)
-        {
-            this.nm.string = "岩東勇";
-            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
-            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData.fullHP[a].toString();
-        }
-        else if(a==1)
-        {
-            this.nm.string = "炎東勇";
-            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
-            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData.fullHP[a].toString();
-        }
-        else if(a==2)
-        {
-            this.nm.string = "嚴冬勇";
-            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
-            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData.fullHP[a].toString();
-        }
-        else if(a==3)
-        {
-            this.nm.string = "魔關羽";
-            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
-            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData.fullHP[a].toString();
-        }
-        else if(a==7)
-        {
-            this.nm.string = "fishKing";
-            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
-            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData.fullHP[a].toString();
-        }else{
-            this.nm.string = "Killer Queen";
-            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
-            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
-            this.hp_num.string = GlobalData.fullHP[a].toString();
-        }
-        // console.log(this.nm.string);
+        this.nm.string = GlobalData.pokewomanName[GlobalData.pokewoman[a]];
+        this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
+        this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
+        this.hp_num.string = GlobalData.fullHP[a].toString();
+       
     }
     update (dt) {
         // console.log(this.nm.string);
