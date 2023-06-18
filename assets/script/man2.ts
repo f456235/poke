@@ -150,12 +150,21 @@ export default class NewClass extends cc.Component {
     }
 
     onBeginContact(contact, selfCollider, otherCollider) {
-        console.log("shit1");
+        // console.log(cc.director.getPhysicsManager().gravity);
+        if (otherCollider.node.name === "sensor0.01") {
+        cc.find("Canvas/man2").getComponent(cc.RigidBody).gravityScale = -0.1;
+        this.node.getComponent(cc.Sprite).spriteFrame = this.lie;
+        }
+        if (otherCollider.node.name === "sensor0") {
+            cc.find("Canvas/man2").getComponent(cc.RigidBody).gravityScale = 0;
+            }
+        if (otherCollider.node.name === "sensorlie") {
+            this.node.getComponent(cc.Sprite).spriteFrame = this.lie;
+        }
         let worldManifold = contact.getWorldManifold();
         let points = worldManifold.points;
         let normal = worldManifold.normal;
-        if(otherCollider.tag == 4 || otherCollider.tag == 5){
-            console.log("shit");
+        if(otherCollider.tag == 4 || otherCollider.tag == 5|| otherCollider.tag == 6|| otherCollider.tag == 7){
             this.enemyNum = otherCollider.tag;
             this.isBattle = true;
             cc.audioEngine.pauseMusic();
