@@ -21,6 +21,9 @@ export default class NewClass extends cc.Component {
     @property({type:cc.AudioClip})
     loseSound: cc.AudioClip = null;
 
+    @property({type:cc.AudioClip})
+    red_dong_punch: cc.AudioClip = null;
+
     @property({type:cc.Node})
     mainCamera: cc.Node = null;
 
@@ -29,6 +32,9 @@ export default class NewClass extends cc.Component {
 
     @property({type:cc.SpriteFrame})
     enemy2: cc.SpriteFrame = null;
+
+    @property({type:cc.SpriteFrame})
+    enemy3: cc.SpriteFrame = null;
 
     @property(cc.ProgressBar)
     myHP: cc.ProgressBar = null;
@@ -42,7 +48,7 @@ export default class NewClass extends cc.Component {
     @property([cc.SpriteFrame])
     sprite: cc.SpriteFrame[] = [];
 
-    bag: number[] =GlobalData.pokewoman;
+    bag: number[] = GlobalData.pokewoman;
 
     mylife: number =GlobalData.mylife;
 
@@ -53,31 +59,36 @@ export default class NewClass extends cc.Component {
     private enemyTurn: boolean = false;
     private isLose: boolean = false;
     private enemynum = 0;
+    private renew: boolean = true;
+    private last_myself: number = -1;
+    public skill1Button: cc.Button = null;
+    public skill2Button: cc.Button = null;
+    public skill3Button: cc.Button = null;
+    public skill4Button: cc.Button = null;
+
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        // this.enemynum = cc.director.getScene()["enemyNum"];
-        // console.log("enemyNum:", this.enemynum);
-        // if(this.enemynum !== undefined){
-        //     console.log("Number passed from previous scene:", this.enemynum);
-        //     //this.enemynum = enemyNum;
-        // }
+        
         cc.find('Canvas/skills/bag2').on('click', () => {
-            // cc.director.loadScene('bag_battle');
             cc.find('Canvas/skills').active = false;
             cc.find('Canvas/bags2').active = true;
-    });
+        });
+        this.skill1Button = cc.find("Canvas/skills/skill1").getComponent(cc.Button);
+        this.skill2Button = cc.find("Canvas/skills/skill2").getComponent(cc.Button);
+        this.skill3Button = cc.find("Canvas/skills/skill3").getComponent(cc.Button);
+        this.skill4Button = cc.find("Canvas/skills/skill4").getComponent(cc.Button);
+        this.skill1Button.node.on('click', this.skill1, this);
+        this.skill2Button.node.on('click', this.skill2, this);
+        this.skill3Button.node.on('click', this.skill3, this);
+        this.skill4Button.node.on('click', this.skill4, this);
+        
     }
 
     start () {
+        this.last_myself = GlobalData.myelf;
         this.enemynum = cc.director.getScene()["enemyNum"];
-        // this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
-        //console.log("enemyNum:", this.enemynum);
-
-        if(this.enemynum !== undefined){
-            //console.log("Number passed from previous scene:", this.enemynum);
-        }
 
         if(this.enemynum == 4){
             if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
@@ -89,12 +100,17 @@ export default class NewClass extends cc.Component {
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy2;
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
+        }else if(this.enemynum == 6){
+            if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
+                cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy3;
+               // cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame.setFlipX(true);
+                cc.find("Canvas/enemy").scaleX *= -1;
+                cc.find("Canvas/enemy").width = 300;
+                cc.find("Canvas/enemy").y = 0;    
+            }
         }
         cc.audioEngine.playMusic(this.battleBgm, true);
-        this.initSkill1();
-        this.initSkill2();
-        this.initSkill3();
-        this.initSkill4();
+        
 
         let enemyParticleEffect2 = cc.find("Canvas/enemy/onLoad").getComponent(cc.ParticleSystem);
         if(this.enemynum == 4){
@@ -105,17 +121,26 @@ export default class NewClass extends cc.Component {
     }
 
     update(dt){
+        if(this.renew){
+            this.renew = false;
+            if(GlobalData.myelf == 0){
+                cc.find("Canvas/skills/skill1/Background/Label").getComponent(cc.Label).string = "魔法攻擊";
+                cc.find("Canvas/skills/skill4/Background/Label").getComponent(cc.Label).string = "懶蛋攻擊";
+            }
+            else{
+                cc.find("Canvas/skills/skill1/Background/Label").getComponent(cc.Label).string = "衝撞";
+            }
+        }
+        if(GlobalData.myelf != this.last_myself){
+            console.log("GlobalData.myelf:", GlobalData.myelf);
+            this.last_myself = GlobalData.myelf;
+            this.renew = true;
+        }
         
         this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
         this.updateUI(dt);
         if(this.enemyLife <= 0 && !this.isWin){
-            // var uid = GlobalData.uid;
-            // const database = firebase.database();
-            // firebase.database().ref('user').child(GlobalData.uid).update({
-            //     myArray: [this.enemynum],
-            // });
             GlobalData.pokewoman.push(this.enemynum);
-            console.log("GlobalData.pokewoman:", GlobalData.pokewoman);
 
 
             this.enemyLife = 0;
@@ -126,12 +151,8 @@ export default class NewClass extends cc.Component {
             GlobalData.exp += 100;
             this.scheduleOnce(function() {
                 cc.director.loadScene("map2", ()=>{
-                    // const nextScene = cc.director.getScene();
                     let enemyNumString = cc.js.formatStr("%d", this.enemynum);
                     GlobalData.nodeToDestroy.push(enemyNumString);
-                    // nextScene["nodeToDestroy"] = enemyNumString;
-                    // //console.log("nextScene[nodeToDestroy]", enemyNumString);
-                    // console.log("nextScene[nodeToDestroy]", nextScene["nodeToDestroy"]);
                 }
                 );
             }, 4);
@@ -154,10 +175,6 @@ export default class NewClass extends cc.Component {
             this.enemyTurn = false;
             this.myTurn = true;
             this.enemyTurnAction();
-            
-            //this.scheduleOnce(function() {
-                //cc.find("Canvas/skill1").getComponent(cc.Button).interactable = this.myTurn;
-            // }, 2);
         }
 
         if(!this.enemyTurn && this.myTurn && this.myLife > 0){
@@ -183,50 +200,10 @@ export default class NewClass extends cc.Component {
         enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) + ('/100');
     }
 
-    initSkill1(){
-        let clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node; 
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill1";
-
-        cc.find("Canvas/skills/skill1").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-
-        
-    }
-
-    initSkill2(){
-        let clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node; 
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill2";
-
-        cc.find("Canvas/skills/skill2").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-    }
-
-    initSkill3(){
-        let clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node; 
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill3";
-
-        cc.find("Canvas/skills/skill3").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-    }
-
-    initSkill4(){
-        let clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node; 
-        clickEventHandler.component = "battle_man";
-        clickEventHandler.handler = "skill4";
-
-        cc.find("Canvas/skills/skill4").getComponent(cc.Button).clickEvents.push(clickEventHandler);
-
-        
-    }
-
     skill1(){
-        //cc.log("skill1");
         let enemyLifeDeduct = cc.callFunc(function(target) {
-            this.enemyLife -= 50;
+            if(GlobalData.myelf == 0) this.enemyLife -= 80;
+            else this.enemyLife -= 20;
         }, this);
 
         let turnSwitch1 = cc.callFunc(function(target) {
@@ -236,7 +213,7 @@ export default class NewClass extends cc.Component {
         let turnSwitch2 = cc.callFunc(function(target) {
             this.enemyTurn = true;
         }, this);
-
+          
         this.node.runAction(cc.sequence(turnSwitch1, cc.moveBy(1, cc.v2(520, 0)), cc.moveBy(1, cc.v2(-520, 0)),enemyLifeDeduct, turnSwitch2))
     }
 
@@ -294,6 +271,7 @@ export default class NewClass extends cc.Component {
         let enemyAnimation = cc.find("Canvas/enemy").getComponent(cc.Animation);
         let enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
         let enemyParticleEffect3 = cc.find("Canvas/enemy/punch").getComponent(cc.ParticleSystem);
+        let enemyParticleEffect4 = cc.find("Canvas/enemy/boom").getComponent(cc.ParticleSystem);
         
         let shakeCamera = cc.callFunc(function(target) {
             const mainCamera = cc.Camera.main;
@@ -327,12 +305,13 @@ export default class NewClass extends cc.Component {
         }else if(this.enemynum == 5){
             enemyAnimation.play("red_dong_move");
         }else if(this.enemynum == 6){
+            enemyAnimation.play("boom");
         }
         let myLifeDeduct = cc.callFunc(function(target) {
             //console.log("enemyNum in mylife deduct:", this.enemynum);
             if(this.enemynum == 4) this.myLife -= 10;
             else if(this.enemynum == 5) this.myLife -= 20;
-            else if(this.enemynum == 6) this.myLife -= 40;
+            else if(this.enemynum == 6) this.myLife -= 45;
         }, this);
 
         let turnSwitch1 = cc.callFunc(function(target) {
@@ -348,27 +327,38 @@ export default class NewClass extends cc.Component {
         let particleAction = cc.callFunc(function(target) {
             if(this.enemynum == 4 )enemyParticleEffect.resetSystem();
             else if(this.enemynum == 5) enemyParticleEffect3.resetSystem();
+            else if(this.enemynum == 6){ 
+                enemyParticleEffect4.resetSystem();
+                cc.find("Canvas/enemy/boom").runAction(cc.moveBy(0.2, cc.v2(-525, 0)));
+                cc.find("Canvas/enemy/boom").x = 17.366;
+            }
         }, this);
 
-        // let particleAction = cc.callFunc(function(target) {
-        //     enemyParticleEffect.stopSystem();
-        // }, this);
-
+        let sound = cc.callFunc(function(target) {
+            if(this.enemynum == 4 ){}//enemyParticleEffect.resetSystem();
+            else if(this.enemynum == 5) {
+                cc.audioEngine.playEffect(this.red_dong_punch, false);
+                console.log("sound");
+            }else if(this.enemynum == 6) {
+                cc.audioEngine.playEffect(this.red_dong_punch, false);
+                console.log("sound");
+            }
+            }, this); 
         
         let moveAction = cc.callFunc(function(target) {
             if(this.enemynum == 4)
-                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera,myLifeDeduct));
+                enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera,myLifeDeduct,turnSwitch2));
             else if(this.enemynum == 5)
-                enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)),myLifeDeduct));
+                enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), sound, shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)),myLifeDeduct,turnSwitch2));
             else if(this.enemynum == 6)
-                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)),myLifeDeduct));
+            enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 20)), sound, shakeCamera2, particleAction, cc.moveBy(0.1, cc.v2(0, -20)),myLifeDeduct,turnSwitch2));
         }, this);
 
         
 
 
         let enemy = cc.find("Canvas/enemy");
-        enemy.runAction(cc.sequence(turnSwitch1, moveAction,  turnSwitch2))
+        enemy.runAction(cc.sequence(turnSwitch1, moveAction))
     }
     
 

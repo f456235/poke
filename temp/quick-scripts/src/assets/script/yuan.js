@@ -34,8 +34,32 @@ var No = /** @class */ (function (_super) {
         return _this;
     }
     No.prototype.onLoad = function () {
+        // 注册键盘事件
+        cc.director.getPhysicsManager().enabled = true;
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
         this.animation = this.getComponent(cc.Animation);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        // cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);        
     };
+    No.prototype.onDestroy = function () {
+        // 移除键盘事件监听
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        // cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    };
+    No.prototype.onKeyDown = function (event) {
+        switch (event.keyCode) {
+            case cc.macro.KEY.space:
+                cc.director.loadScene("map2");
+                break;
+        }
+    };
+    // onKeyUp(event: cc.Event.EventKeyboard) {
+    //     switch(event.keyCode) {
+    //         case cc.macro.KEY.space:
+    //             break;
+    //     }
+    // }
     No.prototype.start = function () {
         this.audioId = cc.audioEngine.playEffect(this.yuan, false);
         cc.audioEngine.setVolume(this.audioId, 1.0); // Set the volume to 1.0 (maximum)

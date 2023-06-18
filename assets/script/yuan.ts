@@ -12,8 +12,36 @@ export default class No extends cc.Component {
     audioId = -1; // Audio ID for the yuan audio clip
 
     onLoad() {
+        // 注册键盘事件
+        cc.director.getPhysicsManager().enabled = true;
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
         this.animation = this.getComponent(cc.Animation);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        // cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);        
     }
+
+    onDestroy() {
+        // 移除键盘事件监听
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        // cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+    }
+
+    onKeyDown(event: cc.Event.EventKeyboard) {
+        switch(event.keyCode) {
+            case cc.macro.KEY.space:
+                cc.director.loadScene("map2");
+                break;
+            
+        }
+    }
+
+    // onKeyUp(event: cc.Event.EventKeyboard) {
+    //     switch(event.keyCode) {
+    //         case cc.macro.KEY.space:
+    //             break;
+    //     }
+    // }
 
     start() {
         this.audioId = cc.audioEngine.playEffect(this.yuan, false);

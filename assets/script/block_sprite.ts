@@ -108,6 +108,7 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[1]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
+            
             this.update_s6(this.bag[1]);
             // this.nm.string = "炎東勇";
             // this.atk_num.string = "100";
