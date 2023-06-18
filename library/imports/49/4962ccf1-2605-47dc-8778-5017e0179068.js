@@ -35,24 +35,34 @@ var NewClass = /** @class */ (function (_super) {
         var database = firebase.database();
         cc.director.getPhysicsManager().enabled = true;
         cc.find('Canvas/select/dong1/dong1_btn').on('click', function () {
+            GlobalData_1.default.pokewoman.push(0);
+            GlobalData_1.default.initializeHPArrays();
             firebase.database().ref('user').child(GlobalData_1.default.uid).update({
                 myArray: [0],
+                curHP: GlobalData_1.default.myPokewomanHP,
+                fullHP: GlobalData_1.default.fullHP,
             });
-            GlobalData_1.default.pokewoman.push(0);
             cc.director.loadScene('main');
         });
         cc.find('Canvas/select/dong2/dong2_btn').on('click', function () {
+            GlobalData_1.default.pokewoman.push(1);
+            console.log(GlobalData_1.default.pokewoman.length);
+            GlobalData_1.default.initializeHPArrays();
             firebase.database().ref('user').child(GlobalData_1.default.uid).update({
                 myArray: [1],
+                curHP: GlobalData_1.default.myPokewomanHP,
+                fullHP: GlobalData_1.default.fullHP,
             });
-            GlobalData_1.default.pokewoman.push(1);
             cc.director.loadScene('main');
         });
         cc.find('Canvas/select/dong3/dong3_btn').on('click', function () {
+            GlobalData_1.default.pokewoman.push(2);
+            GlobalData_1.default.initializeHPArrays();
             firebase.database().ref('user').child(GlobalData_1.default.uid).update({
                 myArray: [2],
+                curHP: GlobalData_1.default.myPokewomanHP,
+                fullHP: GlobalData_1.default.fullHP,
             });
-            GlobalData_1.default.pokewoman.push(2);
             cc.director.loadScene('main');
         });
         // cc.find('Canvas/logout').on('click', () => {

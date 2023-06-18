@@ -58,7 +58,9 @@ var NewClass = /** @class */ (function (_super) {
             firebase.database().ref('user').child(GlobalData_1.default.uid).set({
                 level: GlobalData_1.default.level,
                 myArray: [],
-                exp: GlobalData_1.default.exp
+                exp: GlobalData_1.default.exp,
+                curHP: [],
+                fullHP: [],
             });
             cc.director.loadScene('select');
         })

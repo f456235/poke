@@ -56,6 +56,14 @@ export default class NewClass extends cc.Component {
                 GlobalData.exp = userData.exp;
                 console.log(userData.exp);
             }
+            if(userData && userData.curHP){
+                GlobalData.myPokewomanHP = userData.curHP;
+                console.log(GlobalData.myPokewomanHP);
+            }
+            if(userData && userData.fullHP){
+                GlobalData.fullHP = userData.fullHP;
+                console.log(GlobalData.fullHP);
+            }
             else {
                 console.log("myArray not found in user data");
             }

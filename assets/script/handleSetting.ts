@@ -66,6 +66,20 @@ export default class NewClass extends cc.Component {
             .catch((error)=>{
                 console.log('error saving exp',error);
             });
+        userRef.child('curHP').set(GlobalData.myPokewomanHP)
+            .then(() =>{
+                console.log('exp saved successfully');
+            })
+            .catch((error)=>{
+                console.log('error saving exp',error);
+            });
+        userRef.child('fullHP').set(GlobalData.fullHP)
+            .then(() =>{
+                console.log('exp saved successfully');
+            })
+            .catch((error)=>{
+                console.log('error saving exp',error);
+            });
     }
     quitGame(){
         GlobalData.uid = "";

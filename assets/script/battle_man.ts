@@ -51,6 +51,12 @@ export default class NewClass extends cc.Component {
     @property([cc.SpriteFrame])
     sprite: cc.SpriteFrame[] = [];
 
+    @property(cc.Label)
+    myLVlabel: cc.Label = null;
+
+    @property(cc.Label)
+    enemyLVlabel: cc.Label = null;
+
     bag: number[] = GlobalData.pokewoman;
 
     mylife: number =GlobalData.mylife;
@@ -62,6 +68,8 @@ export default class NewClass extends cc.Component {
     private enemyTurn: boolean = false;
     private isLose: boolean = false;
     private enemynum = 0;
+    private enemyAttack : number;
+    private enemyLV : number ;  
     private renew: boolean = true;
     private last_myself: number = -1;
     public skill1Button: cc.Button = null;
@@ -86,6 +94,8 @@ export default class NewClass extends cc.Component {
         this.skill2Button.node.on('click', this.skill2, this);
         this.skill3Button.node.on('click', this.skill3, this);
         this.skill4Button.node.on('click', this.skill4, this);
+        this.myLVlabel.string = 'Lv. ' + GlobalData.level.toString();
+        this.myLife = GlobalData.myPokewomanHP[GlobalData.myelf];
         
     }
 
@@ -97,12 +107,18 @@ export default class NewClass extends cc.Component {
             if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy1;
             }
+            this.enemyLife = GlobalData.enemyHPbyID[this.enemynum-1];
+            this.enemyAttack = GlobalData.enemyAttackById[this.enemynum-1];
+            this.enemyLV = GlobalData.enemyLevelById[this.enemynum-1];
             
         }else if(this.enemynum == 5){
             if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy2;
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
+            this.enemyLife = GlobalData.enemyHPbyID[this.enemynum-1];
+            this.enemyAttack = GlobalData.enemyAttackById[this.enemynum-1];
+            this.enemyLV = GlobalData.enemyLevelById[this.enemynum-1];
         }else if(this.enemynum == 6){
             if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy3;
@@ -111,12 +127,18 @@ export default class NewClass extends cc.Component {
                 cc.find("Canvas/enemy").width = 300;
                 cc.find("Canvas/enemy").y = 0;    
             }
+            this.enemyLife = GlobalData.enemyHPbyID[this.enemynum-1];
+            this.enemyAttack = GlobalData.enemyAttackById[this.enemynum-1];
+            this.enemyLV = GlobalData.enemyLevelById[this.enemynum-1];
         }
         else if(this.enemynum == 7){
             if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy7;
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
+            this.enemyLife = GlobalData.enemyHPbyID[this.enemynum-1];
+            this.enemyAttack = GlobalData.enemyAttackById[this.enemynum-1];
+            this.enemyLV = GlobalData.enemyLevelById[this.enemynum-1];
         }
         cc.audioEngine.playMusic(this.battleBgm, true);
         
@@ -151,7 +173,9 @@ export default class NewClass extends cc.Component {
         if(this.enemyLife <= 0 && !this.isWin){
             GlobalData.pokewoman.push(this.enemynum);
 
-
+            GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[GlobalData.pokewoman.length-1]] + 
+            GlobalData.level*GlobalData.pokewomanHPscale[GlobalData.pokewoman[GlobalData.pokewoman.length-1]])
+            GlobalData.fullHP[GlobalData.pokewoman.length-1] = GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1];
             this.enemyLife = 0;
             this.isWin = true;
             this.enemyHP.progress = 0;
@@ -167,8 +191,8 @@ export default class NewClass extends cc.Component {
             }, 4);
         }
 
-        if(this.myLife<=0 && !this.isLose){
-            this.myLife = 0;
+        if(GlobalData.myPokewomanHP[GlobalData.myelf]<=0 && !this.isLose){
+            GlobalData.myPokewomanHP[GlobalData.myelf] = 0;
             this.isLose = true;
             this.myTurn = false;
             this.enemyTurn = false;
@@ -200,14 +224,17 @@ export default class NewClass extends cc.Component {
     }
 
     updateUI(dt){
-        // console.log(this.enemynum);
-        this.myHP.progress = this.myLife / 100;
-        this.enemyHP.progress = this.enemyLife / 100;
+        //console.log(GlobalData.myelf);
+        console.log(GlobalData.myPokewomanHP);
+        console.log(GlobalData.fullHP);
+        this.myHP.progress = GlobalData.myPokewomanHP[GlobalData.myelf] / GlobalData.fullHP[GlobalData.myelf];
+        this.enemyHP.progress = this.enemyLife / GlobalData.enemyHPbyID[this.enemynum-1];
         const myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
         const enemyLifeLabel = cc.find("Canvas/enemyLife").getComponent(cc.Label);
-      
-        myLifeLabel.string = ((Array(7).join("0") + this.myLife.toString()).slice(-3)) + ('/100');
-        enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) + ('/100');
+        this.enemyLVlabel.string = 'Lv. '+this.enemyLV.toString();
+        this.myLVlabel.string = 'Lv. '+ GlobalData.level.toString();
+        myLifeLabel.string = ((Array(7).join("0") + GlobalData.myPokewomanHP[GlobalData.myelf].toString()).slice(-3)) + '/' + GlobalData.fullHP[GlobalData.myelf].toString();
+        enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) +'/'+ GlobalData.enemyHPbyID[this.enemynum-1].toString();
     }
 
     skill1(){
@@ -322,10 +349,12 @@ export default class NewClass extends cc.Component {
         }
         let myLifeDeduct = cc.callFunc(function(target) {
             console.log("enemyNum in mylife deduct:", this.enemynum);
-            if(this.enemynum == 4) this.myLife -= 10;
-            else if(this.enemynum == 5) this.myLife -= 20;
-            else if(this.enemynum == 6) this.myLife -= 45;
-            else if(this.enemynum == 7) this.myLife -= 10;
+            const enhance = (this.enemyLV * 0.75 + this.enemyAttack) / this.enemyAttack
+            if(this.enemynum == 4) GlobalData.myPokewomanHP[GlobalData.myelf] -= (10 * enhance);
+            else if(this.enemynum == 5) GlobalData.myPokewomanHP[GlobalData.myelf] -= (20 * enhance);
+            else if(this.enemynum == 6) GlobalData.myPokewomanHP[GlobalData.myelf] -= (45 * enhance);
+            else if(this.enemynum == 7) GlobalData.myPokewomanHP[GlobalData.myelf] -= (10 * enhance);
+            GlobalData.myPokewomanHP[GlobalData.myelf] = Math.round(GlobalData.myPokewomanHP[GlobalData.myelf]);
         }, this);
 
         let turnSwitch1 = cc.callFunc(function(target) {

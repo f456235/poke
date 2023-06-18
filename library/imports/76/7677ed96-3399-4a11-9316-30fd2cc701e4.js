@@ -77,6 +77,20 @@ var NewClass = /** @class */ (function (_super) {
             .catch(function (error) {
             console.log('error saving exp', error);
         });
+        userRef.child('curHP').set(GlobalData_1.default.myPokewomanHP)
+            .then(function () {
+            console.log('exp saved successfully');
+        })
+            .catch(function (error) {
+            console.log('error saving exp', error);
+        });
+        userRef.child('fullHP').set(GlobalData_1.default.fullHP)
+            .then(function () {
+            console.log('exp saved successfully');
+        })
+            .catch(function (error) {
+            console.log('error saving exp', error);
+        });
     };
     NewClass.prototype.quitGame = function () {
         GlobalData_1.default.uid = "";

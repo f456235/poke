@@ -73,6 +73,14 @@ var NewClass = /** @class */ (function (_super) {
                     GlobalData_1.default.exp = userData.exp;
                     console.log(userData.exp);
                 }
+                if (userData && userData.curHP) {
+                    GlobalData_1.default.myPokewomanHP = userData.curHP;
+                    console.log(GlobalData_1.default.myPokewomanHP);
+                }
+                if (userData && userData.fullHP) {
+                    GlobalData_1.default.fullHP = userData.fullHP;
+                    console.log(GlobalData_1.default.fullHP);
+                }
                 else {
                     console.log("myArray not found in user data");
                 }

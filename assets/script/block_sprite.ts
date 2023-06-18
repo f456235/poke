@@ -16,6 +16,9 @@ export default class NewClass extends cc.Component {
     @property
     index: number = 0;
 
+    @property(cc.ProgressBar)
+    healthBar: cc.ProgressBar = null;
+
     /* get a return array from other script */
     // bag: number[] = [3, 4, 1, 2, 5, 0];
     bag: number[] =GlobalData.pokewoman;
@@ -100,7 +103,7 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[0]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
-            this.update_s6(this.bag[0]);
+            this.update_s6(0);
             // this.nm.string = "岩東勇";
             // this.atk_num.string = "100";
         });
@@ -108,7 +111,7 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[1]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
-            this.update_s6(this.bag[1]);
+            this.update_s6(1);
             // this.nm.string = "炎東勇";
             // this.atk_num.string = "100";
         });
@@ -116,7 +119,7 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[2]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
-            this.update_s6(this.bag[2]);
+            this.update_s6(2);
             // this.nm.string = "嚴冬勇";
             // this.atk_num.string = "100";
         });
@@ -124,19 +127,19 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[3]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
-            this.update_s6(this.bag[3]);
+            this.update_s6(3);
         });
         cc.find('Canvas/block/Sprite4').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[4]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
-            this.update_s6(this.bag[4]);
+            this.update_s6(4);
         });
         cc.find('Canvas/block/Sprite5').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[5]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
-            this.update_s6(this.bag[5]);
+            this.update_s6(5);
         });
     }
     update_s6(a)  
@@ -146,36 +149,47 @@ export default class NewClass extends cc.Component {
         this.node.getChildByName('atk_num').active = true;
         this.node.getChildByName('hp').active = true;
         this.node.getChildByName('hp_num').active = true;
+        this.healthBar.node.active = true;
         console.log("hi:",a);
         if(a==0)
         {
             this.nm.string = "岩東勇";
-            this.atk_num.string = "20";
-            this.hp_num.string = "100";
+            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
+            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData.fullHP[a].toString();
         }
         else if(a==1)
         {
             this.nm.string = "炎東勇";
-            this.atk_num.string = "100";
-            this.hp_num.string = "20";
+            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
+            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData.fullHP[a].toString();
         }
         else if(a==2)
         {
             this.nm.string = "嚴冬勇";
-            this.atk_num.string = "50";
-            this.hp_num.string = "50";
+            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
+            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData.fullHP[a].toString();
         }
         else if(a==3)
         {
             this.nm.string = "魔關羽";
-            this.atk_num.string = "300";
-            this.hp_num.string = "10";
+            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
+            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData.fullHP[a].toString();
         }
         else if(a==7)
         {
             this.nm.string = "fishKing";
-            this.atk_num.string = "10";
-            this.hp_num.string = "10";
+            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
+            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData.fullHP[a].toString();
+        }else{
+            this.nm.string = "Killer Queen";
+            this.healthBar.progress = GlobalData.myPokewomanHP[a]/GlobalData.fullHP[a];
+            this.atk_num.string = GlobalData.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData.fullHP[a].toString();
         }
         // console.log(this.nm.string);
     }

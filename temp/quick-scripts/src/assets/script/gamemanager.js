@@ -43,6 +43,7 @@ var GameManager = /** @class */ (function (_super) {
             this.scheduleOnce(function () {
                 cc.find('Canvas/Main Camera/level up').active = false;
             }, 1.2);
+            GlobalData_1.default.initializeHPArrays();
         }
     };
     GameManager = __decorate([

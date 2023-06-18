@@ -1006,7 +1006,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 500,
       "height": 40
     },
     "_anchorPoint": {
@@ -1377,7 +1377,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 500,
       "height": 40
     },
     "_anchorPoint": {
@@ -1748,7 +1748,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 500,
       "height": 40
     },
     "_anchorPoint": {
@@ -2119,7 +2119,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
+      "width": 500,
       "height": 40
     },
     "_anchorPoint": {
@@ -3770,7 +3770,7 @@
       "__uuid__": "91d6e170-6767-4576-9e8a-6c81776fef2d"
     },
     "_texture": null,
-    "_stopped": false,
+    "_stopped": true,
     "playOnLoad": false,
     "autoRemoveOnFinish": false,
     "totalParticles": 50,
@@ -4100,7 +4100,7 @@
       "__uuid__": "5f5e3318-ba66-41da-a6f9-4fc1d3667830"
     },
     "_texture": null,
-    "_stopped": false,
+    "_stopped": true,
     "playOnLoad": false,
     "autoRemoveOnFinish": false,
     "totalParticles": 300,

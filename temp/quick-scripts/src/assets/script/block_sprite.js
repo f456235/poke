@@ -33,6 +33,7 @@ var NewClass = /** @class */ (function (_super) {
         _this.text = 'hello';
         _this.sprite = [];
         _this.index = 0;
+        _this.healthBar = null;
         /* get a return array from other script */
         // bag: number[] = [3, 4, 1, 2, 5, 0];
         _this.bag = GlobalData_1.default.pokewoman;
@@ -110,7 +111,7 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[0]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
-            _this.update_s6(_this.bag[0]);
+            _this.update_s6(0);
             // this.nm.string = "岩東勇";
             // this.atk_num.string = "100";
         });
@@ -118,7 +119,7 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[1]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
-            _this.update_s6(_this.bag[1]);
+            _this.update_s6(1);
             // this.nm.string = "炎東勇";
             // this.atk_num.string = "100";
         });
@@ -126,7 +127,7 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[2]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
-            _this.update_s6(_this.bag[2]);
+            _this.update_s6(2);
             // this.nm.string = "嚴冬勇";
             // this.atk_num.string = "100";
         });
@@ -134,19 +135,19 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[3]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
-            _this.update_s6(_this.bag[3]);
+            _this.update_s6(3);
         });
         cc.find('Canvas/block/Sprite4').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[4]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
-            _this.update_s6(_this.bag[4]);
+            _this.update_s6(4);
         });
         cc.find('Canvas/block/Sprite5').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[5]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
-            _this.update_s6(_this.bag[5]);
+            _this.update_s6(5);
         });
     };
     NewClass.prototype.update_s6 = function (a) {
@@ -155,31 +156,43 @@ var NewClass = /** @class */ (function (_super) {
         this.node.getChildByName('atk_num').active = true;
         this.node.getChildByName('hp').active = true;
         this.node.getChildByName('hp_num').active = true;
+        this.healthBar.node.active = true;
         console.log("hi:", a);
         if (a == 0) {
             this.nm.string = "岩東勇";
-            this.atk_num.string = "20";
-            this.hp_num.string = "100";
+            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
+            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
         }
         else if (a == 1) {
             this.nm.string = "炎東勇";
-            this.atk_num.string = "100";
-            this.hp_num.string = "20";
+            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
+            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
         }
         else if (a == 2) {
             this.nm.string = "嚴冬勇";
-            this.atk_num.string = "50";
-            this.hp_num.string = "50";
+            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
+            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
         }
         else if (a == 3) {
             this.nm.string = "魔關羽";
-            this.atk_num.string = "300";
-            this.hp_num.string = "10";
+            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
+            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
         }
         else if (a == 7) {
             this.nm.string = "fishKing";
-            this.atk_num.string = "10";
-            this.hp_num.string = "10";
+            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
+            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
+        }
+        else {
+            this.nm.string = "Killer Queen";
+            this.healthBar.progress = GlobalData_1.default.myPokewomanHP[a] / GlobalData_1.default.fullHP[a];
+            this.atk_num.string = GlobalData_1.default.pokewomanAttack[a].toString();
+            this.hp_num.string = GlobalData_1.default.fullHP[a].toString();
         }
         // console.log(this.nm.string);
     };
@@ -198,6 +211,9 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property
     ], NewClass.prototype, "index", void 0);
+    __decorate([
+        property(cc.ProgressBar)
+    ], NewClass.prototype, "healthBar", void 0);
     __decorate([
         property
     ], NewClass.prototype, "num", void 0);

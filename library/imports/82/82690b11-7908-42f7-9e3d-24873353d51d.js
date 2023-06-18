@@ -13,6 +13,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var GlobalData = /** @class */ (function () {
     function GlobalData() {
     }
+    GlobalData.initializeHPArrays = function () {
+        //this.hp = 100 + 10 * this.level;
+        console.log(this.pokewoman.length);
+        for (var i = 0; i < 6; i++) {
+            if (i < this.pokewoman.length) {
+                this.myPokewomanHP[i] = (this.pokewomanBaseHP[this.pokewoman[i]] +
+                    this.level * this.pokewomanHPscale[this.pokewoman[i]]);
+                this.fullHP[i] = this.myPokewomanHP[i];
+            }
+            else {
+                this.myPokewomanHP[i] = 0;
+                this.fullHP[i] = 0;
+            }
+        }
+    };
+    GlobalData.updateFullHP = function () {
+        for (var i = 0; i < this.pokewoman.length; i++) {
+            this.fullHP[i] = (this.pokewomanBaseHP[this.pokewoman[i]] +
+                this.level * this.pokewomanHPscale[this.pokewoman[i]]);
+        }
+    };
     GlobalData.uid = "";
     GlobalData.pokewoman = [];
     GlobalData.level = 1;
@@ -30,6 +51,15 @@ var GlobalData = /** @class */ (function () {
     GlobalData.mylife = 0;
     GlobalData.exp = 0;
     GlobalData.level_exp = [50, 120, 190, 290, 390, 500, 610, 670, 800, 1000];
+    GlobalData.enemyHPbyID = [50, 54, 63, 65, 70, 59, 60];
+    GlobalData.enemyAttackById = [21, 25, 21, 23, 18, 25, 24];
+    GlobalData.enemyLevelById = [15, 15, 20, 30, 20, 23, 26];
+    GlobalData.pokewomanAttack = [10, 15, 20, 23, 22, 18, 12, 29, 30, 24, 15, 31, 25, 31, 9, 8];
+    GlobalData.pokewomanBaseHP = [80, 70, 60, 69, 78, 97, 62, 88, 73, 74, 81, 72, 60, 90, 50, 40];
+    GlobalData.pokewomanHPscale = [9, 10, 11, 9, 10, 8, 13, 9, 14, 10, 10, 11, 13, 14, 9];
+    GlobalData.hp = 100;
+    GlobalData.myPokewomanHP = [];
+    GlobalData.fullHP = [];
     return GlobalData;
 }());
 exports.default = GlobalData;

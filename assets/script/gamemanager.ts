@@ -19,6 +19,7 @@ export default class GameManager extends cc.Component {
             this.scheduleOnce(()=>{
                 cc.find('Canvas/Main Camera/level up').active = false;
             },1.2)
+            GlobalData.initializeHPArrays();
         }
     }
 

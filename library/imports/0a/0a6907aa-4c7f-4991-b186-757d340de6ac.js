@@ -45,6 +45,8 @@ var NewClass = /** @class */ (function (_super) {
         _this.enemyHP = null;
         _this.man = null;
         _this.sprite = [];
+        _this.myLVlabel = null;
+        _this.enemyLVlabel = null;
         _this.bag = GlobalData_1.default.pokewoman;
         _this.mylife = GlobalData_1.default.mylife;
         _this.myLife = 100;
@@ -76,6 +78,8 @@ var NewClass = /** @class */ (function (_super) {
         this.skill2Button.node.on('click', this.skill2, this);
         this.skill3Button.node.on('click', this.skill3, this);
         this.skill4Button.node.on('click', this.skill4, this);
+        this.myLVlabel.string = 'Lv. ' + GlobalData_1.default.level.toString();
+        this.myLife = GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf];
     };
     NewClass.prototype.start = function () {
         this.last_myself = GlobalData_1.default.myelf;
@@ -84,12 +88,18 @@ var NewClass = /** @class */ (function (_super) {
             if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy1;
             }
+            this.enemyLife = GlobalData_1.default.enemyHPbyID[this.enemynum - 1];
+            this.enemyAttack = GlobalData_1.default.enemyAttackById[this.enemynum - 1];
+            this.enemyLV = GlobalData_1.default.enemyLevelById[this.enemynum - 1];
         }
         else if (this.enemynum == 5) {
             if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy2;
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
+            this.enemyLife = GlobalData_1.default.enemyHPbyID[this.enemynum - 1];
+            this.enemyAttack = GlobalData_1.default.enemyAttackById[this.enemynum - 1];
+            this.enemyLV = GlobalData_1.default.enemyLevelById[this.enemynum - 1];
         }
         else if (this.enemynum == 6) {
             if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
@@ -99,12 +109,18 @@ var NewClass = /** @class */ (function (_super) {
                 cc.find("Canvas/enemy").width = 300;
                 cc.find("Canvas/enemy").y = 0;
             }
+            this.enemyLife = GlobalData_1.default.enemyHPbyID[this.enemynum - 1];
+            this.enemyAttack = GlobalData_1.default.enemyAttackById[this.enemynum - 1];
+            this.enemyLV = GlobalData_1.default.enemyLevelById[this.enemynum - 1];
         }
         else if (this.enemynum == 7) {
             if (cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null) {
                 cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy7;
                 cc.find("Canvas/enemy").color = cc.Color.RED;
             }
+            this.enemyLife = GlobalData_1.default.enemyHPbyID[this.enemynum - 1];
+            this.enemyAttack = GlobalData_1.default.enemyAttackById[this.enemynum - 1];
+            this.enemyLV = GlobalData_1.default.enemyLevelById[this.enemynum - 1];
         }
         cc.audioEngine.playMusic(this.battleBgm, true);
         var enemyParticleEffect2 = cc.find("Canvas/enemy/onLoad").getComponent(cc.ParticleSystem);
@@ -134,6 +150,9 @@ var NewClass = /** @class */ (function (_super) {
         this.updateUI(dt);
         if (this.enemyLife <= 0 && !this.isWin) {
             GlobalData_1.default.pokewoman.push(this.enemynum);
+            GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]] +
+                GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]]);
+            GlobalData_1.default.fullHP[GlobalData_1.default.pokewoman.length - 1] = GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1];
             this.enemyLife = 0;
             this.isWin = true;
             this.enemyHP.progress = 0;
@@ -148,8 +167,8 @@ var NewClass = /** @class */ (function (_super) {
                 });
             }, 4);
         }
-        if (this.myLife <= 0 && !this.isLose) {
-            this.myLife = 0;
+        if (GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] <= 0 && !this.isLose) {
+            GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] = 0;
             this.isLose = true;
             this.myTurn = false;
             this.enemyTurn = false;
@@ -177,13 +196,17 @@ var NewClass = /** @class */ (function (_super) {
         cc.audioEngine.setEffectsVolume(GlobalData_1.default.volume);
     };
     NewClass.prototype.updateUI = function (dt) {
-        // console.log(this.enemynum);
-        this.myHP.progress = this.myLife / 100;
-        this.enemyHP.progress = this.enemyLife / 100;
+        //console.log(GlobalData.myelf);
+        console.log(GlobalData_1.default.myPokewomanHP);
+        console.log(GlobalData_1.default.fullHP);
+        this.myHP.progress = GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] / GlobalData_1.default.fullHP[GlobalData_1.default.myelf];
+        this.enemyHP.progress = this.enemyLife / GlobalData_1.default.enemyHPbyID[this.enemynum - 1];
         var myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
         var enemyLifeLabel = cc.find("Canvas/enemyLife").getComponent(cc.Label);
-        myLifeLabel.string = ((Array(7).join("0") + this.myLife.toString()).slice(-3)) + ('/100');
-        enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) + ('/100');
+        this.enemyLVlabel.string = 'Lv. ' + this.enemyLV.toString();
+        this.myLVlabel.string = 'Lv. ' + GlobalData_1.default.level.toString();
+        myLifeLabel.string = ((Array(7).join("0") + GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf].toString()).slice(-3)) + '/' + GlobalData_1.default.fullHP[GlobalData_1.default.myelf].toString();
+        enemyLifeLabel.string = ((Array(7).join("0") + this.enemyLife.toString()).slice(-3)) + '/' + GlobalData_1.default.enemyHPbyID[this.enemynum - 1].toString();
     };
     NewClass.prototype.skill1 = function () {
         var enemyLifeDeduct = cc.callFunc(function (target) {
@@ -273,14 +296,16 @@ var NewClass = /** @class */ (function (_super) {
         }
         var myLifeDeduct = cc.callFunc(function (target) {
             console.log("enemyNum in mylife deduct:", this.enemynum);
+            var enhance = (this.enemyLV * 0.75 + this.enemyAttack) / this.enemyAttack;
             if (this.enemynum == 4)
-                this.myLife -= 10;
+                GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] -= (10 * enhance);
             else if (this.enemynum == 5)
-                this.myLife -= 20;
+                GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] -= (20 * enhance);
             else if (this.enemynum == 6)
-                this.myLife -= 45;
+                GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] -= (45 * enhance);
             else if (this.enemynum == 7)
-                this.myLife -= 10;
+                GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] -= (10 * enhance);
+            GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] = Math.round(GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf]);
         }, this);
         var turnSwitch1 = cc.callFunc(function (target) {
             this.myTurn = false;
@@ -371,6 +396,12 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property([cc.SpriteFrame])
     ], NewClass.prototype, "sprite", void 0);
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "myLVlabel", void 0);
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "enemyLVlabel", void 0);
     NewClass = __decorate([
         ccclass
     ], NewClass);
