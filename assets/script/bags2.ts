@@ -30,13 +30,14 @@ export default class NewClass extends cc.Component {
     atk_num: cc.Label = null;
     @property(cc.Label)
     hp_num: cc.Label = null;
-
+    @property(cc.Node)
+    runAway: cc.Node = null;
     @property
     nowchoose: number = 0;
 
     onLoad () {
         cc.director.getPhysicsManager().enabled = true;
-
+        this.runAway.active = false;
         var uid = GlobalData.uid;  
         firebase.database().ref(uid + 'pokewoman').on('value', snapshot => {
             this.num = snapshot.val();
@@ -74,10 +75,12 @@ export default class NewClass extends cc.Component {
             GlobalData.myelf = this.nowchoose;
             cc.find('Canvas/bags2').active = false;
             cc.find('Canvas/skills').active = true;
+            this.runAway.active = true;
         });
         cc.find('Canvas/bags2/cancel').on('click', () => {
             cc.find('Canvas/bags2').active = false;
             cc.find('Canvas/skills').active = true;
+            this.runAway.active = true;
         });
     }
     update(dt) {

@@ -51,15 +51,25 @@ var NewClass = /** @class */ (function (_super) {
     };
     NewClass.prototype.handle = function () {
         if (this.code == 'tk888') {
-            GlobalData_1.default.pokewoman.push(3);
-            cc.director.loadScene('map2');
+            if (GlobalData_1.default.pokewoman.length < 6) {
+                GlobalData_1.default.pokewoman.push(3);
+                GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]] +
+                    GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]]);
+                GlobalData_1.default.fullHP[GlobalData_1.default.pokewoman.length - 1] = GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1];
+            }
+            else {
+                GlobalData_1.default.toCapture = true;
+                GlobalData_1.default.toCaptureID = 3;
+                cc.director.loadScene('bag');
+            }
+            cc.director.loadScene(GlobalData_1.default.map);
         }
         else {
             cc.error('wrong code');
         }
     };
     NewClass.prototype.nope = function () {
-        cc.director.loadScene('map2');
+        cc.director.loadScene(GlobalData_1.default.map);
     };
     NewClass.prototype.update = function (dt) {
         this.code = cc.find('Canvas/e1/label').getComponent(cc.Label).string;

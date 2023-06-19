@@ -91,12 +91,26 @@ var NewClass = /** @class */ (function (_super) {
             .catch(function (error) {
             console.log('error saving exp', error);
         });
+        userRef.child('win').set(GlobalData_1.default.winNum)
+            .then(function () {
+            console.log('winNum saved successfully');
+        })
+            .catch(function (error) {
+            console.log('error saving exp', error);
+        });
     };
     NewClass.prototype.quitGame = function () {
         GlobalData_1.default.uid = "";
         var auth = firebase.auth();
         auth.signOut().then(function () {
             // User signed out successfully
+            cc.audioEngine.stopMusic();
+            GlobalData_1.default.nodeToDestroy = [];
+            GlobalData_1.default.isEnenmyBoss2 = false;
+            GlobalData_1.default.isBoss1 = false;
+            GlobalData_1.default.isEnenmyMagic = false;
+            GlobalData_1.default.isEnenmyRed = false;
+            GlobalData_1.default.isEnenmyMagic = false;
             cc.director.loadScene('login');
         }).catch(function (error) {
             // An error occurred while signing out
@@ -104,7 +118,7 @@ var NewClass = /** @class */ (function (_super) {
         });
     };
     NewClass.prototype.backToMap = function () {
-        cc.director.loadScene('map2');
+        cc.director.loadScene(GlobalData_1.default.map);
     };
     NewClass.prototype.start = function () {
     };

@@ -22,6 +22,7 @@ export default class NewClass extends cc.Component {
     public password:string = null;
     public login:cc.Button = null;
     public toRegister:cc.Button = null;
+    public toLeaderBoard:cc.Button = null;
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -29,6 +30,8 @@ export default class NewClass extends cc.Component {
         this.login.node.on('click',this.handleLogin,this);
         this.toRegister = cc.find('register').getComponent(cc.Button);
         this.toRegister.node.on('click',this.toRegisterPage,this);
+        this.toLeaderBoard = cc.find('leaderboard').getComponent(cc.Button);
+        this.toLeaderBoard.node.on('click',this.toLeaderBoardPage,this);
     }
 
     handleLogin(){
@@ -64,6 +67,7 @@ export default class NewClass extends cc.Component {
                 GlobalData.fullHP = userData.fullHP;
                 console.log(GlobalData.fullHP);
             }
+            
             else {
                 console.log("myArray not found in user data");
             }
@@ -79,6 +83,9 @@ export default class NewClass extends cc.Component {
 
     toRegisterPage(){
         cc.director.loadScene('register');
+    }
+    toLeaderBoardPage(){
+        cc.director.loadScene('leaderboard');
     }
     update (dt) {
         this.email = cc.find('account/label').getComponent(cc.Label).string;

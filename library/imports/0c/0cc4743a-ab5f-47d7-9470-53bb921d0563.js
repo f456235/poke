@@ -41,12 +41,14 @@ var NewClass = /** @class */ (function (_super) {
         _this.nm = null;
         _this.atk_num = null;
         _this.hp_num = null;
+        _this.runAway = null;
         _this.nowchoose = 0;
         return _this;
     }
     NewClass.prototype.onLoad = function () {
         var _this = this;
         cc.director.getPhysicsManager().enabled = true;
+        this.runAway.active = false;
         var uid = GlobalData_1.default.uid;
         firebase.database().ref(uid + 'pokewoman').on('value', function (snapshot) {
             _this.num = snapshot.val();
@@ -83,10 +85,12 @@ var NewClass = /** @class */ (function (_super) {
             GlobalData_1.default.myelf = _this.nowchoose;
             cc.find('Canvas/bags2').active = false;
             cc.find('Canvas/skills').active = true;
+            _this.runAway.active = true;
         });
         cc.find('Canvas/bags2/cancel').on('click', function () {
             cc.find('Canvas/bags2').active = false;
             cc.find('Canvas/skills').active = true;
+            _this.runAway.active = true;
         });
     };
     NewClass.prototype.update = function (dt) {
@@ -125,6 +129,9 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property(cc.Label)
     ], NewClass.prototype, "hp_num", void 0);
+    __decorate([
+        property(cc.Node)
+    ], NewClass.prototype, "runAway", void 0);
     __decorate([
         property
     ], NewClass.prototype, "nowchoose", void 0);

@@ -19,6 +19,18 @@ export default class NewClass extends cc.Component {
     @property(cc.ProgressBar)
     healthBar: cc.ProgressBar = null;
 
+
+    @property(cc.Button)
+    acceptButton: cc.Button = null;
+
+    @property(cc.Button)
+    cancelButton: cc.Button = null;
+
+    @property(cc.Label)
+    informText: cc.Label = null;
+
+    @property(cc.Node)
+    inform: cc.Node = null;
     /* get a return array from other script */
     // bag: number[] = [3, 4, 1, 2, 5, 0];
     bag: number[] =GlobalData.pokewoman;
@@ -103,6 +115,22 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[0]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
+            if(GlobalData.toCapture == true){
+                
+                this.inform.active = true;
+                this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[0]]+"放生嗎?";
+                this.acceptButton.node.on('click', () => {
+                    GlobalData.pokewoman[0] = GlobalData.toCaptureID;
+                    this.node.getChildByName('Sprite0').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    GlobalData.toCapture = false;
+                    this.inform.active = false;
+                    GlobalData.myPokewomanHP[0] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[0]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[0]]);
+                    GlobalData.fullHP[0] = GlobalData.myPokewomanHP[0];
+                });
+                this.cancelButton.node.on('click', () => {
+                    this.inform.active = false;
+                });
+            }
             this.update_s6(0);
             // this.nm.string = "岩東勇";
             // this.atk_num.string = "100";
@@ -111,6 +139,21 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[1]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
+            if(GlobalData.toCapture == true){
+                this.inform.active = true;
+                this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[1]]+"放生嗎?";
+                this.acceptButton.node.on('click', () => {
+                    GlobalData.pokewoman[1] = GlobalData.toCaptureID;
+                    this.node.getChildByName('Sprite1').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    GlobalData.toCapture = false;
+                    this.inform.active = false;
+                    GlobalData.myPokewomanHP[1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[1]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[1]]);
+                    GlobalData.fullHP[1] = GlobalData.myPokewomanHP[1];
+                });
+                this.cancelButton.node.on('click', () => {
+                    this.inform.active = false;
+                });
+            }
             this.update_s6(1);
             // this.nm.string = "炎東勇";
             // this.atk_num.string = "100";
@@ -119,6 +162,21 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[2]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
+            if(GlobalData.toCapture == true){
+                this.inform.active = true;
+                this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[2]]+"放生嗎?";
+                this.acceptButton.node.on('click', () => {
+                    GlobalData.pokewoman[2] = GlobalData.toCaptureID;
+                    this.node.getChildByName('Sprite2').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    GlobalData.toCapture = false;
+                    this.inform.active = false;
+                    GlobalData.myPokewomanHP[2] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[2]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[2]]);
+                    GlobalData.fullHP[2] = GlobalData.myPokewomanHP[2];
+                });
+                this.cancelButton.node.on('click', () => {
+                    this.inform.active = false;
+                });
+            }
             this.update_s6(2);
             // this.nm.string = "嚴冬勇";
             // this.atk_num.string = "100";
@@ -127,18 +185,66 @@ export default class NewClass extends cc.Component {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[3]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
+            if(GlobalData.toCapture == true){
+                
+                this.inform.active = true;
+                this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[3]]+"放生嗎?";
+                this.acceptButton.node.on('click', () => {
+                    GlobalData.pokewoman[3] = GlobalData.toCaptureID;
+                    this.node.getChildByName('Sprite3').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    GlobalData.toCapture = false;
+                    this.inform.active = false;
+                    GlobalData.myPokewomanHP[3] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[3]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[3]]);
+                    GlobalData.fullHP[3] = GlobalData.myPokewomanHP[3];
+                });
+                this.cancelButton.node.on('click', () => {
+                    this.inform.active = false;
+                });
+            }
             this.update_s6(3);
         });
         cc.find('Canvas/block/Sprite4').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[4]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
+            if(GlobalData.toCapture == true){
+                
+                this.inform.active = true;
+                this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[4]]+"放生嗎?";
+                this.acceptButton.node.on('click', () => {
+                    GlobalData.pokewoman[4] = GlobalData.toCaptureID;
+                    this.node.getChildByName('Sprite4').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    GlobalData.toCapture = false;
+                    this.inform.active = false;
+                    GlobalData.myPokewomanHP[4] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[4]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[4]]);
+                    GlobalData.fullHP[4] = GlobalData.myPokewomanHP[4];
+                });
+                this.cancelButton.node.on('click', () => {
+                    this.inform.active = false;
+                });
+            }
             this.update_s6(4);
         });
         cc.find('Canvas/block/Sprite5').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[5]];
             this.node.getChildByName('Sprite6').active = true;
             this.node.getChildByName('Sprite6').scale = 0.1;
+            if(GlobalData.toCapture == true){
+                
+                this.inform.active = true;
+                this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[5]]+"放生嗎?";
+                this.acceptButton.node.on('click', () => {
+                    GlobalData.pokewoman[5] = GlobalData.toCaptureID;
+                    this.node.getChildByName('Sprite5').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    GlobalData.toCapture = false;
+                    this.inform.active = false;
+                    GlobalData.myPokewomanHP[5] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[5]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[5]]);
+                    GlobalData.fullHP[5] = GlobalData.myPokewomanHP[5];
+                });
+                this.cancelButton.node.on('click', () => {
+                    this.inform.active = false;
+                });
+            }
             this.update_s6(5);
         });
     }

@@ -50,7 +50,7 @@ var change = /** @class */ (function (_super) {
         var loadAction = cc.moveTo(1, cc.v2(0, 0));
         // 运行动作
         var ActionSequnce = cc.callFunc(function () {
-            cc.director.loadScene(GlobalData_1.default.Map);
+            cc.director.loadScene(GlobalData_1.default.map);
         });
         spriteNode.runAction(cc.sequence(moveAction, loadAction, ActionSequnce));
         // spriteNode.runAction(moveAction);

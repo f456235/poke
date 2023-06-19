@@ -39,6 +39,8 @@ export default class NewClass extends cc.Component {
                 exp: GlobalData.exp,
                 curHP: [],
                 fullHP: [],
+                win: 0,
+                name: this.email.split('@')[0]
             });
             cc.director.loadScene('select');
         })

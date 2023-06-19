@@ -33,8 +33,18 @@ export default class NewClass extends cc.Component {
     handle(){
         if(this.code == 'tk888')
         {
-            GlobalData.pokewoman.push(3);
-            cc.director.loadScene('map2');
+
+            if(GlobalData.pokewoman.length < 6){
+                GlobalData.pokewoman.push(3);
+                GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[GlobalData.pokewoman.length-1]] + 
+                GlobalData.level*GlobalData.pokewomanHPscale[GlobalData.pokewoman[GlobalData.pokewoman.length-1]])
+                GlobalData.fullHP[GlobalData.pokewoman.length-1] = GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1]; 
+            }else{
+                GlobalData.toCapture = true;
+                GlobalData.toCaptureID = 3;
+                cc.director.loadScene('bag');
+            }
+            cc.director.loadScene(GlobalData.map);
         }
         else
         {
@@ -43,7 +53,7 @@ export default class NewClass extends cc.Component {
     }
 
     nope(){
-        cc.director.loadScene('map2');
+        cc.director.loadScene(GlobalData.map);
     }
     update (dt) {
         this.code = cc.find('Canvas/e1/label').getComponent(cc.Label).string;

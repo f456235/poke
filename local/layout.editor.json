@@ -5,21 +5,21 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": -8,
-      "y": -8,
-      "width": 1552,
-      "height": 832,
+      "x": 76,
+      "y": 92,
+      "width": 1556,
+      "height": 836,
       "layout": {
         "type": "dock-h",
         "children": [
           {
-            "width": 230,
-            "height": 712.1000366210938,
+            "width": 231.14584350585938,
+            "height": 720.3333740234375,
             "type": "dock-v",
             "children": [
               {
-                "width": 230,
-                "height": 446.6875,
+                "width": 231.14584350585938,
+                "height": 451.84375,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -27,8 +27,8 @@
                 ]
               },
               {
-                "width": 230,
-                "height": 262.4125061035156,
+                "width": 231.14584350585938,
+                "height": 265.4895935058594,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -38,13 +38,13 @@
             ]
           },
           {
-            "width": 931,
-            "height": 712.1000366210938,
+            "width": 934.6041870117188,
+            "height": 720.3333740234375,
             "type": "dock-v",
             "children": [
               {
-                "width": 931,
-                "height": 438.0625,
+                "width": 934.6041870117188,
+                "height": 442.82293701171875,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -52,8 +52,8 @@
                 ]
               },
               {
-                "width": 931,
-                "height": 271.0375061035156,
+                "width": 934.6041870117188,
+                "height": 274.51043701171875,
                 "type": "panel",
                 "active": 0,
                 "children": [
@@ -65,8 +65,8 @@
             ]
           },
           {
-            "width": 369,
-            "height": 712.1000366210938,
+            "width": 370.2395935058594,
+            "height": 720.3333740234375,
             "type": "panel",
             "active": 0,
             "children": [
@@ -88,32 +88,7 @@
       ]
     },
     " common-asset-worker-worker": {},
-    "window-1687168210787": {
-      "main": false,
-      "url": "unpack://static/window.html",
-      "windowType": "dockable",
-      "x": 608,
-      "y": 136,
-      "width": 316,
-      "height": 520,
-      "layout": {
-        "type": "dock-v",
-        "children": [
-          {
-            "width": 300,
-            "height": 480,
-            "type": "panel",
-            "active": 0,
-            "children": [
-              "node-library"
-            ]
-          }
-        ]
-      },
-      "panels": [
-        "node-library"
-      ]
-    }
+    " load-media-worker": {}
   },
   "panels": {
     "preferences": {
@@ -131,8 +106,8 @@
     "package-asset.import": {
       "x": 646,
       "y": 220,
-      "width": 415,
-      "height": 558
+      "width": 420,
+      "height": 585
     },
     "node-library": {
       "x": 608,

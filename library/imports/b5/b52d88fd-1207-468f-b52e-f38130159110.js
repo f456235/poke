@@ -34,6 +34,10 @@ var NewClass = /** @class */ (function (_super) {
         _this.sprite = [];
         _this.index = 0;
         _this.healthBar = null;
+        _this.acceptButton = null;
+        _this.cancelButton = null;
+        _this.informText = null;
+        _this.inform = null;
         /* get a return array from other script */
         // bag: number[] = [3, 4, 1, 2, 5, 0];
         _this.bag = GlobalData_1.default.pokewoman;
@@ -111,6 +115,21 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[0]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
+            if (GlobalData_1.default.toCapture == true) {
+                _this.inform.active = true;
+                _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[0]] + "放生嗎?";
+                _this.acceptButton.node.on('click', function () {
+                    GlobalData_1.default.pokewoman[0] = GlobalData_1.default.toCaptureID;
+                    _this.node.getChildByName('Sprite0').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    GlobalData_1.default.toCapture = false;
+                    _this.inform.active = false;
+                    GlobalData_1.default.myPokewomanHP[0] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[0]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[0]]);
+                    GlobalData_1.default.fullHP[0] = GlobalData_1.default.myPokewomanHP[0];
+                });
+                _this.cancelButton.node.on('click', function () {
+                    _this.inform.active = false;
+                });
+            }
             _this.update_s6(0);
             // this.nm.string = "岩東勇";
             // this.atk_num.string = "100";
@@ -119,6 +138,21 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[1]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
+            if (GlobalData_1.default.toCapture == true) {
+                _this.inform.active = true;
+                _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[1]] + "放生嗎?";
+                _this.acceptButton.node.on('click', function () {
+                    GlobalData_1.default.pokewoman[1] = GlobalData_1.default.toCaptureID;
+                    _this.node.getChildByName('Sprite1').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    GlobalData_1.default.toCapture = false;
+                    _this.inform.active = false;
+                    GlobalData_1.default.myPokewomanHP[1] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[1]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[1]]);
+                    GlobalData_1.default.fullHP[1] = GlobalData_1.default.myPokewomanHP[1];
+                });
+                _this.cancelButton.node.on('click', function () {
+                    _this.inform.active = false;
+                });
+            }
             _this.update_s6(1);
             // this.nm.string = "炎東勇";
             // this.atk_num.string = "100";
@@ -127,6 +161,21 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[2]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
+            if (GlobalData_1.default.toCapture == true) {
+                _this.inform.active = true;
+                _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[2]] + "放生嗎?";
+                _this.acceptButton.node.on('click', function () {
+                    GlobalData_1.default.pokewoman[2] = GlobalData_1.default.toCaptureID;
+                    _this.node.getChildByName('Sprite2').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    GlobalData_1.default.toCapture = false;
+                    _this.inform.active = false;
+                    GlobalData_1.default.myPokewomanHP[2] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[2]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[2]]);
+                    GlobalData_1.default.fullHP[2] = GlobalData_1.default.myPokewomanHP[2];
+                });
+                _this.cancelButton.node.on('click', function () {
+                    _this.inform.active = false;
+                });
+            }
             _this.update_s6(2);
             // this.nm.string = "嚴冬勇";
             // this.atk_num.string = "100";
@@ -135,18 +184,63 @@ var NewClass = /** @class */ (function (_super) {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[3]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
+            if (GlobalData_1.default.toCapture == true) {
+                _this.inform.active = true;
+                _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[3]] + "放生嗎?";
+                _this.acceptButton.node.on('click', function () {
+                    GlobalData_1.default.pokewoman[3] = GlobalData_1.default.toCaptureID;
+                    _this.node.getChildByName('Sprite3').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    GlobalData_1.default.toCapture = false;
+                    _this.inform.active = false;
+                    GlobalData_1.default.myPokewomanHP[3] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[3]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[3]]);
+                    GlobalData_1.default.fullHP[3] = GlobalData_1.default.myPokewomanHP[3];
+                });
+                _this.cancelButton.node.on('click', function () {
+                    _this.inform.active = false;
+                });
+            }
             _this.update_s6(3);
         });
         cc.find('Canvas/block/Sprite4').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[4]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
+            if (GlobalData_1.default.toCapture == true) {
+                _this.inform.active = true;
+                _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[4]] + "放生嗎?";
+                _this.acceptButton.node.on('click', function () {
+                    GlobalData_1.default.pokewoman[4] = GlobalData_1.default.toCaptureID;
+                    _this.node.getChildByName('Sprite4').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    GlobalData_1.default.toCapture = false;
+                    _this.inform.active = false;
+                    GlobalData_1.default.myPokewomanHP[4] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[4]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[4]]);
+                    GlobalData_1.default.fullHP[4] = GlobalData_1.default.myPokewomanHP[4];
+                });
+                _this.cancelButton.node.on('click', function () {
+                    _this.inform.active = false;
+                });
+            }
             _this.update_s6(4);
         });
         cc.find('Canvas/block/Sprite5').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[5]];
             _this.node.getChildByName('Sprite6').active = true;
             _this.node.getChildByName('Sprite6').scale = 0.1;
+            if (GlobalData_1.default.toCapture == true) {
+                _this.inform.active = true;
+                _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[5]] + "放生嗎?";
+                _this.acceptButton.node.on('click', function () {
+                    GlobalData_1.default.pokewoman[5] = GlobalData_1.default.toCaptureID;
+                    _this.node.getChildByName('Sprite5').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    GlobalData_1.default.toCapture = false;
+                    _this.inform.active = false;
+                    GlobalData_1.default.myPokewomanHP[5] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[5]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[5]]);
+                    GlobalData_1.default.fullHP[5] = GlobalData_1.default.myPokewomanHP[5];
+                });
+                _this.cancelButton.node.on('click', function () {
+                    _this.inform.active = false;
+                });
+            }
             _this.update_s6(5);
         });
     };
@@ -181,6 +275,18 @@ var NewClass = /** @class */ (function (_super) {
     __decorate([
         property(cc.ProgressBar)
     ], NewClass.prototype, "healthBar", void 0);
+    __decorate([
+        property(cc.Button)
+    ], NewClass.prototype, "acceptButton", void 0);
+    __decorate([
+        property(cc.Button)
+    ], NewClass.prototype, "cancelButton", void 0);
+    __decorate([
+        property(cc.Label)
+    ], NewClass.prototype, "informText", void 0);
+    __decorate([
+        property(cc.Node)
+    ], NewClass.prototype, "inform", void 0);
     __decorate([
         property
     ], NewClass.prototype, "num", void 0);

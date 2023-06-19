@@ -50,6 +50,7 @@ var NewClass = /** @class */ (function (_super) {
         this.toLogin.node.on('click', this.toLoginPage, this);
     };
     NewClass.prototype.handleRegister = function () {
+        var _this = this;
         var auth = firebase.auth();
         auth.createUserWithEmailAndPassword(this.email, this.password)
             .then(function (userCredential) {
@@ -61,6 +62,8 @@ var NewClass = /** @class */ (function (_super) {
                 exp: GlobalData_1.default.exp,
                 curHP: [],
                 fullHP: [],
+                win: 0,
+                name: _this.email.split('@')[0]
             });
             cc.director.loadScene('select');
         })

@@ -41,6 +41,7 @@ var NewClass = /** @class */ (function (_super) {
         _this.password = null;
         _this.login = null;
         _this.toRegister = null;
+        _this.toLeaderBoard = null;
         return _this;
     }
     // LIFE-CYCLE CALLBACKS:
@@ -49,6 +50,8 @@ var NewClass = /** @class */ (function (_super) {
         this.login.node.on('click', this.handleLogin, this);
         this.toRegister = cc.find('register').getComponent(cc.Button);
         this.toRegister.node.on('click', this.toRegisterPage, this);
+        this.toLeaderBoard = cc.find('leaderboard').getComponent(cc.Button);
+        this.toLeaderBoard.node.on('click', this.toLeaderBoardPage, this);
     };
     NewClass.prototype.handleLogin = function () {
         GlobalData_1.default.nodeToDestroy = [];
@@ -94,6 +97,9 @@ var NewClass = /** @class */ (function (_super) {
     };
     NewClass.prototype.toRegisterPage = function () {
         cc.director.loadScene('register');
+    };
+    NewClass.prototype.toLeaderBoardPage = function () {
+        cc.director.loadScene('leaderboard');
     };
     NewClass.prototype.update = function (dt) {
         this.email = cc.find('account/label').getComponent(cc.Label).string;

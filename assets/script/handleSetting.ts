@@ -80,12 +80,26 @@ export default class NewClass extends cc.Component {
             .catch((error)=>{
                 console.log('error saving exp',error);
             });
+        userRef.child('win').set(GlobalData.winNum)
+            .then(() =>{
+                console.log('winNum saved successfully');
+            })
+            .catch((error)=>{
+                console.log('error saving exp',error);
+            });
     }
     quitGame(){
         GlobalData.uid = "";
         const auth = firebase.auth();
         auth.signOut().then(() => {
             // User signed out successfully
+            cc.audioEngine.stopMusic();
+            GlobalData.nodeToDestroy = [];
+            GlobalData.isEnenmyBoss2 = false;
+            GlobalData.isBoss1 = false;
+            GlobalData.isEnenmyMagic = false;
+            GlobalData.isEnenmyRed = false;
+            GlobalData.isEnenmyMagic = false;
             cc.director.loadScene('login');
           }).catch((error) => {
             // An error occurred while signing out
@@ -93,7 +107,7 @@ export default class NewClass extends cc.Component {
           });
     }
     backToMap(){
-        cc.director.loadScene('map2');
+        cc.director.loadScene(GlobalData.map);
     }
     start () {
 

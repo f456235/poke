@@ -167,40 +167,71 @@ export default class NewClass extends cc.Component {
             this.last_myself = GlobalData.myelf;
             this.renew = true;
         }
-        
+        for(var i=0 ; i < GlobalData.pokewoman.length ; i++){
+            if(GlobalData.myPokewomanHP[i] > 0){
+                GlobalData.lose = false;
+                break;
+            }
+            GlobalData.lose = true;    
+        }
         this.node.getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[GlobalData.myelf]];
         this.updateUI(dt);
         if(this.enemyLife <= 0 && !this.isWin){
-            GlobalData.pokewoman.push(this.enemynum);
             if(this.enemynum == 4){
                 GlobalData.isEnenmyMagic = true;
+                console.log("GlobalData.isEnenmyMagic:", GlobalData.isEnenmyMagic);
             }else if(this.enemynum == 5){
                 GlobalData.isEnenmyRed = true;
+                console.log("GlobalData.isEnenmyRed:", GlobalData.isEnenmyRed);
             }else if(this.enemynum == 6){
                 GlobalData.isBoss1 = true;
+                console.log("GlobalData.isBoss1:", GlobalData.isBoss1);
             }else if(this.enemynum == 7){
                 GlobalData.isEnenmyFish = true;
+                console.log("GlobalData.isEnenmyFish:", GlobalData.isEnenmyFish);
+            }else if(this.enemynum == 8){
+                GlobalData.isEnenmyBoss2 = true;
+                console.log("GlobalData.isEnenmyBoss2:", GlobalData.isEnenmyBoss2);
             }
+            if(GlobalData.pokewoman.length < 6){
+                GlobalData.pokewoman.push(this.enemynum);
 
-            GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[GlobalData.pokewoman.length-1]] + 
-            GlobalData.level*GlobalData.pokewomanHPscale[GlobalData.pokewoman[GlobalData.pokewoman.length-1]])
-            GlobalData.fullHP[GlobalData.pokewoman.length-1] = GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1];
-            this.enemyLife = 0;
-            this.isWin = true;
-            this.enemyHP.progress = 0;
-            cc.audioEngine.pauseMusic();
-            cc.audioEngine.playEffect(this.winSound, false);
-            GlobalData.exp += 100;
-            this.scheduleOnce(function() {
-                cc.director.loadScene("map2", ()=>{
-                    let enemyNumString = cc.js.formatStr("%d", this.enemynum);
-                    GlobalData.nodeToDestroy.push(enemyNumString);
-                }
-                );
-            }, 4);
+                GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[GlobalData.pokewoman.length-1]] + 
+                GlobalData.level*GlobalData.pokewomanHPscale[GlobalData.pokewoman[GlobalData.pokewoman.length-1]])
+                GlobalData.fullHP[GlobalData.pokewoman.length-1] = GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1];
+                this.enemyLife = 0;
+                this.isWin = true;
+                this.enemyHP.progress = 0;
+                cc.audioEngine.pauseMusic();
+                cc.audioEngine.playEffect(this.winSound, false);
+                GlobalData.exp += 100;
+                this.scheduleOnce(function() {
+                    cc.director.loadScene(GlobalData.map, ()=>{
+                        let enemyNumString = cc.js.formatStr("%d", this.enemynum);
+                        GlobalData.nodeToDestroy.push(enemyNumString);
+                    }
+                    );
+                }, 4);
+            }else{
+                GlobalData.toCapture = true;  
+                GlobalData.toCaptureID = this.enemynum;
+                this.enemyLife = 0;
+                this.isWin = true;
+                this.enemyHP.progress = 0;
+                cc.audioEngine.pauseMusic();
+                cc.audioEngine.playEffect(this.winSound, false);
+                GlobalData.exp += 100;
+                this.scheduleOnce(function() {
+                    cc.director.loadScene("bag", ()=>{
+                        let enemyNumString = cc.js.formatStr("%d", this.enemynum);
+                        GlobalData.nodeToDestroy.push(enemyNumString);
+                    });
+                }, 4);
+            }
+            GlobalData.winNum+=1;
         }
 
-        if(GlobalData.myPokewomanHP[GlobalData.myelf]<=0 && !this.isLose){
+        if(GlobalData.lose && !this.isLose){
             GlobalData.myPokewomanHP[GlobalData.myelf] = 0;
             this.isLose = true;
             this.myTurn = false;
@@ -209,7 +240,7 @@ export default class NewClass extends cc.Component {
             cc.audioEngine.pauseMusic();
             cc.audioEngine.playEffect(this.loseSound, false);
             this.scheduleOnce(function() {
-                cc.director.loadScene("map2");
+                cc.director.loadScene(GlobalData.map);
             }, 4);
         }
 

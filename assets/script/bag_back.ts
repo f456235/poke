@@ -1,3 +1,5 @@
+import GlobalData from "./GlobalData";
+
 const { ccclass, property } = cc._decorator;
 declare const firebase: any;
 
@@ -9,7 +11,8 @@ export default class NewClass extends cc.Component {
         
         cc.director.getPhysicsManager().enabled = true;
         cc.find('Canvas/block/brown/back').on('click', () => {
-                cc.director.loadScene('map2');
+                GlobalData.toCapture = false;
+                cc.director.loadScene(GlobalData.map);
         });
     }
 

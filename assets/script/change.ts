@@ -30,7 +30,7 @@ export default class change extends cc.Component {
     
         // 运行动作
         let ActionSequnce = cc.callFunc(function(){
-            cc.director.loadScene(GlobalData.Map);
+            cc.director.loadScene(GlobalData.map);
         });
 
         spriteNode.runAction(cc.sequence(moveAction,loadAction,ActionSequnce));

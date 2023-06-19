@@ -33,17 +33,29 @@ var NewClass = /** @class */ (function (_super) {
     NewClass.prototype.onLoad = function () {
         cc.director.getPhysicsManager().enabled = true;
         cc.find('Canvas/p1').on('click', function () {
-            GlobalData_1.default.Map = "map2";
+            GlobalData_1.default.map = "map2";
+            GlobalData_1.default.PlayerPosX = 29;
+            GlobalData_1.default.PlayerPosY = -62;
+            GlobalData_1.default.Player2PosX = 35;
+            GlobalData_1.default.Player2PosY = -62;
             cc.director.loadScene('universe_changeScene');
         });
         cc.find('Canvas/p2').on('click', function () {
-            GlobalData_1.default.Map = "map3";
+            GlobalData_1.default.map = "map3";
+            GlobalData_1.default.PlayerPosX = 113;
+            GlobalData_1.default.PlayerPosY = -62;
+            GlobalData_1.default.Player2PosX = 95;
+            GlobalData_1.default.Player2PosY = -25;
             cc.director.loadScene('universe_changeScene');
         });
         if (GlobalData_1.default.isEnenmyFish && GlobalData_1.default.isBoss1 && GlobalData_1.default.isEnenmyMagic && GlobalData_1.default.isEnenmyRed) {
             cc.find('Canvas/p3').active = true;
             cc.find('Canvas/p3').on('click', function () {
-                GlobalData_1.default.Map = "map4";
+                GlobalData_1.default.map = "map4";
+                GlobalData_1.default.PlayerPosX = 113;
+                GlobalData_1.default.PlayerPosY = -62;
+                GlobalData_1.default.Player2PosX = 86;
+                GlobalData_1.default.Player2PosY = -62;
                 cc.director.loadScene('universe_changeScene');
             });
         }
