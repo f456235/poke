@@ -1,11 +1,23 @@
 {
-  "start-scene": "13fa0e2a-d1ef-4c93-8087-0c4c8eae6cda",
   "group-list": [
-    "bg"
+    "bg",
+    "man",
+    "smog"
   ],
   "collision-matrix": [
     [
+      true,
       true
+    ],
+    [
+      true,
+      true,
+      true
+    ],
+    [
+      false,
+      true,
+      false
     ]
   ],
   "excluded-modules": [
@@ -33,5 +45,6 @@
     "audience": {
       "enable": false
     }
-  }
+  },
+  "start-scene": "current"
 }

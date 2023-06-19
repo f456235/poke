@@ -16,6 +16,8 @@ require('./assets/script/libaoma');
 require('./assets/script/login');
 require('./assets/script/man');
 require('./assets/script/man2');
+require('./assets/script/man_map3');
+require('./assets/script/me');
 require('./assets/script/moyan');
 require('./assets/script/no');
 require('./assets/script/register');

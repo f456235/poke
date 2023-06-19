@@ -37,6 +37,7 @@ export default class GlobalData {
     static isBoss1 : boolean = false;
     static isEnenmyMagic : boolean = false;
     static isEnenmyRed: boolean = false;
+    static isEnenmyFish: boolean = false;
     static initializeHPArrays(): void {
         //this.hp = 100 + 10 * this.level;
         console.log(this.pokewoman.length);

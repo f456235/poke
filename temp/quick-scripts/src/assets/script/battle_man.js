@@ -156,6 +156,12 @@ var NewClass = /** @class */ (function (_super) {
             else if (this.enemynum == 5) {
                 GlobalData_1.default.isEnenmyRed = true;
             }
+            else if (this.enemynum == 6) {
+                GlobalData_1.default.isBoss1 = true;
+            }
+            else if (this.enemynum == 7) {
+                GlobalData_1.default.isEnenmyFish = true;
+            }
             GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]] +
                 GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]]);
             GlobalData_1.default.fullHP[GlobalData_1.default.pokewoman.length - 1] = GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1];

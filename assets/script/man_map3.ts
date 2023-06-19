@@ -10,14 +10,14 @@ export default class Man extends cc.Component {
     @property(cc.Label)
     label: cc.Label = null;
 
+    @property(cc.TiledMap)
+    tilemap: cc.TiledMap = null;
+
     @property
     text: string = 'hello';
 
     @property({type:cc.AudioClip})
-    bgmMapGrass: cc.AudioClip = null;
-
-    @property({type:cc.AudioClip})
-    bgmMapDesert: cc.AudioClip = null;
+    bgm: cc.AudioClip = null;
     
     @property({type:cc.AudioClip})
     goinSound: cc.AudioClip = null;
@@ -38,6 +38,36 @@ export default class Man extends cc.Component {
 
 
     start(){
+        let tilemap = cc.find('Canvas/map3').getComponent(cc.TiledMap);
+        // let smoglayer = cc.find('Canvas/map3/smog');
+        
+        
+        // let tilemap = this.getComponent(cc.TiledMap);
+        // console.log("hi",tilemap);
+        let tilemapsize = tilemap.getMapSize();
+        let layer = tilemap.getLayer('ground');
+        let layersize = layer.getLayerSize();
+        let smoglayer = tilemap.getLayer('smog');
+        smoglayer.node.active = true;
+        console.log("layersize.width",layersize.width);
+        console.log("layersize.height",layersize.height);
+        console.log("tilemapsize",tilemapsize);
+        console.log("smoglayer",smoglayer);
+        for(let i = 0; i < layersize.width; i++){
+            for(let j = 0; j < layersize.height; j++){
+                let tile = smoglayer.getTiledTileAt(i,j,true);
+                if(tile.gid!=0){
+                    // console.log("i:", i);
+                    // console.log("j:", j);
+                    tile.node.group = 'smog';
+                    let collider = tile.node.addComponent(cc.BoxCollider);
+                    collider.offset = cc.v2(tilemapsize.width/2-256,tilemapsize.height/2-256);
+                    collider.size = tilemapsize;
+                    // console.log(this.node.position);
+                    // console.log("collider",collider);
+                }
+            }
+        }
         let nodetodestory = cc.director.getScene()["nodeToDestroy"];
         console.log("nodeToDestroy in man:", nodetodestory);
         //if(this.node.getChildByName(nodetodestory) !== null){
@@ -53,14 +83,7 @@ export default class Man extends cc.Component {
             // This callback is invoked after visiting each node in the scene hierarchy
             //console.log("Iteration complete");
         });
-        let scene = cc.director.getScene();
-    if(scene.name == "map2"){
-        console.log("map2 bgm");
-        cc.audioEngine.playMusic(this.bgmMapGrass, true);
-    }else if(scene.name == "map3"){
-        console.log("map3 bgm");
-        cc.audioEngine.playMusic(this.bgmMapDesert, true);
-    }
+        cc.audioEngine.playMusic(this.bgm, true);
         this.Gamemanger = cc.find('Canvas/gamemanager').getComponent('gamemanager');
         // console.log(this.Gamemanger);
         this.Gamemanger.palse = false;
@@ -75,9 +98,8 @@ export default class Man extends cc.Component {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
         this.node.setPosition(GlobalData.PlayerPosX,GlobalData.PlayerPosY);
-        if(GlobalData.isEnenmyMagic && GlobalData.isEnenmyRed){
-            cc.find('enemies/6').active = true;
-        }
+        cc.director.getCollisionManager().enabled = true;
+        // cc.director.getCollisionManager().enabledDebugDraw = true;
         
     }
 
@@ -140,6 +162,10 @@ export default class Man extends cc.Component {
     }
 
     update(dt: number) {
+        // if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
+        //     let smoglayer = cc.find('Canvas/map3/smog');
+        //     smoglayer.active = false; // 迷霧消失
+        // }
         //cc.log(this.node.x, this.node.y);
         // 根据按键状态更新角色位置
         if(this.Gamemanger.palse==false)
@@ -165,89 +191,50 @@ export default class Man extends cc.Component {
         if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
         }   
         GlobalData.PlayerPosX = this.node.getPosition().x;
-        GlobalData.PlayerPosY = this.node.getPosition().y-10;  
+        GlobalData.PlayerPosY = this.node.getPosition().y;  
         cc.audioEngine.setMusicVolume(GlobalData.volume);
         cc.audioEngine.setEffectsVolume(GlobalData.volume);
     }
 
+    onCollisionEnter(other, self) {
+        if(other.node.group == "smog"){
+            other.node.active = false; // 迷霧消失
+            other.node.getComponent(cc.TiledTile).gid=0;
+        }
+    }
     onBeginContact(contact, selfCollider, otherCollider) {
         //cc.log("Player hits the bush");
         let worldManifold = contact.getWorldManifold();
         let points = worldManifold.points;
         let normal = worldManifold.normal;
-        if(otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6|| otherCollider.tag == 7 || otherCollider.tag == 8 ){
+        if(otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6|| otherCollider.tag == 7){
             this.enemyNum = otherCollider.tag;
+            //console.log("enemyNum in man");
+            //console.log(this.enemyNum);
+            //cc.log("Player hits the enemy");
             this.isBattle = true;
-            var canvasNode = cc.find("Canvas");
-            const cameraNode = cc.Camera.main;
-            var blinkAction = cc.blink(2, 5);
+            // cc.audioEngine.pauseMusic();
+            cc.audioEngine.playEffect(this.goinSound, false);
+        
+            var canvasNode = cc.find("Canvas"); // 获取画布节点
+            var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
             this.Gamemanger.palse = true;
             cc.audioEngine.pauseMusic();
-            if(otherCollider.tag != 8){
-                cc.audioEngine.playEffect(this.goinSound, false);
-                //console.log(this.Gamemanger.palse);
-                canvasNode.runAction(cc.sequence(
-                    blinkAction,
-                    cc.callFunc(function () {
-                        
-                        cc.director.loadScene("battle", () =>{
-                        const nextScene = cc.director.getScene();
-                        nextScene["enemyNum"] = otherCollider.tag;
-                        //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
-                        });
-                    })
-                ));
-            }else if(otherCollider.tag == 8){
-                GlobalData.isBOSScamera = true;
-                //let cameraAction = cameraNode.runAction(cc.moveTo(2, cc.v2(0,50)));
-                let cameraAction = cc.callFunc(function(target) {
-                    const mainCamera = cc.Camera.main;
-                    this.originalPosition = mainCamera.node.position.clone();
-                   //let shakeSequence;
-                   console.log("shakeSequence");
-                    
-                    const shakeSequence = cc.moveTo(3, cc.v2(this.originalPosition.x , this.originalPosition.y+70));
-                    
-                    cc.find("Canvas/Main Camera").getComponent(cc.Camera).node.runAction(shakeSequence);
-                });
-                
-
-                let loadAction = cc.moveBy(4, cc.v2(0,0));
-                this.scheduleOnce(function() {
-                    GlobalData.isBOSScamera = false;
-                }, 13);
-
-                let conversationAction = cc.callFunc(function(target) {
-                    cc.find("Canvas/Main Camera/moyan").active = true;
-                });
-
-                this.scheduleOnce(function() {
-                    cc.audioEngine.playEffect(this.goinSound, false);
-                }, 8);
-
-                this.scheduleOnce(function() {
-                    cc.find("Canvas/Main Camera/moyan").active = false;
-                }, 8);
-                
-                canvasNode.runAction(cc.sequence(
-                    cameraAction,
-                    loadAction,
-                    conversationAction,
-                    loadAction,
-                    blinkAction,
-                    cc.callFunc(function () {
-                        
-                        cc.director.loadScene("battle", () =>{
-                        const nextScene = cc.director.getScene();
-                        nextScene["enemyNum"] = otherCollider.tag;
-                        //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
-                        });
-                    })
-                ));
-                
-            }
+            console.log(this.Gamemanger.palse);
+            canvasNode.runAction(cc.sequence(
+                blinkAction,
+                cc.callFunc(function () {
+                       
+                    cc.director.loadScene("battle", () =>{
+                       const nextScene = cc.director.getScene();
+                       nextScene["enemyNum"] = otherCollider.tag;
+                       //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
+                    });
+                })
+            ));
             //cc.audioEngine.pauseMusic();
             //cc.audioEngine.playEffect(this.battleBgm, true);
         }
+    
     }
 }

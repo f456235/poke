@@ -65,6 +65,7 @@ var GlobalData = /** @class */ (function () {
     GlobalData.isBoss1 = false;
     GlobalData.isEnenmyMagic = false;
     GlobalData.isEnenmyRed = false;
+    GlobalData.isEnenmyFish = false;
     GlobalData.myPokewomanHP = [];
     GlobalData.fullHP = [];
     return GlobalData;

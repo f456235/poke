@@ -1,6 +1,6 @@
 "use strict";
-cc._RF.push(module, '6a0c28JVppJgLNy4xXQY0Ko', 'man');
-// script/man.ts
+cc._RF.push(module, 'f1109mL3hFDjrmo+cRUSpUZ', 'man_map3');
+// script/man_map3.ts
 
 "use strict";
 var __extends = (this && this.__extends) || (function () {
@@ -32,9 +32,9 @@ var Man = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.Gamemanger = null;
         _this.label = null;
+        _this.tilemap = null;
         _this.text = 'hello';
-        _this.bgmMapGrass = null;
-        _this.bgmMapDesert = null;
+        _this.bgm = null;
         _this.goinSound = null;
         _this.moveSpeed = 1; // 移动速度，可以根据需要调整
         _this.animation = null; // 动画组件
@@ -48,6 +48,34 @@ var Man = /** @class */ (function (_super) {
         return _this;
     }
     Man.prototype.start = function () {
+        var tilemap = cc.find('Canvas/map3').getComponent(cc.TiledMap);
+        // let smoglayer = cc.find('Canvas/map3/smog');
+        // let tilemap = this.getComponent(cc.TiledMap);
+        // console.log("hi",tilemap);
+        var tilemapsize = tilemap.getMapSize();
+        var layer = tilemap.getLayer('ground');
+        var layersize = layer.getLayerSize();
+        var smoglayer = tilemap.getLayer('smog');
+        smoglayer.node.active = true;
+        console.log("layersize.width", layersize.width);
+        console.log("layersize.height", layersize.height);
+        console.log("tilemapsize", tilemapsize);
+        console.log("smoglayer", smoglayer);
+        for (var i = 0; i < layersize.width; i++) {
+            for (var j = 0; j < layersize.height; j++) {
+                var tile = smoglayer.getTiledTileAt(i, j, true);
+                if (tile.gid != 0) {
+                    // console.log("i:", i);
+                    // console.log("j:", j);
+                    tile.node.group = 'smog';
+                    var collider = tile.node.addComponent(cc.BoxCollider);
+                    collider.offset = cc.v2(tilemapsize.width / 2 - 256, tilemapsize.height / 2 - 256);
+                    collider.size = tilemapsize;
+                    // console.log(this.node.position);
+                    // console.log("collider",collider);
+                }
+            }
+        }
         var nodetodestory = cc.director.getScene()["nodeToDestroy"];
         console.log("nodeToDestroy in man:", nodetodestory);
         //if(this.node.getChildByName(nodetodestory) !== null){
@@ -63,15 +91,7 @@ var Man = /** @class */ (function (_super) {
             // This callback is invoked after visiting each node in the scene hierarchy
             //console.log("Iteration complete");
         });
-        var scene = cc.director.getScene();
-        if (scene.name == "map2") {
-            console.log("map2 bgm");
-            cc.audioEngine.playMusic(this.bgmMapGrass, true);
-        }
-        else if (scene.name == "map3") {
-            console.log("map3 bgm");
-            cc.audioEngine.playMusic(this.bgmMapDesert, true);
-        }
+        cc.audioEngine.playMusic(this.bgm, true);
         this.Gamemanger = cc.find('Canvas/gamemanager').getComponent('gamemanager');
         // console.log(this.Gamemanger);
         this.Gamemanger.palse = false;
@@ -85,9 +105,8 @@ var Man = /** @class */ (function (_super) {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
         this.node.setPosition(GlobalData_1.default.PlayerPosX, GlobalData_1.default.PlayerPosY);
-        if (GlobalData_1.default.isEnenmyMagic && GlobalData_1.default.isEnenmyRed) {
-            cc.find('enemies/6').active = true;
-        }
+        cc.director.getCollisionManager().enabled = true;
+        // cc.director.getCollisionManager().enabledDebugDraw = true;
     };
     Man.prototype.onDestroy = function () {
         // 移除键盘事件监听
@@ -142,6 +161,10 @@ var Man = /** @class */ (function (_super) {
         }
     };
     Man.prototype.update = function (dt) {
+        // if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
+        //     let smoglayer = cc.find('Canvas/map3/smog');
+        //     smoglayer.active = false; // 迷霧消失
+        // }
         //cc.log(this.node.x, this.node.y);
         // 根据按键状态更新角色位置
         if (this.Gamemanger.palse == false) {
@@ -169,66 +192,41 @@ var Man = /** @class */ (function (_super) {
         if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
         }
         GlobalData_1.default.PlayerPosX = this.node.getPosition().x;
-        GlobalData_1.default.PlayerPosY = this.node.getPosition().y - 10;
+        GlobalData_1.default.PlayerPosY = this.node.getPosition().y;
         cc.audioEngine.setMusicVolume(GlobalData_1.default.volume);
         cc.audioEngine.setEffectsVolume(GlobalData_1.default.volume);
+    };
+    Man.prototype.onCollisionEnter = function (other, self) {
+        if (other.node.group == "smog") {
+            other.node.active = false; // 迷霧消失
+            other.node.getComponent(cc.TiledTile).gid = 0;
+        }
     };
     Man.prototype.onBeginContact = function (contact, selfCollider, otherCollider) {
         //cc.log("Player hits the bush");
         var worldManifold = contact.getWorldManifold();
         var points = worldManifold.points;
         var normal = worldManifold.normal;
-        if (otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6 || otherCollider.tag == 7 || otherCollider.tag == 8) {
+        if (otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6 || otherCollider.tag == 7) {
             this.enemyNum = otherCollider.tag;
+            //console.log("enemyNum in man");
+            //console.log(this.enemyNum);
+            //cc.log("Player hits the enemy");
             this.isBattle = true;
-            var canvasNode = cc.find("Canvas");
-            var cameraNode = cc.Camera.main;
-            var blinkAction = cc.blink(2, 5);
+            // cc.audioEngine.pauseMusic();
+            cc.audioEngine.playEffect(this.goinSound, false);
+            var canvasNode = cc.find("Canvas"); // 获取画布节点
+            var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
             this.Gamemanger.palse = true;
             cc.audioEngine.pauseMusic();
-            if (otherCollider.tag != 8) {
-                cc.audioEngine.playEffect(this.goinSound, false);
-                //console.log(this.Gamemanger.palse);
-                canvasNode.runAction(cc.sequence(blinkAction, cc.callFunc(function () {
-                    cc.director.loadScene("battle", function () {
-                        var nextScene = cc.director.getScene();
-                        nextScene["enemyNum"] = otherCollider.tag;
-                        //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
-                    });
-                })));
-            }
-            else if (otherCollider.tag == 8) {
-                GlobalData_1.default.isBOSScamera = true;
-                //let cameraAction = cameraNode.runAction(cc.moveTo(2, cc.v2(0,50)));
-                var cameraAction = cc.callFunc(function (target) {
-                    var mainCamera = cc.Camera.main;
-                    this.originalPosition = mainCamera.node.position.clone();
-                    //let shakeSequence;
-                    console.log("shakeSequence");
-                    var shakeSequence = cc.moveTo(3, cc.v2(this.originalPosition.x, this.originalPosition.y + 70));
-                    cc.find("Canvas/Main Camera").getComponent(cc.Camera).node.runAction(shakeSequence);
+            console.log(this.Gamemanger.palse);
+            canvasNode.runAction(cc.sequence(blinkAction, cc.callFunc(function () {
+                cc.director.loadScene("battle", function () {
+                    var nextScene = cc.director.getScene();
+                    nextScene["enemyNum"] = otherCollider.tag;
+                    //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
                 });
-                var loadAction = cc.moveBy(4, cc.v2(0, 0));
-                this.scheduleOnce(function () {
-                    GlobalData_1.default.isBOSScamera = false;
-                }, 13);
-                var conversationAction = cc.callFunc(function (target) {
-                    cc.find("Canvas/Main Camera/moyan").active = true;
-                });
-                this.scheduleOnce(function () {
-                    cc.audioEngine.playEffect(this.goinSound, false);
-                }, 8);
-                this.scheduleOnce(function () {
-                    cc.find("Canvas/Main Camera/moyan").active = false;
-                }, 8);
-                canvasNode.runAction(cc.sequence(cameraAction, loadAction, conversationAction, loadAction, blinkAction, cc.callFunc(function () {
-                    cc.director.loadScene("battle", function () {
-                        var nextScene = cc.director.getScene();
-                        nextScene["enemyNum"] = otherCollider.tag;
-                        //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
-                    });
-                })));
-            }
+            })));
             //cc.audioEngine.pauseMusic();
             //cc.audioEngine.playEffect(this.battleBgm, true);
         }
@@ -240,14 +238,14 @@ var Man = /** @class */ (function (_super) {
         property(cc.Label)
     ], Man.prototype, "label", void 0);
     __decorate([
+        property(cc.TiledMap)
+    ], Man.prototype, "tilemap", void 0);
+    __decorate([
         property
     ], Man.prototype, "text", void 0);
     __decorate([
         property({ type: cc.AudioClip })
-    ], Man.prototype, "bgmMapGrass", void 0);
-    __decorate([
-        property({ type: cc.AudioClip })
-    ], Man.prototype, "bgmMapDesert", void 0);
+    ], Man.prototype, "bgm", void 0);
     __decorate([
         property({ type: cc.AudioClip })
     ], Man.prototype, "goinSound", void 0);

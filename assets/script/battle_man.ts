@@ -176,6 +176,10 @@ export default class NewClass extends cc.Component {
                 GlobalData.isEnenmyMagic = true;
             }else if(this.enemynum == 5){
                 GlobalData.isEnenmyRed = true;
+            }else if(this.enemynum == 6){
+                GlobalData.isBoss1 = true;
+            }else if(this.enemynum == 7){
+                GlobalData.isEnenmyFish = true;
             }
 
             GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[GlobalData.pokewoman.length-1]] + 

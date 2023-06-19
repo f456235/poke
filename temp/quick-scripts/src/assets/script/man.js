@@ -211,11 +211,17 @@ var Man = /** @class */ (function (_super) {
                 var loadAction = cc.moveBy(4, cc.v2(0, 0));
                 this.scheduleOnce(function () {
                     GlobalData_1.default.isBOSScamera = false;
-                }, 7);
+                }, 13);
+                var conversationAction = cc.callFunc(function (target) {
+                    cc.find("Canvas/Main Camera/moyan").active = true;
+                });
                 this.scheduleOnce(function () {
                     cc.audioEngine.playEffect(this.goinSound, false);
-                }, 4);
-                canvasNode.runAction(cc.sequence(cameraAction, loadAction, blinkAction, cc.callFunc(function () {
+                }, 8);
+                this.scheduleOnce(function () {
+                    cc.find("Canvas/Main Camera/moyan").active = false;
+                }, 8);
+                canvasNode.runAction(cc.sequence(cameraAction, loadAction, conversationAction, loadAction, blinkAction, cc.callFunc(function () {
                     cc.director.loadScene("battle", function () {
                         var nextScene = cc.director.getScene();
                         nextScene["enemyNum"] = otherCollider.tag;

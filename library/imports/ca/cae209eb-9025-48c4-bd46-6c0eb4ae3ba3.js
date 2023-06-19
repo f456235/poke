@@ -40,10 +40,13 @@ var NewClass = /** @class */ (function (_super) {
             GlobalData_1.default.Map = "map3";
             cc.director.loadScene('universe_changeScene');
         });
-        cc.find('Canvas/p3').on('click', function () {
-            GlobalData_1.default.Map = "map2";
-            cc.director.loadScene('universe_changeScene');
-        });
+        if (GlobalData_1.default.isEnenmyFish && GlobalData_1.default.isBoss1 && GlobalData_1.default.isEnenmyMagic && GlobalData_1.default.isEnenmyRed) {
+            cc.find('Canvas/p3').active = true;
+            cc.find('Canvas/p3').on('click', function () {
+                GlobalData_1.default.Map = "map4";
+                cc.director.loadScene('universe_changeScene');
+            });
+        }
     };
     NewClass.prototype.start = function () {
     };
