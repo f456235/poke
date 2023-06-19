@@ -22,9 +22,9 @@ export default class GlobalData {
     static mylife : number = 0;
     static exp : number = 0;
     static level_exp: number[] = [50,120,190,290,390,500,610,670,800,1000];
-    static enemyHPbyID: number[] = [50,54,63,65,70,59,60]
-    static enemyAttackById: number[] = [21,25,21,23,18,25,24]
-    static enemyLevelById: number[] = [15,15,20,30,20,23,26]
+    static enemyHPbyID: number[] = [50,54,63,65,70,59,60,120,200]
+    static enemyAttackById: number[] = [21,25,21,23,18,25,24,60,100]
+    static enemyLevelById: number[] = [15,15,20,30,20,23,26,45,100]
     static pokewomanAttack: number[] = [10,15,20,23,22,18,12,29,30,24,15,31,25,31,9,8]
     static pokewomanBaseHP: number[] = [80,70,60,69,78,97,62,88,73,74,81,72,60,90,50,40]
     static pokewomanHPscale: number[] = [9,10,11,9,10,8,13,9,14,10,10,11,13,14,9]

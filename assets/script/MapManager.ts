@@ -64,4 +64,22 @@ export default class MapManager extends cc.Component {
             sprite.spriteFrame = spriteFrame;
         }
     }
+
+    onLoad(){
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    }
+
+   onDestroy() {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    }
+
+    onKeyDown(event: cc.Event.EventKeyboard) {
+        switch(event.keyCode) {
+            case cc.macro.KEY.space:
+                cc.director.loadScene("main_back");
+                cc.audioEngine.stopMusic();
+                break;
+            
+        }
+    }
 }

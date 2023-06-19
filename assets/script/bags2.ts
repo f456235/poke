@@ -47,7 +47,11 @@ export default class NewClass extends cc.Component {
     start () {
         for (let i = 0; i < 6; i++) {
             this.node.getChildByName('Sprite' + i).getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[i]];
-            this.node.getChildByName('Sprite' + i).scale = 0.05;
+            this.node.getChildByName('Sprite' + i).width = 80;
+            this.node.getChildByName('Sprite' + i).height = 90;
+            console.log("i:" ,i);
+            console.log(this.node.getChildByName('Sprite' + i).width);
+            console.log(this.node.getChildByName('Sprite' + i).height);
             if(this.bag[i]==null){
                 this.node.getChildByName('Sprite' + i).active = false;
             }

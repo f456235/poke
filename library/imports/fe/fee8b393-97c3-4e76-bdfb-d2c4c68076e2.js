@@ -25,6 +25,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var man_1 = require("./man");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
+var gamemanager_1 = require("./gamemanager");
 var Enemy = /** @class */ (function (_super) {
     __extends(Enemy, _super);
     function Enemy() {
@@ -32,6 +33,7 @@ var Enemy = /** @class */ (function (_super) {
         _this.enemySpeed = 50;
         _this.anim = null;
         _this.man = null;
+        _this.Gamemanger = null;
         return _this;
     }
     Enemy.prototype.start = function () {
@@ -49,23 +51,25 @@ var Enemy = /** @class */ (function (_super) {
     };
     Enemy.prototype.update = function (dt) {
         //cc.log("dong_move");
-        if (this.node.name == "4") {
-            if (!this.anim.getAnimationState("dong_move").isPlaying)
-                this.playAnimation("dong_move");
+        if (this.Gamemanger.palse == false) {
+            if (this.node.name == "4") {
+                if (!this.anim.getAnimationState("dong_move").isPlaying)
+                    this.playAnimation("dong_move");
+            }
+            else if (this.node.name == "5")
+                if (!this.anim.getAnimationState("red_dong_move").isPlaying)
+                    this.playAnimation("red_dong_move");
+            if (this.node.name == "4") {
+                if (!this.anim.getAnimationState("dong_move").isPlaying)
+                    this.playAnimation("dong_move");
+            }
+            else if (this.node.name == "7")
+                if (!this.anim.getAnimationState("fish").isPlaying)
+                    this.playAnimation("fish");
+            //cc.log("dong_move");
+            // this.playAnimation("dong_move");  
+            this.node.x = this.node.x + this.enemySpeed * dt;
         }
-        else if (this.node.name == "5")
-            if (!this.anim.getAnimationState("red_dong_move").isPlaying)
-                this.playAnimation("red_dong_move");
-        if (this.node.name == "4") {
-            if (!this.anim.getAnimationState("dong_move").isPlaying)
-                this.playAnimation("dong_move");
-        }
-        else if (this.node.name == "7")
-            if (!this.anim.getAnimationState("fish").isPlaying)
-                this.playAnimation("fish");
-        //cc.log("dong_move");
-        // this.playAnimation("dong_move");  
-        this.node.x = this.node.x + this.enemySpeed * dt;
     };
     Enemy.prototype.onBeginContact = function (contact, self, other) {
         if (other.tag != 2) {
@@ -95,6 +99,9 @@ var Enemy = /** @class */ (function (_super) {
     __decorate([
         property(man_1.default)
     ], Enemy.prototype, "man", void 0);
+    __decorate([
+        property(gamemanager_1.default)
+    ], Enemy.prototype, "Gamemanger", void 0);
     Enemy = __decorate([
         ccclass
     ], Enemy);

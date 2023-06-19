@@ -105,7 +105,9 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite0').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[0]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 36;
+            this.node.getChildByName('Sprite6').height = 40;
+
             this.update_s6(this.bag[0]);
             this.nowchoose=0;
             // this.nm.string = "岩東勇";
@@ -114,7 +116,8 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite1').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[1]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 36;
+            this.node.getChildByName('Sprite6').height = 40;
             this.update_s6(this.bag[1]);
             this.nowchoose=1;
             // this.nm.string = "炎東勇";
@@ -123,7 +126,9 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite2').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[2]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 36;
+            this.node.getChildByName('Sprite6').height = 40;
             this.update_s6(this.bag[2]);
             this.nowchoose=2;
             // this.nm.string = "嚴冬勇";
@@ -132,21 +137,24 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite3').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[3]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 36;
+            this.node.getChildByName('Sprite6').height = 40;
             this.update_s6(this.bag[3]);
             this.nowchoose=3;
         });
         cc.find('Canvas/block/Sprite4').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[4]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 36;
+            this.node.getChildByName('Sprite6').height = 40;
             this.update_s6(this.bag[4]);
             this.nowchoose=4;
         });
         cc.find('Canvas/block/Sprite5').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[5]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 36;
+            this.node.getChildByName('Sprite6').height = 40;
             this.update_s6(this.bag[5]);
             this.nowchoose=5;
         });

@@ -36,6 +36,7 @@ require('./assets/script/man_map3');
 require('./assets/script/me');
 require('./assets/script/moyan');
 require('./assets/script/no');
+require('./assets/script/pa');
 require('./assets/script/register');
 require('./assets/script/runaway');
 require('./assets/script/select_dong');
@@ -43,6 +44,7 @@ require('./assets/script/setting');
 require('./assets/script/universe');
 require('./assets/script/universe_select');
 require('./assets/script/yuan');
+require('./assets/script/yuan_back');
 
                     }
                     if (nodeEnv) {

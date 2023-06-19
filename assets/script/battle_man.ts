@@ -39,6 +39,9 @@ export default class NewClass extends cc.Component {
     @property({type:cc.SpriteFrame})
     enemy7: cc.SpriteFrame = null;
 
+    @property({type:cc.SpriteFrame})
+    enemy8: cc.SpriteFrame = null;
+
     @property(cc.ProgressBar)
     myHP: cc.ProgressBar = null;
 
@@ -76,11 +79,13 @@ export default class NewClass extends cc.Component {
     public skill2Button: cc.Button = null;
     public skill3Button: cc.Button = null;
     public skill4Button: cc.Button = null;
+    private moyanAnimation: boolean = true;
 
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        //cc.find("Canvas/enemy/fire").getComponent(cc.ParticleSystem).resetSystem();
         
         cc.find('Canvas/skills/bag2').on('click', () => {
             cc.find('Canvas/skills').active = false;
@@ -139,6 +144,16 @@ export default class NewClass extends cc.Component {
             this.enemyLife = GlobalData.enemyHPbyID[this.enemynum-1];
             this.enemyAttack = GlobalData.enemyAttackById[this.enemynum-1];
             this.enemyLV = GlobalData.enemyLevelById[this.enemynum-1];
+        }else if(this.enemynum == 8){
+            if(cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame == null){
+                cc.find("Canvas/enemy").getComponent(cc.Sprite).spriteFrame = this.enemy8;
+                //cc.find("Canvas/enemy").color = cc.Color.RED;
+            }
+            cc.find("Canvas/enemy").scaleX *= -1;
+            cc.find("Canvas/enemy").width += 50;
+            this.enemyLife = GlobalData.enemyHPbyID[this.enemynum-1];
+            this.enemyAttack = GlobalData.enemyAttackById[this.enemynum-1];
+            this.enemyLV = GlobalData.enemyLevelById[this.enemynum-1];
         }
         cc.audioEngine.playMusic(this.battleBgm, true);
         
@@ -152,11 +167,22 @@ export default class NewClass extends cc.Component {
     }
 
     update(dt){
+        
+        
+        if(this.enemynum == 8){
+            if(!cc.find("Canvas/enemy").getComponent(cc.Animation).getAnimationState("moyan_default").isPlaying
+            && this.moyanAnimation){
+
+                cc.find("Canvas/enemy").getComponent(cc.Animation).play("moyan_default");
+            }
+        }
+        console.log(GlobalData.myPokewomanHP[GlobalData.myelf],GlobalData.fullHP[GlobalData.myelf],
+            this.enemyLife,GlobalData.enemyHPbyID[this.enemynum-1],this.enemyLV);
         if(this.renew){
             this.renew = false;
             if(GlobalData.myelf == 0){
                 cc.find("Canvas/skills/skill1/Background/Label").getComponent(cc.Label).string = "魔法攻擊";
-                cc.find("Canvas/skills/skill4/Background/Label").getComponent(cc.Label).string = "懶蛋攻擊";
+                //cc.find("Canvas/skills/skill4/Background/Label").getComponent(cc.Label).string = "懶蛋攻擊";
             }
             else{
                 cc.find("Canvas/skills/skill1/Background/Label").getComponent(cc.Label).string = "衝撞";
@@ -191,6 +217,7 @@ export default class NewClass extends cc.Component {
                 console.log("GlobalData.isEnenmyFish:", GlobalData.isEnenmyFish);
             }else if(this.enemynum == 8){
                 GlobalData.isEnenmyBoss2 = true;
+                cc.director.loadScene("map_inif");
                 console.log("GlobalData.isEnenmyBoss2:", GlobalData.isEnenmyBoss2);
             }
             if(GlobalData.pokewoman.length < 6){
@@ -267,6 +294,7 @@ export default class NewClass extends cc.Component {
         //console.log(GlobalData.myelf);
         //console.log(GlobalData.myPokewomanHP);
         //console.log(GlobalData.fullHP);
+       
         this.myHP.progress = GlobalData.myPokewomanHP[GlobalData.myelf] / GlobalData.fullHP[GlobalData.myelf];
         this.enemyHP.progress = this.enemyLife / GlobalData.enemyHPbyID[this.enemynum-1];
         const myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
@@ -349,6 +377,7 @@ export default class NewClass extends cc.Component {
         let enemyParticleEffect = cc.find("Canvas/enemy/magic").getComponent(cc.ParticleSystem);
         let enemyParticleEffect3 = cc.find("Canvas/enemy/punch").getComponent(cc.ParticleSystem);
         let enemyParticleEffect4 = cc.find("Canvas/enemy/boom").getComponent(cc.ParticleSystem);
+        let enemyParticleEffect5 = cc.find("Canvas/enemy/fire").getComponent(cc.ParticleSystem);
         
         let shakeCamera = cc.callFunc(function(target) {
             const mainCamera = cc.Camera.main;
@@ -386,6 +415,11 @@ export default class NewClass extends cc.Component {
         }
         else if(this.enemynum == 7){
             enemyAnimation.play("fish3");
+        }else if(this.enemynum == 8){
+            console.log("moyan_b");
+            enemyAnimation.stop("moyan_default");
+            this.moyanAnimation = false;
+            enemyAnimation.play("moyan_b");
         }
         let myLifeDeduct = cc.callFunc(function(target) {
             //console.log("enemyNum in mylife deduct:", this.enemynum);
@@ -394,6 +428,7 @@ export default class NewClass extends cc.Component {
             else if(this.enemynum == 5) GlobalData.myPokewomanHP[GlobalData.myelf] -= (20 * enhance);
             else if(this.enemynum == 6) GlobalData.myPokewomanHP[GlobalData.myelf] -= (45 * enhance);
             else if(this.enemynum == 7) GlobalData.myPokewomanHP[GlobalData.myelf] -= (10 * enhance);
+            else if(this.enemynum == 8) GlobalData.myPokewomanHP[GlobalData.myelf] -= (50 * enhance);
             GlobalData.myPokewomanHP[GlobalData.myelf] = Math.round(GlobalData.myPokewomanHP[GlobalData.myelf]);
         }, this);
 
@@ -415,6 +450,12 @@ export default class NewClass extends cc.Component {
                 cc.find("Canvas/enemy/boom").runAction(cc.moveBy(0.2, cc.v2(-525, 0)));
                 cc.find("Canvas/enemy/boom").x = 17.366;
             }
+            else if(this.enemynum == 8){
+                console.log("fire");    
+                enemyParticleEffect5.resetSystem();
+                cc.find("Canvas/enemy/fire").runAction(cc.moveBy(1, cc.v2(-760, 0)));
+                // cc.find("Canvas/enemy/fire").x = 17.366;
+            }
         }, this);
 
         let sound = cc.callFunc(function(target) {
@@ -427,7 +468,9 @@ export default class NewClass extends cc.Component {
                 console.log("sound");
             }
             }, this); 
-        
+            let moyanFlagAction = cc.callFunc(function(target) {
+                this.moyanAnimation = true;
+            }, this);
         let moveAction = cc.callFunc(function(target) {
             if(this.enemynum == 4)
                 enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 50)), cc.moveBy(0.2, cc.v2(0, -50)), particleAction, shakeCamera,myLifeDeduct,turnSwitch2));
@@ -435,9 +478,15 @@ export default class NewClass extends cc.Component {
                 enemy.runAction(cc.sequence(cc.moveBy(0.8, cc.v2(-460, 0)), sound, shakeCamera2, particleAction, cc.moveBy(1.5, cc.v2(460, 0)),myLifeDeduct,turnSwitch2));
             else if(this.enemynum == 6)
             enemy.runAction(cc.sequence(cc.moveBy(0.6, cc.v2(0, 20)), sound, shakeCamera2, particleAction, cc.moveBy(0.1, cc.v2(0, -20)),myLifeDeduct,turnSwitch2));
-            else if(this.enemynum == 7){enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(520, 0)),myLifeDeduct,turnSwitch2));}
-            
+            else if(this.enemynum == 7){
+                enemy.runAction(cc.sequence(cc.moveBy(1, cc.v2(-480, 0)), cc.moveBy(1, cc.v2(480, 0)),myLifeDeduct,turnSwitch2));
+            }
+            else if(this.enemynum == 8){
+                enemy.runAction(cc.sequence(cc.moveBy(1.3, cc.v2(0, 0)),particleAction, shakeCamera, myLifeDeduct, turnSwitch2, moyanFlagAction));
+            }
         }, this);
+
+       
 
         
 

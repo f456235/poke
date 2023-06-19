@@ -48,6 +48,7 @@ var Man = /** @class */ (function (_super) {
         return _this;
     }
     Man.prototype.start = function () {
+        GlobalData_1.default.isBOSScamera = false;
         var nodetodestory = cc.director.getScene()["nodeToDestroy"];
         console.log("nodeToDestroy in man:", nodetodestory);
         //if(this.node.getChildByName(nodetodestory) !== null){
@@ -142,6 +143,7 @@ var Man = /** @class */ (function (_super) {
         }
     };
     Man.prototype.update = function (dt) {
+        //console.log(GlobalData.isBOSScamera);
         //cc.log(this.node.x, this.node.y);
         // 根据按键状态更新角色位置
         if (this.Gamemanger.palse == false) {

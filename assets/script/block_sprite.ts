@@ -74,7 +74,13 @@ export default class NewClass extends cc.Component {
         for (let i = 0; i < 6; i++) {
             this.node.getChildByName('Sprite' + i).getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[i]];
             // scale 0.1
-            this.node.getChildByName('Sprite' + i).scale = 0.05;
+            //this.node.getChildByName('Sprite' + i).scale = 0.3;
+            this.node.getChildByName('Sprite' + i).width = 80;
+            this.node.getChildByName('Sprite' + i).height = 90;
+            console.log("i:" ,i);
+            console.log(this.node.getChildByName('Sprite' + i).width);
+            console.log(this.node.getChildByName('Sprite' + i).height);
+
             // onload click event
             if(this.bag[i]==null){
                 // console.log("bag[",i,"] is null");
@@ -114,7 +120,9 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite0').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[0]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 160;
+            this.node.getChildByName('Sprite6').height = 185;
             if(GlobalData.toCapture == true){
                 
                 this.inform.active = true;
@@ -138,13 +146,17 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite1').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[1]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 160;
+            this.node.getChildByName('Sprite6').height = 185;
             if(GlobalData.toCapture == true){
                 this.inform.active = true;
                 this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[1]]+"放生嗎?";
                 this.acceptButton.node.on('click', () => {
                     GlobalData.pokewoman[1] = GlobalData.toCaptureID;
                     this.node.getChildByName('Sprite1').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    this.node.getChildByName('Sprite1').width = 40;
+                    this.node.getChildByName('Sprite1').height = 40;
                     GlobalData.toCapture = false;
                     this.inform.active = false;
                     GlobalData.myPokewomanHP[1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[1]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[1]]);
@@ -161,13 +173,17 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite2').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[2]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 160;
+            this.node.getChildByName('Sprite6').height = 185;
             if(GlobalData.toCapture == true){
                 this.inform.active = true;
                 this.informText.string = "確定要將"+GlobalData.pokewomanName[this.bag[2]]+"放生嗎?";
                 this.acceptButton.node.on('click', () => {
                     GlobalData.pokewoman[2] = GlobalData.toCaptureID;
                     this.node.getChildByName('Sprite2').getComponent(cc.Sprite).spriteFrame = this.sprite[GlobalData.toCaptureID];
+                    this.node.getChildByName('Sprite2').width = 40;
+                    this.node.getChildByName('Sprite2').height = 40;
                     GlobalData.toCapture = false;
                     this.inform.active = false;
                     GlobalData.myPokewomanHP[2] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[2]] + GlobalData.level * GlobalData.pokewomanHPscale[GlobalData.pokewoman[2]]);
@@ -184,7 +200,9 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite3').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[3]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 160;
+            this.node.getChildByName('Sprite6').height = 185;
             if(GlobalData.toCapture == true){
                 
                 this.inform.active = true;
@@ -206,7 +224,9 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite4').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[4]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 160;
+            this.node.getChildByName('Sprite6').height = 185;
             if(GlobalData.toCapture == true){
                 
                 this.inform.active = true;
@@ -228,7 +248,9 @@ export default class NewClass extends cc.Component {
         cc.find('Canvas/block/Sprite5').on('click', () => {
             this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[5]];
             this.node.getChildByName('Sprite6').active = true;
-            this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            this.node.getChildByName('Sprite6').width = 160;
+            this.node.getChildByName('Sprite6').height = 185;
             if(GlobalData.toCapture == true){
                 
                 this.inform.active = true;

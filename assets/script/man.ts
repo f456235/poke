@@ -38,6 +38,7 @@ export default class Man extends cc.Component {
 
 
     start(){
+        GlobalData.isBOSScamera = false;
         let nodetodestory = cc.director.getScene()["nodeToDestroy"];
         console.log("nodeToDestroy in man:", nodetodestory);
         //if(this.node.getChildByName(nodetodestory) !== null){
@@ -140,6 +141,8 @@ export default class Man extends cc.Component {
     }
 
     update(dt: number) {
+        
+        //console.log(GlobalData.isBOSScamera);
         //cc.log(this.node.x, this.node.y);
         // 根据按键状态更新角色位置
         if(this.Gamemanger.palse==false)

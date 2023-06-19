@@ -76,7 +76,12 @@ var NewClass = /** @class */ (function (_super) {
         for (var i = 0; i < 6; i++) {
             this.node.getChildByName('Sprite' + i).getComponent(cc.Sprite).spriteFrame = this.sprite[this.bag[i]];
             // scale 0.1
-            this.node.getChildByName('Sprite' + i).scale = 0.05;
+            //this.node.getChildByName('Sprite' + i).scale = 0.3;
+            this.node.getChildByName('Sprite' + i).width = 80;
+            this.node.getChildByName('Sprite' + i).height = 90;
+            console.log("i:", i);
+            console.log(this.node.getChildByName('Sprite' + i).width);
+            console.log(this.node.getChildByName('Sprite' + i).height);
             // onload click event
             if (this.bag[i] == null) {
                 // console.log("bag[",i,"] is null");
@@ -114,7 +119,9 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite0').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[0]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 160;
+            _this.node.getChildByName('Sprite6').height = 185;
             if (GlobalData_1.default.toCapture == true) {
                 _this.inform.active = true;
                 _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[0]] + "放生嗎?";
@@ -137,13 +144,17 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite1').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[1]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 160;
+            _this.node.getChildByName('Sprite6').height = 185;
             if (GlobalData_1.default.toCapture == true) {
                 _this.inform.active = true;
                 _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[1]] + "放生嗎?";
                 _this.acceptButton.node.on('click', function () {
                     GlobalData_1.default.pokewoman[1] = GlobalData_1.default.toCaptureID;
                     _this.node.getChildByName('Sprite1').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    _this.node.getChildByName('Sprite1').width = 40;
+                    _this.node.getChildByName('Sprite1').height = 40;
                     GlobalData_1.default.toCapture = false;
                     _this.inform.active = false;
                     GlobalData_1.default.myPokewomanHP[1] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[1]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[1]]);
@@ -160,13 +171,17 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite2').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[2]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 160;
+            _this.node.getChildByName('Sprite6').height = 185;
             if (GlobalData_1.default.toCapture == true) {
                 _this.inform.active = true;
                 _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[2]] + "放生嗎?";
                 _this.acceptButton.node.on('click', function () {
                     GlobalData_1.default.pokewoman[2] = GlobalData_1.default.toCaptureID;
                     _this.node.getChildByName('Sprite2').getComponent(cc.Sprite).spriteFrame = _this.sprite[GlobalData_1.default.toCaptureID];
+                    _this.node.getChildByName('Sprite2').width = 40;
+                    _this.node.getChildByName('Sprite2').height = 40;
                     GlobalData_1.default.toCapture = false;
                     _this.inform.active = false;
                     GlobalData_1.default.myPokewomanHP[2] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[2]] + GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[2]]);
@@ -183,7 +198,9 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite3').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[3]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 160;
+            _this.node.getChildByName('Sprite6').height = 185;
             if (GlobalData_1.default.toCapture == true) {
                 _this.inform.active = true;
                 _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[3]] + "放生嗎?";
@@ -204,7 +221,9 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite4').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[4]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 160;
+            _this.node.getChildByName('Sprite6').height = 185;
             if (GlobalData_1.default.toCapture == true) {
                 _this.inform.active = true;
                 _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[4]] + "放生嗎?";
@@ -225,7 +244,9 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite5').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[5]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 160;
+            _this.node.getChildByName('Sprite6').height = 185;
             if (GlobalData_1.default.toCapture == true) {
                 _this.inform.active = true;
                 _this.informText.string = "確定要將" + GlobalData_1.default.pokewomanName[_this.bag[5]] + "放生嗎?";

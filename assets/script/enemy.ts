@@ -1,6 +1,6 @@
 import Man from "./man";
 const {ccclass, property} = cc._decorator;
-
+import GameManager from "./gamemanager";
 @ccclass
 export default class Enemy extends cc.Component {
     private enemySpeed: number = 50;
@@ -9,6 +9,9 @@ export default class Enemy extends cc.Component {
 
     @property(Man)
     man: Man = null;
+
+    @property(GameManager)
+    Gamemanger: GameManager = null;
 
     start() {
         
@@ -30,6 +33,7 @@ export default class Enemy extends cc.Component {
 
     update(dt) {
         //cc.log("dong_move");
+        if (this.Gamemanger.palse == false) {
             if(this.node.name == "4"){
                 if(!this.anim.getAnimationState("dong_move").isPlaying) this.playAnimation("dong_move")
             }
@@ -44,7 +48,7 @@ export default class Enemy extends cc.Component {
         
            // this.playAnimation("dong_move");  
         this.node.x = this.node.x + this.enemySpeed * dt;
-          
+        }
     }
 
     

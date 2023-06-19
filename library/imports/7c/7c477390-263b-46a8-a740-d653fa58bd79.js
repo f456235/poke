@@ -113,7 +113,8 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite0').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[0]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 36;
+            _this.node.getChildByName('Sprite6').height = 40;
             _this.update_s6(_this.bag[0]);
             _this.nowchoose = 0;
             // this.nm.string = "岩東勇";
@@ -122,7 +123,8 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite1').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[1]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 36;
+            _this.node.getChildByName('Sprite6').height = 40;
             _this.update_s6(_this.bag[1]);
             _this.nowchoose = 1;
             // this.nm.string = "炎東勇";
@@ -131,7 +133,9 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite2').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[2]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            // this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 36;
+            _this.node.getChildByName('Sprite6').height = 40;
             _this.update_s6(_this.bag[2]);
             _this.nowchoose = 2;
             // this.nm.string = "嚴冬勇";
@@ -140,21 +144,24 @@ var NewClass = /** @class */ (function (_super) {
         cc.find('Canvas/block/Sprite3').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[3]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 36;
+            _this.node.getChildByName('Sprite6').height = 40;
             _this.update_s6(_this.bag[3]);
             _this.nowchoose = 3;
         });
         cc.find('Canvas/block/Sprite4').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[4]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 36;
+            _this.node.getChildByName('Sprite6').height = 40;
             _this.update_s6(_this.bag[4]);
             _this.nowchoose = 4;
         });
         cc.find('Canvas/block/Sprite5').on('click', function () {
             _this.node.getChildByName('Sprite6').getComponent(cc.Sprite).spriteFrame = _this.sprite[_this.bag[5]];
             _this.node.getChildByName('Sprite6').active = true;
-            _this.node.getChildByName('Sprite6').scale = 0.1;
+            _this.node.getChildByName('Sprite6').width = 36;
+            _this.node.getChildByName('Sprite6').height = 40;
             _this.update_s6(_this.bag[5]);
             _this.nowchoose = 5;
         });

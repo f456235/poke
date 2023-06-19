@@ -76,6 +76,20 @@ var MapManager = /** @class */ (function (_super) {
             sprite.spriteFrame = spriteFrame;
         }
     };
+    MapManager.prototype.onLoad = function () {
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    };
+    MapManager.prototype.onDestroy = function () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    };
+    MapManager.prototype.onKeyDown = function (event) {
+        switch (event.keyCode) {
+            case cc.macro.KEY.space:
+                cc.director.loadScene("main_back");
+                cc.audioEngine.stopMusic();
+                break;
+        }
+    };
     __decorate([
         property(cc.Node)
     ], MapManager.prototype, "map1", void 0);
