@@ -31,17 +31,11 @@ export default class No extends cc.Component {
         switch(event.keyCode) {
             case cc.macro.KEY.space:
                 cc.director.loadScene("map2");
+                cc.audioEngine.stopMusic();
                 break;
             
         }
     }
-
-    // onKeyUp(event: cc.Event.EventKeyboard) {
-    //     switch(event.keyCode) {
-    //         case cc.macro.KEY.space:
-    //             break;
-    //     }
-    // }
 
     start() {
         this.audioId = cc.audioEngine.playEffect(this.yuan, false);

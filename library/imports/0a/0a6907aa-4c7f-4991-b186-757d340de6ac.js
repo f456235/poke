@@ -142,7 +142,7 @@ var NewClass = /** @class */ (function (_super) {
             }
         }
         if (GlobalData_1.default.myelf != this.last_myself) {
-            console.log("GlobalData.myelf:", GlobalData_1.default.myelf);
+            //console.log("GlobalData.myelf:", GlobalData.myelf);
             this.last_myself = GlobalData_1.default.myelf;
             this.renew = true;
         }
@@ -150,6 +150,12 @@ var NewClass = /** @class */ (function (_super) {
         this.updateUI(dt);
         if (this.enemyLife <= 0 && !this.isWin) {
             GlobalData_1.default.pokewoman.push(this.enemynum);
+            if (this.enemynum == 4) {
+                GlobalData_1.default.isEnenmyMagic = true;
+            }
+            else if (this.enemynum == 5) {
+                GlobalData_1.default.isEnenmyRed = true;
+            }
             GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1] = (GlobalData_1.default.pokewomanBaseHP[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]] +
                 GlobalData_1.default.level * GlobalData_1.default.pokewomanHPscale[GlobalData_1.default.pokewoman[GlobalData_1.default.pokewoman.length - 1]]);
             GlobalData_1.default.fullHP[GlobalData_1.default.pokewoman.length - 1] = GlobalData_1.default.myPokewomanHP[GlobalData_1.default.pokewoman.length - 1];
@@ -197,8 +203,8 @@ var NewClass = /** @class */ (function (_super) {
     };
     NewClass.prototype.updateUI = function (dt) {
         //console.log(GlobalData.myelf);
-        console.log(GlobalData_1.default.myPokewomanHP);
-        console.log(GlobalData_1.default.fullHP);
+        //console.log(GlobalData.myPokewomanHP);
+        //console.log(GlobalData.fullHP);
         this.myHP.progress = GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] / GlobalData_1.default.fullHP[GlobalData_1.default.myelf];
         this.enemyHP.progress = this.enemyLife / GlobalData_1.default.enemyHPbyID[this.enemynum - 1];
         var myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
@@ -295,7 +301,7 @@ var NewClass = /** @class */ (function (_super) {
             enemyAnimation.play("fish3");
         }
         var myLifeDeduct = cc.callFunc(function (target) {
-            console.log("enemyNum in mylife deduct:", this.enemynum);
+            //console.log("enemyNum in mylife deduct:", this.enemynum);
             var enhance = (this.enemyLV * 0.75 + this.enemyAttack) / this.enemyAttack;
             if (this.enemynum == 4)
                 GlobalData_1.default.myPokewomanHP[GlobalData_1.default.myelf] -= (10 * enhance);

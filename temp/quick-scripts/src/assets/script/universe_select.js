@@ -23,6 +23,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var GlobalData_1 = require("./GlobalData");
 var _a = cc._decorator, ccclass = _a.ccclass, property = _a.property;
 var NewClass = /** @class */ (function (_super) {
     __extends(NewClass, _super);
@@ -32,13 +33,16 @@ var NewClass = /** @class */ (function (_super) {
     NewClass.prototype.onLoad = function () {
         cc.director.getPhysicsManager().enabled = true;
         cc.find('Canvas/p1').on('click', function () {
-            cc.director.loadScene('map3');
+            GlobalData_1.default.Map = "map2";
+            cc.director.loadScene('universe_changeScene');
         });
         cc.find('Canvas/p2').on('click', function () {
-            cc.director.loadScene('map2');
+            GlobalData_1.default.Map = "map3";
+            cc.director.loadScene('universe_changeScene');
         });
         cc.find('Canvas/p3').on('click', function () {
-            cc.director.loadScene('map2');
+            GlobalData_1.default.Map = "map2";
+            cc.director.loadScene('universe_changeScene');
         });
     };
     NewClass.prototype.start = function () {

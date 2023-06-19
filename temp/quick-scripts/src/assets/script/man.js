@@ -33,7 +33,8 @@ var Man = /** @class */ (function (_super) {
         _this.Gamemanger = null;
         _this.label = null;
         _this.text = 'hello';
-        _this.bgm = null;
+        _this.bgmMapGrass = null;
+        _this.bgmMapDesert = null;
         _this.goinSound = null;
         _this.moveSpeed = 1; // 移动速度，可以根据需要调整
         _this.animation = null; // 动画组件
@@ -62,7 +63,15 @@ var Man = /** @class */ (function (_super) {
             // This callback is invoked after visiting each node in the scene hierarchy
             //console.log("Iteration complete");
         });
-        cc.audioEngine.playMusic(this.bgm, true);
+        var scene = cc.director.getScene();
+        if (scene.name == "map2") {
+            console.log("map2 bgm");
+            cc.audioEngine.playMusic(this.bgmMapGrass, true);
+        }
+        else if (scene.name == "map3") {
+            console.log("map3 bgm");
+            cc.audioEngine.playMusic(this.bgmMapDesert, true);
+        }
         this.Gamemanger = cc.find('Canvas/gamemanager').getComponent('gamemanager');
         // console.log(this.Gamemanger);
         this.Gamemanger.palse = false;
@@ -76,6 +85,9 @@ var Man = /** @class */ (function (_super) {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
         this.node.setPosition(GlobalData_1.default.PlayerPosX, GlobalData_1.default.PlayerPosY);
+        if (GlobalData_1.default.isEnenmyMagic && GlobalData_1.default.isEnenmyRed) {
+            cc.find('enemies/6').active = true;
+        }
     };
     Man.prototype.onDestroy = function () {
         // 移除键盘事件监听
@@ -157,7 +169,7 @@ var Man = /** @class */ (function (_super) {
         if ((this.node.x >= 48 && this.node.x <= 88) && (this.node.y >= 50 && this.node.y <= 86) && this.isBattle == false) {
         }
         GlobalData_1.default.PlayerPosX = this.node.getPosition().x;
-        GlobalData_1.default.PlayerPosY = this.node.getPosition().y;
+        GlobalData_1.default.PlayerPosY = this.node.getPosition().y - 10;
         cc.audioEngine.setMusicVolume(GlobalData_1.default.volume);
         cc.audioEngine.setEffectsVolume(GlobalData_1.default.volume);
     };
@@ -166,26 +178,51 @@ var Man = /** @class */ (function (_super) {
         var worldManifold = contact.getWorldManifold();
         var points = worldManifold.points;
         var normal = worldManifold.normal;
-        if (otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6 || otherCollider.tag == 7) {
+        if (otherCollider.tag == 4 || otherCollider.tag == 5 || otherCollider.tag == 6 || otherCollider.tag == 7 || otherCollider.tag == 8) {
             this.enemyNum = otherCollider.tag;
-            //console.log("enemyNum in man");
-            //console.log(this.enemyNum);
-            //cc.log("Player hits the enemy");
             this.isBattle = true;
-            // cc.audioEngine.pauseMusic();
-            cc.audioEngine.playEffect(this.goinSound, false);
-            var canvasNode = cc.find("Canvas"); // 获取画布节点
-            var blinkAction = cc.blink(2, 5); // 闪烁动画，持续时间为2秒，闪烁次数为5次
+            var canvasNode = cc.find("Canvas");
+            var cameraNode = cc.Camera.main;
+            var blinkAction = cc.blink(2, 5);
             this.Gamemanger.palse = true;
             cc.audioEngine.pauseMusic();
-            console.log(this.Gamemanger.palse);
-            canvasNode.runAction(cc.sequence(blinkAction, cc.callFunc(function () {
-                cc.director.loadScene("battle", function () {
-                    var nextScene = cc.director.getScene();
-                    nextScene["enemyNum"] = otherCollider.tag;
-                    //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
+            if (otherCollider.tag != 8) {
+                cc.audioEngine.playEffect(this.goinSound, false);
+                //console.log(this.Gamemanger.palse);
+                canvasNode.runAction(cc.sequence(blinkAction, cc.callFunc(function () {
+                    cc.director.loadScene("battle", function () {
+                        var nextScene = cc.director.getScene();
+                        nextScene["enemyNum"] = otherCollider.tag;
+                        //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
+                    });
+                })));
+            }
+            else if (otherCollider.tag == 8) {
+                GlobalData_1.default.isBOSScamera = true;
+                //let cameraAction = cameraNode.runAction(cc.moveTo(2, cc.v2(0,50)));
+                var cameraAction = cc.callFunc(function (target) {
+                    var mainCamera = cc.Camera.main;
+                    this.originalPosition = mainCamera.node.position.clone();
+                    //let shakeSequence;
+                    console.log("shakeSequence");
+                    var shakeSequence = cc.moveTo(3, cc.v2(this.originalPosition.x, this.originalPosition.y + 70));
+                    cc.find("Canvas/Main Camera").getComponent(cc.Camera).node.runAction(shakeSequence);
                 });
-            })));
+                var loadAction = cc.moveBy(4, cc.v2(0, 0));
+                this.scheduleOnce(function () {
+                    GlobalData_1.default.isBOSScamera = false;
+                }, 7);
+                this.scheduleOnce(function () {
+                    cc.audioEngine.playEffect(this.goinSound, false);
+                }, 4);
+                canvasNode.runAction(cc.sequence(cameraAction, loadAction, blinkAction, cc.callFunc(function () {
+                    cc.director.loadScene("battle", function () {
+                        var nextScene = cc.director.getScene();
+                        nextScene["enemyNum"] = otherCollider.tag;
+                        //console.log("nextScene[enemyNum]", nextScene["enemyNum"]);
+                    });
+                })));
+            }
             //cc.audioEngine.pauseMusic();
             //cc.audioEngine.playEffect(this.battleBgm, true);
         }
@@ -201,7 +238,10 @@ var Man = /** @class */ (function (_super) {
     ], Man.prototype, "text", void 0);
     __decorate([
         property({ type: cc.AudioClip })
-    ], Man.prototype, "bgm", void 0);
+    ], Man.prototype, "bgmMapGrass", void 0);
+    __decorate([
+        property({ type: cc.AudioClip })
+    ], Man.prototype, "bgmMapDesert", void 0);
     __decorate([
         property({ type: cc.AudioClip })
     ], Man.prototype, "goinSound", void 0);

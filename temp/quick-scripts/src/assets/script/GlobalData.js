@@ -59,6 +59,12 @@ var GlobalData = /** @class */ (function () {
     GlobalData.pokewomanHPscale = [9, 10, 11, 9, 10, 8, 13, 9, 14, 10, 10, 11, 13, 14, 9];
     GlobalData.pokewomanName = ["岩東勇", "炎東勇", "嚴冬勇", "魔關羽", "dong boss", "Jigglypuff", "Meowth", "鯉魚王", "Snorlax", "Mew", "Mewtwo", "Dragonite", "Gengar", "Gyarados", "Pidgey", "Rattata"];
     GlobalData.hp = 100;
+    GlobalData.Map = "map2";
+    GlobalData.isBOSScamera = false;
+    //打敗仙女棒和紅拳=>大熊顯現
+    GlobalData.isBoss1 = false;
+    GlobalData.isEnenmyMagic = false;
+    GlobalData.isEnenmyRed = false;
     GlobalData.myPokewomanHP = [];
     GlobalData.fullHP = [];
     return GlobalData;

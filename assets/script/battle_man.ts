@@ -163,7 +163,7 @@ export default class NewClass extends cc.Component {
             }
         }
         if(GlobalData.myelf != this.last_myself){
-            console.log("GlobalData.myelf:", GlobalData.myelf);
+            //console.log("GlobalData.myelf:", GlobalData.myelf);
             this.last_myself = GlobalData.myelf;
             this.renew = true;
         }
@@ -172,6 +172,11 @@ export default class NewClass extends cc.Component {
         this.updateUI(dt);
         if(this.enemyLife <= 0 && !this.isWin){
             GlobalData.pokewoman.push(this.enemynum);
+            if(this.enemynum == 4){
+                GlobalData.isEnenmyMagic = true;
+            }else if(this.enemynum == 5){
+                GlobalData.isEnenmyRed = true;
+            }
 
             GlobalData.myPokewomanHP[GlobalData.pokewoman.length-1] = (GlobalData.pokewomanBaseHP[GlobalData.pokewoman[GlobalData.pokewoman.length-1]] + 
             GlobalData.level*GlobalData.pokewomanHPscale[GlobalData.pokewoman[GlobalData.pokewoman.length-1]])
@@ -225,8 +230,8 @@ export default class NewClass extends cc.Component {
 
     updateUI(dt){
         //console.log(GlobalData.myelf);
-        console.log(GlobalData.myPokewomanHP);
-        console.log(GlobalData.fullHP);
+        //console.log(GlobalData.myPokewomanHP);
+        //console.log(GlobalData.fullHP);
         this.myHP.progress = GlobalData.myPokewomanHP[GlobalData.myelf] / GlobalData.fullHP[GlobalData.myelf];
         this.enemyHP.progress = this.enemyLife / GlobalData.enemyHPbyID[this.enemynum-1];
         const myLifeLabel = cc.find("Canvas/myLife").getComponent(cc.Label);
@@ -348,7 +353,7 @@ export default class NewClass extends cc.Component {
             enemyAnimation.play("fish3");
         }
         let myLifeDeduct = cc.callFunc(function(target) {
-            console.log("enemyNum in mylife deduct:", this.enemynum);
+            //console.log("enemyNum in mylife deduct:", this.enemynum);
             const enhance = (this.enemyLV * 0.75 + this.enemyAttack) / this.enemyAttack
             if(this.enemynum == 4) GlobalData.myPokewomanHP[GlobalData.myelf] -= (10 * enhance);
             else if(this.enemynum == 5) GlobalData.myPokewomanHP[GlobalData.myelf] -= (20 * enhance);

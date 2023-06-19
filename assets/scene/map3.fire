@@ -5975,8 +5975,11 @@
     "Gamemanger": null,
     "label": null,
     "text": "hello",
-    "bgm": {
+    "bgmMapGrass": {
       "__uuid__": "f8a82d17-bd5f-4e07-9bb0-390111641170"
+    },
+    "bgmMapDesert": {
+      "__uuid__": "f7c6f803-973c-4f88-87c1-40b68014da82"
     },
     "goinSound": {
       "__uuid__": "c01c97d2-f744-4dd2-921b-a0f7205560fa"

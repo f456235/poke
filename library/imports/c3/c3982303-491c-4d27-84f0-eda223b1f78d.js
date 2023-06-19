@@ -51,15 +51,10 @@ var No = /** @class */ (function (_super) {
         switch (event.keyCode) {
             case cc.macro.KEY.space:
                 cc.director.loadScene("map2");
+                cc.audioEngine.stopMusic();
                 break;
         }
     };
-    // onKeyUp(event: cc.Event.EventKeyboard) {
-    //     switch(event.keyCode) {
-    //         case cc.macro.KEY.space:
-    //             break;
-    //     }
-    // }
     No.prototype.start = function () {
         this.audioId = cc.audioEngine.playEffect(this.yuan, false);
         cc.audioEngine.setVolume(this.audioId, 1.0); // Set the volume to 1.0 (maximum)

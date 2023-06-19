@@ -66,10 +66,10 @@ var NewClass = /** @class */ (function (_super) {
         //     cc.director.loadScene('bag');
         // });
         //cc.log(this.node.x);
-        if (this.player.x <= 55 && this.player.x >= -55)
+        if (this.player.x <= 55 && this.player.x >= -55 && !GlobalData_1.default.isBOSScamera)
             this.node.x = this.player.x;
         //else this.node.x = 62;
-        if (this.player.y <= 136 && this.player.y >= -136)
+        if (this.player.y <= 136 && this.player.y >= -136 && !GlobalData_1.default.isBOSScamera)
             this.node.y = this.player.y;
         //else this.node.y = -147;
         GlobalData_1.default.cameraPosX = this.node.position.x;

@@ -54,11 +54,11 @@ export default class NewClass extends cc.Component {
         //     cc.director.loadScene('bag');
         // });
         //cc.log(this.node.x);
-        if(this.player.x <= 55 && this.player.x >= -55) 
+        if(this.player.x <= 55 && this.player.x >= -55 && !GlobalData.isBOSScamera) 
             this.node.x = this.player.x ;
         //else this.node.x = 62;
-        if(this.player.y <= 136 && this.player.y >= -136) 
-        this.node.y = this.player.y ;
+        if(this.player.y <= 136 && this.player.y >= -136 && !GlobalData.isBOSScamera) 
+            this.node.y = this.player.y ;
         //else this.node.y = -147;
        GlobalData.cameraPosX = this.node.position.x;
        GlobalData.cameraPosY = this.node.position.y;

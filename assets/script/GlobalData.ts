@@ -30,6 +30,13 @@ export default class GlobalData {
     static pokewomanHPscale: number[] = [9,10,11,9,10,8,13,9,14,10,10,11,13,14,9]
     static pokewomanName: string[] = ["岩東勇","炎東勇","嚴冬勇","魔關羽","dong boss","Jigglypuff","Meowth","鯉魚王","Snorlax","Mew","Mewtwo","Dragonite","Gengar","Gyarados","Pidgey","Rattata"]
     static hp: number = 100;
+    static Map : string = "map2";
+    static isBOSScamera : boolean = false;
+
+    //打敗仙女棒和紅拳=>大熊顯現
+    static isBoss1 : boolean = false;
+    static isEnenmyMagic : boolean = false;
+    static isEnenmyRed: boolean = false;
     static initializeHPArrays(): void {
         //this.hp = 100 + 10 * this.level;
         console.log(this.pokewoman.length);
